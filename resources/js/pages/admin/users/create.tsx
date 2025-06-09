@@ -90,7 +90,7 @@ export default function CreateUser() {
                     <InputError message={errors.password} className="mt-2" />
                 </div>
 
-                <div>
+                {/* <div>
                     <Label htmlFor="role">Role</Label>
                     <select
                         id="role"
@@ -106,7 +106,7 @@ export default function CreateUser() {
                         <option value="user">User</option>
                     </select>
                     <InputError message={errors.role} className="mt-2" />
-                </div>
+                </div> */}
 
                 <button
                     type="submit"

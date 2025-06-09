@@ -36,10 +36,10 @@ export default function ShowUser({ user }: { user: { id: number; name: string; e
                         <span className="text-gray-500">Email:</span>
                         <p className="text-lg text-gray-800">{user.email}</p>
                     </div>
-                    <div>
+                    {/* <div>
                         <span className="text-gray-500">Role:</span>
                         <p className="text-lg text-gray-800 capitalize">{user.role}</p>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </AppLayout>

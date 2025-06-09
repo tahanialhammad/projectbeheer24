@@ -86,7 +86,7 @@ export default function EditUser({ user }: { user: { id: number; name: string; e
                     <InputError message={errors.password} className="mt-2" />
                 </div>
 
-                <div>
+                {/* <div>
                     <Label htmlFor="role">Role</Label>
                     <select
                         id="role"
@@ -102,7 +102,7 @@ export default function EditUser({ user }: { user: { id: number; name: string; e
                         <option value="user">User</option>
                     </select>
                     <InputError message={errors.role} className="mt-2" />
-                </div>
+                </div> */}
 
                 <button
                     type="submit"
