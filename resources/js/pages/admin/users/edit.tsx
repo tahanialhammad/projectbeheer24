@@ -15,7 +15,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function EditUser({ user }: { user: { id: number; name: string; email: string; role: string } }) {
-    const { data, setData, put, processing, errors, reset } = useForm({
+    const { data, setData, put, processing, errors } = useForm({
         name: user.name || '',
         email:  user.email || '',
         password: '',

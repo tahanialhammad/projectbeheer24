@@ -42,7 +42,7 @@ export default function SiteNav() {
                     </div>
 
                     <div className="hidden lg:flex lg:gap-x-12">
-                        {navigation.map((item, index) => (
+                        {navigation.map((item) => (
                             <NavLink
                                 key={item.name}
                                 href={item.href && route(item.href)}

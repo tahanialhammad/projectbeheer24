@@ -29,7 +29,9 @@ export default function CreateUser() {
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route('users.store'));
+        post(route('users.store'), {
+            onSuccess: () => reset(), // Reset form on successful submission
+        });
     };
 
     return (

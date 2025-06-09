@@ -1,5 +1,4 @@
-import { type SharedData } from '@/types';
-import { Head, usePage } from '@inertiajs/react';
+import { Head } from '@inertiajs/react';
 import { type ReactNode } from 'react';
 import SiteNav from './site/SiteNav';
 import SiteFooter from './site/SiteFooter';
@@ -10,7 +9,7 @@ type SiteLayoutProps = {
 };
 
 export default function SiteLayout({ children, title = 'Welcome' }: SiteLayoutProps) {
-    const { auth } = usePage<SharedData>().props;
+//    const { auth } = usePage<SharedData>().props;
 
     return (
         <>
