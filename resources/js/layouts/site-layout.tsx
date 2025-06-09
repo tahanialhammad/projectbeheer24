@@ -2,6 +2,7 @@ import { type SharedData } from '@/types';
 import { Head, usePage } from '@inertiajs/react';
 import { type ReactNode } from 'react';
 import SiteNav from './site/SiteNav';
+import SiteFooter from './site/SiteFooter';
 
 type SiteLayoutProps = {
     children: ReactNode;
@@ -23,6 +24,9 @@ export default function SiteLayout({ children, title = 'Welcome' }: SiteLayoutPr
 
                 {/* Page Content */}
                 <div className="m-4 mt-24">{children}</div>
+                <footer>
+                <SiteFooter />
+            </footer>
             </div>
         </>
     );
