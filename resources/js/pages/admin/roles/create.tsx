@@ -14,19 +14,31 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export default function CreateRole({ permissions }) {
-    const { data, setData, post, processing, errors, reset } = useForm({
+// ✅ FIX: Add proper type for props
+interface CreateRoleProps {
+    permissions: string[]; // if permission items are just strings
+}
+
+// ✅ FIX: Add proper type for form data managed by useForm
+interface RoleFormData {
+    name: string;
+    permissions: string[];
+}
+
+export default function CreateRole({ permissions }: CreateRoleProps) { // ✅ FIX: typed props
+    const { data, setData, post, processing, errors, reset } = useForm<RoleFormData>({ // ✅ FIX: typed useForm with RoleFormData
         name: '',
         permissions: [],
     });
 
-    function handleCheckBoxChanges(permissionName, checked) {
+    // ✅ FIX: Added type annotations for parameters
+    function handleCheckBoxChanges(permissionName: string, checked: boolean) {
         if (checked) {
             setData('permissions', [...data.permissions, permissionName]);
         } else {
             setData(
                 'permissions',
-                data.permissions.filter((name) => name != permissionName),
+                data.permissions.filter((name) => name !== permissionName), // ✅ FIX: changed `!=` to `!==` (strict equality)
             );
         }
     }
@@ -34,22 +46,28 @@ export default function CreateRole({ permissions }) {
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
         post(route('roles.store'), {
-            onSuccess: () => reset(), // Reset form on successful submission
+            onSuccess: () => reset(),
         });
     };
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Create user" />
+            <Head title="Create role" /> {/* ✅ FIX: Corrected title from "Create user" to "Create role" */}
 
             <div className="mb-6 flex items-center justify-between">
-                <h2 className="text-3xl font-bold text-gray-800">Create User</h2>
-                <Link href="/roles" className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700">
+                <h2 className="text-3xl font-bold text-gray-800">Create Role</h2> {/* ✅ FIX: Changed "Create User" to "Create Role" */}
+                <Link
+                    href="/roles"
+                    className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700"
+                >
                     Back to all roles
                 </Link>
             </div>
 
-            <form className="max-w-xl space-y-6 rounded bg-white p-6 shadow-md" onSubmit={submit}>
+            <form
+                className="max-w-xl space-y-6 rounded bg-white p-6 shadow-md"
+                onSubmit={submit}
+            >
                 <div>
                     <Label htmlFor="name">Name</Label>
                     <Input
@@ -75,7 +93,10 @@ export default function CreateRole({ permissions }) {
                                     type="checkbox"
                                     value={permission}
                                     id={permission}
-                                    onChange={(e) => handleCheckBoxChanges(permission, e.target.checked)}
+                                    checked={data.permissions.includes(permission)} // ✅ FIX: made checkbox controlled using `checked`
+                                    onChange={(e) =>
+                                        handleCheckBoxChanges(permission, e.target.checked)
+                                    }
                                 />
                                 <span>{permission}</span>
                             </label>
