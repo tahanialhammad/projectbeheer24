@@ -16,7 +16,7 @@ class RoleController extends Controller
     {
         return Inertia::render('admin/roles/index', [
             // 'roles' => Role::all(),
-             'roles' => Role::with('permissions')->get(),
+            'roles' => Role::with('permissions')->get(),
         ]);
     }
 
@@ -49,24 +49,50 @@ class RoleController extends Controller
      */
     public function show(string $id)
     {
-        //
-    }
+        $role = Role::with('permissions')->findOrFail($id);
+        $permissions = $role->permissions;
 
+        return Inertia::render('admin/roles/show', [
+            'role' => $role,
+            'permissions' => $permissions,
+        ]);
+    }
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        $role = Role::with('permissions')->findOrFail($id);
+
+        return Inertia::render('admin/roles/edit', [
+            'role' =>  $role,
+            'permissions' => Permission::all(),
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
+
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'permissions' => 'required|array',
+            'permissions.*' => 'exists:permissions,name',
+        ]);
+
+        $role = Role::findOrFail($id);
+
+        $role->update([
+            'name' => $validated['name'],
+        ]);
+
+        $role->syncPermissions($validated['permissions']);
+
+        return to_route('roles.index')->with('message', 'Role was updated successfully!');
     }
+
 
     /**
      * Remove the specified resource from storage.
