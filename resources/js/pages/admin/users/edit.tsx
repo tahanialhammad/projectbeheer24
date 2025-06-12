@@ -14,14 +14,30 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export default function EditUser({ user }: { user: { id: number; name: string; email: string; role: string } }) {
+export default function EditUser({
+    user,
+    roles,
+}: {
+    user: { id: number; name: string; email: string; roles: { name: string }[] };
+    roles: { id: number; name: string }[];
+}) {
     const { data, setData, put, processing, errors } = useForm({
         name: user.name || '',
-        email:  user.email || '',
+        email: user.email || '',
         password: '',
-        // role: '',
+        roles: user.roles.map((role) => role.name), // hier fix
     });
 
+    function handleCheckBoxChanges(roleName: string, checked: boolean) {
+        if (checked) {
+            setData('roles', [...data.roles, roleName]);
+        } else {
+            setData(
+                'roles',
+                data.roles.filter((name) => name !== roleName),
+            );
+        }
+    }
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
@@ -42,32 +58,13 @@ export default function EditUser({ user }: { user: { id: number; name: string; e
             <form className="max-w-xl space-y-6 rounded bg-white p-6 shadow-md" onSubmit={submit}>
                 <div>
                     <Label htmlFor="name">Name</Label>
-                    <Input
-                        id="name"
-                        type="text"
-                        tabIndex={1}
-                        autoFocus
-                        autoComplete="name"
-                        value={data.name}
-                        onChange={(e) => setData('name', e.target.value)}
-                        disabled={processing}
-                        placeholder="Full name"
-                    />
+                    <Input id="name" type="text" value={data.name} onChange={(e) => setData('name', e.target.value)} disabled={processing} />
                     <InputError message={errors.name} className="mt-2" />
                 </div>
 
                 <div>
                     <Label htmlFor="email">Email</Label>
-                    <Input
-                        id="email"
-                        type="email"
-                        tabIndex={2}
-                        autoComplete="email"
-                        value={data.email}
-                        onChange={(e) => setData('email', e.target.value)}
-                        disabled={processing}
-                        placeholder="Email address"
-                    />
+                    <Input id="email" type="email" value={data.email} onChange={(e) => setData('email', e.target.value)} disabled={processing} />
                     <InputError message={errors.email} className="mt-2" />
                 </div>
 
@@ -76,37 +73,34 @@ export default function EditUser({ user }: { user: { id: number; name: string; e
                     <Input
                         id="password"
                         type="password"
-                        tabIndex={3}
-                        autoComplete="new-password"
                         value={data.password}
                         onChange={(e) => setData('password', e.target.value)}
                         disabled={processing}
-                        placeholder="Create a password"
+                        placeholder="Leave blank to keep current password"
                     />
                     <InputError message={errors.password} className="mt-2" />
                 </div>
 
-                {/* <div>
-                    <Label htmlFor="role">Role</Label>
-                    <select
-                        id="role"
-                        tabIndex={4}
-                        value={data.role}
-                        onChange={(e) => setData('role', e.target.value)}
-                        disabled={processing}
-                        className="mt-1 w-full rounded border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                    >
-                        <option value="">Select a role</option>
-                        <option value="super admin">Super Admin</option>
-                        <option value="clientadmin">Client Admin</option>
-                        <option value="user">User</option>
-                    </select>
-                    <InputError message={errors.role} className="mt-2" />
-                </div> */}
+                <div>
+                    <Label className="mb-2 block">Roles</Label>
+                    <div className="grid grid-cols-1 gap-2">
+                        {roles.map((role) => (
+                            <label key={role.id} className="flex items-center gap-2">
+                                <input
+                                    type="checkbox"
+                                    value={role.name}
+                                    checked={data.roles.includes(role.name)}
+                                    onChange={(e) => handleCheckBoxChanges(role.name, e.target.checked)}
+                                />
+                                <span>{role.name}</span>
+                            </label>
+                        ))}
+                    </div>
+                    <InputError message={errors.roles} className="mt-2" />
+                </div>
 
                 <button
                     type="submit"
-                    tabIndex={5}
                     disabled={processing}
                     className="rounded-md bg-green-600 px-4 py-2 text-white shadow transition hover:bg-green-700"
                 >

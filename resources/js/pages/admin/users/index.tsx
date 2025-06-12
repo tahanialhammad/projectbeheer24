@@ -6,7 +6,7 @@ type User = {
     id: number;
     name: string;
     email: string;
-    role: string;
+    roles: [];
 };
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -44,17 +44,25 @@ export default function Index({ users }: { users: User[] }) {
                                 <th className="border-b p-3 text-left">ID</th>
                                 <th className="border-b p-3 text-left">Name</th>
                                 <th className="border-b p-3 text-left">E-mail</th>
-                                <th className="border-b p-3 text-left">Role</th>
+                                <th className="border-b p-3 text-left">Roles</th>
                                 <th className="border-b p-3 text-left">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {users.map(({ id, name, email, role }) => (
+                            {users.map(({ id, name, email, roles }) => (
                                 <tr key={id} className="transition even:bg-gray-50 hover:bg-gray-100">
                                     <td className="border-b p-3">{id}</td>
                                     <td className="border-b p-3">{name}</td>
                                     <td className="border-b p-3">{email}</td>
-                                    <td className="border-b p-3 capitalize">{role}</td>
+                                    <td className="border-b p-3">
+                                        <div className="flex flex-wrap gap-1">
+                                            {roles.map((role) => (
+                                                <span key={role.id} className="rounded-full bg-indigo-200 px-2 py-1 text-[10px]">
+                                                    {role.name}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </td>
                                     <td className="flex space-x-2 border-b p-3">
                                         <Link
                                             href={route('users.show', id)}
