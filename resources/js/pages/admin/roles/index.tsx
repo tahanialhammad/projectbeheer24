@@ -24,22 +24,18 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 export default function Index({ roles }: { roles: Role[] }) {
     function handleDelete(id: number) {
-        if (confirm('Are you sure you want to remove this role?')) { // ✅ FIX: changed "user" to "role"
-            router.delete(route('roles.destroy', id)); // ✅ FIX: route name changed from 'users.destroy' to 'roles.destroy'
+        if (confirm('Are you sure you want to remove this role?')) {
+            router.delete(route('roles.destroy', id));
         }
     }
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Roles" /> {/* ✅ FIX: changed title from "Users" to "Roles" */}
-
+            <Head title="Roles" />
             <div className="p-6">
                 <div className="mb-4 flex items-center justify-between">
                     <h2 className="text-3xl font-bold text-gray-800">Roles list</h2>
-                    <Link
-                        href={route('roles.create')}
-                        className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700"
-                    >
+                    <Link href={route('roles.create')} className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700">
                         Add new role
                     </Link>
                 </div>
@@ -60,13 +56,9 @@ export default function Index({ roles }: { roles: Role[] }) {
                                     <td className="border-b p-3">{id}</td>
                                     <td className="border-b p-3">{name}</td>
                                     <td className="border-b p-3">
-                                        {/* ✅ FIX: added key to avoid React warning */}
                                         <div className="flex flex-wrap gap-1">
                                             {permissions.map((permission) => (
-                                                <span
-                                                    key={permission.id}
-                                                    className="rounded-full bg-indigo-200 px-2 py-1 text-[10px]"
-                                                >
+                                                <span key={permission.id} className="rounded-full bg-indigo-200 px-2 py-1 text-[10px]">
                                                     {permission.name}
                                                 </span>
                                             ))}

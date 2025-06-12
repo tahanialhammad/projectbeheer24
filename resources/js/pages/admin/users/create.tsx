@@ -14,13 +14,24 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export default function CreateUser() {
+export default function CreateUser({ roles }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
         password: '',
-        // role: '',
+        roles: [],
     });
+
+    function handleCheckBoxChanges(roleName: string, checked: boolean) {
+        if (checked) {
+            setData('roles', [...data.roles, roleName]);
+        } else {
+            setData(
+                'roles',
+                data.roles.filter((name) => name !== roleName),
+            );
+        }
+    }
 
     // function submit(e) {
     //     e.preventDefault();
@@ -109,6 +120,24 @@ export default function CreateUser() {
                     </select>
                     <InputError message={errors.role} className="mt-2" />
                 </div> */}
+
+                <div>
+                    <Label className="mb-2 block">Roles</Label>
+                    <div className="grid grid-cols-1 gap-2">
+                        {roles.map((role) => (
+                            <label key={role} className="flex items-center gap-2">
+                                <input
+                                    type="checkbox"
+                                    value={role}
+                                    id={role}
+                                    checked={data.roles.includes(role)}
+                                    onChange={(e) => handleCheckBoxChanges(role, e.target.checked)}
+                                />
+                                <span>{role}</span>
+                            </label>
+                        ))}
+                    </div>
+                </div>
 
                 <button
                     type="submit"

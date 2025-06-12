@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Hash;
-
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -16,7 +16,9 @@ class UserController extends Controller
     public function index()
     {
         return Inertia::render('admin/users/index', [
-            "users" => User::all()
+            // "users" => User::all()
+            "users" => User::with('roles')->get(),
+
         ]);
     }
 
@@ -25,7 +27,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        return Inertia::render('admin/users/create', []);
+        return Inertia::render('admin/users/create', [
+            'roles' => Role::pluck("name"),
+        ]);
     }
 
     /**
@@ -45,6 +49,8 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        $user->syncRoles($request->roles);
+
         return to_route('users.index')->with('message', 'user was created!');
     }
 
@@ -62,11 +68,11 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        $user = User::findOrFail($id);
+        // $user = User::findOrFail($id);
+        $user = User::with('roles')->findOrFail($id);
+        $roles = Role::all();
 
-        return inertia::render('admin/users/edit', [
-            'user' => $user,
-        ]);
+        return inertia::render('admin/users/edit', compact('user', 'roles'));
     }
     /**
      * Update the specified resource in storage.
@@ -79,6 +85,8 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:users,email,' . $user->id,
             'password' => 'nullable|string|min:8',
+            'roles' => 'array',
+            'roles.*' => 'string|exists:roles,name',
         ]);
 
         if (!empty($validated['password'])) {
@@ -88,7 +96,10 @@ class UserController extends Controller
         }
 
         $user->update($validated);
-
+        // Sync roles
+        if (isset($validated['roles'])) {
+            $user->syncRoles($validated['roles']);
+        }
         return to_route('users.index')->with('message', 'User was updated!');
     }
 
