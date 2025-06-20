@@ -1,7 +1,7 @@
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link, router } from '@inertiajs/react';
-import { can } from '@/lib/can';
+import { useCan } from '@/lib/can';
 
 
 type User = {
@@ -34,7 +34,7 @@ export default function Index({ users }: { users: User[] }) {
             <div className="p-6">
                 <div className="mb-4 flex items-center justify-between">
                     <h2 className="text-3xl font-bold text-gray-800">User list</h2>
-                    {can('users.create') && 
+                    {useCan('users.create') && 
                     <Link href={route('users.create')} className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700">
                         Add new user
                     </Link>}
@@ -67,21 +67,21 @@ export default function Index({ users }: { users: User[] }) {
                                         </div>
                                     </td>
                                     <td className="flex space-x-2 border-b p-3">
-                                         {can('users.view') && 
+                                         {useCan('users.view') && 
                                         <Link
                                             href={route('users.show', id)}
                                             className="rounded bg-gray-600 px-3 py-1 text-white transition hover:bg-green-700"
                                         >
                                             view
                                         </Link>}
-                                         {can('users.edit') && 
+                                         {useCan('users.edit') && 
                                         <Link
                                             href={route('users.edit', id)}
                                             className="rounded bg-green-600 px-3 py-1 text-white transition hover:bg-green-700"
                                         >
                                             Edit
                                         </Link>}
-                                         {can('users.delete') && 
+                                         {useCan('users.delete') && 
                                         <button
                                             onClick={() => handleDelete(id)}
                                             className="rounded bg-red-600 px-3 py-1 text-white transition hover:bg-red-700"

@@ -17,7 +17,7 @@ interface PageProps {
   };
 }
 
-export function can(permission: string): boolean {
+export function useCan(permission: string): boolean {
   const { auth } = usePage<PageProps>().props;
 
   return auth.permissions.includes(permission);
