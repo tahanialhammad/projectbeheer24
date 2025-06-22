@@ -19,6 +19,12 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function Index({ users }: { users: User[] }) {
+
+    const canCreate = useCan('users.create');
+const canView = useCan('users.view');
+const canEdit = useCan('users.edit');
+const canDelete = useCan('users.delete');
+
     function handleDelete(id: number) {
         if (confirm('Are you sure you want to remove this user?')) {
             //  e.preventDefault();
@@ -34,7 +40,7 @@ export default function Index({ users }: { users: User[] }) {
             <div className="p-6">
                 <div className="mb-4 flex items-center justify-between">
                     <h2 className="text-3xl font-bold text-gray-800">User list</h2>
-                    {useCan('users.create') && 
+                    {canCreate && 
                     <Link href={route('users.create')} className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700">
                         Add new user
                     </Link>}
@@ -67,21 +73,21 @@ export default function Index({ users }: { users: User[] }) {
                                         </div>
                                     </td>
                                     <td className="flex space-x-2 border-b p-3">
-                                         {useCan('users.view') && 
+                                         {canView && 
                                         <Link
                                             href={route('users.show', id)}
                                             className="rounded bg-gray-600 px-3 py-1 text-white transition hover:bg-green-700"
                                         >
                                             view
                                         </Link>}
-                                         {useCan('users.edit') && 
+                                         {canEdit && 
                                         <Link
                                             href={route('users.edit', id)}
                                             className="rounded bg-green-600 px-3 py-1 text-white transition hover:bg-green-700"
                                         >
                                             Edit
                                         </Link>}
-                                         {useCan('users.delete') && 
+                                         {canDelete && 
                                         <button
                                             onClick={() => handleDelete(id)}
                                             className="rounded bg-red-600 px-3 py-1 text-white transition hover:bg-red-700"

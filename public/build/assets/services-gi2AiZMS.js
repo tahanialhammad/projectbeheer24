@@ -1,1 +1,0 @@
-import{j as e}from"./app-B7rSe9J1.js";import{S as r}from"./site-layout-fhRldYf3.js";import"./app-logo-B76pC7RV.js";import"./app-logo-icon-cYP24J-z.js";import"./transition-DdFPdT31.js";import"./index-Syccys1j.js";function a(){return e.jsx(r,{title:"Services",children:e.jsx("h1",{className:"mb-1 font-medium",children:"service page "})})}export{a as default};

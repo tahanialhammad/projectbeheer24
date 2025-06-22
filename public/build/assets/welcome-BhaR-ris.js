@@ -1,1 +1,0 @@
-import{j as t}from"./app-B7rSe9J1.js";import{S as e}from"./site-layout-fhRldYf3.js";import"./app-logo-B76pC7RV.js";import"./app-logo-icon-cYP24J-z.js";import"./transition-DdFPdT31.js";import"./index-Syccys1j.js";function a(){return t.jsx(e,{title:"Welcome",children:t.jsx("h1",{className:"mb-1 font-medium",children:"Home page "})})}export{a as default};
