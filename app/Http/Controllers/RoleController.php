@@ -73,6 +73,10 @@ class RoleController extends Controller
      */
     public function edit(string $id)
     {
+        if (!auth()->user()->can('roles.update')) {
+            abort(403);
+        }
+
         $role = Role::with('permissions')->findOrFail($id);
 
         return Inertia::render('admin/roles/edit', [
@@ -110,6 +114,10 @@ class RoleController extends Controller
      */
     public function destroy(string $id)
     {
+        if (!auth()->user()->can('roles.delete')) {
+            abort(403);
+        }
+
         Role::destroy($id);
         return to_route('roles.index')->with('message', 'role was deleted!');
     }

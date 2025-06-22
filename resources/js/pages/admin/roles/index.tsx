@@ -1,4 +1,5 @@
 import AppLayout from '@/layouts/app-layout';
+import { useCan } from '@/lib/can';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link, router } from '@inertiajs/react';
 
@@ -23,6 +24,11 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function Index({ roles }: { roles: Role[] }) {
+    const canCreate = useCan('roles.create');
+    const canView = useCan('roles.view');
+    const canEdit = useCan('roles.edit');
+    const canDelete = useCan('roles.delete');
+
     function handleDelete(id: number) {
         if (confirm('Are you sure you want to remove this role?')) {
             router.delete(route('roles.destroy', id));
@@ -35,9 +41,14 @@ export default function Index({ roles }: { roles: Role[] }) {
             <div className="p-6">
                 <div className="mb-4 flex items-center justify-between">
                     <h2 className="text-3xl font-bold text-gray-800">Roles list</h2>
-                    <Link href={route('roles.create')} className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700">
-                        Add new role
-                    </Link>
+                    {canCreate && (
+                        <Link
+                            href={route('roles.create')}
+                            className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700"
+                        >
+                            Add new role
+                        </Link>
+                    )}
                 </div>
 
                 <div className="overflow-x-auto">
@@ -66,24 +77,30 @@ export default function Index({ roles }: { roles: Role[] }) {
                                     </td>
 
                                     <td className="flex space-x-2 border-b p-3">
-                                        <Link
-                                            href={route('roles.show', id)}
-                                            className="rounded bg-gray-600 px-3 py-1 text-white transition hover:bg-green-700"
-                                        >
-                                            View
-                                        </Link>
-                                        <Link
-                                            href={route('roles.edit', id)}
-                                            className="rounded bg-green-600 px-3 py-1 text-white transition hover:bg-green-700"
-                                        >
-                                            Edit
-                                        </Link>
-                                        <button
-                                            onClick={() => handleDelete(id)}
-                                            className="rounded bg-red-600 px-3 py-1 text-white transition hover:bg-red-700"
-                                        >
-                                            Delete
-                                        </button>
+                                        {canView && (
+                                            <Link
+                                                href={route('roles.show', id)}
+                                                className="rounded bg-gray-600 px-3 py-1 text-white transition hover:bg-green-700"
+                                            >
+                                                View
+                                            </Link>
+                                        )}
+                                        {canEdit && (
+                                            <Link
+                                                href={route('roles.edit', id)}
+                                                className="rounded bg-green-600 px-3 py-1 text-white transition hover:bg-green-700"
+                                            >
+                                                Edit
+                                            </Link>
+                                        )}
+                                        {canDelete && (
+                                            <button
+                                                onClick={() => handleDelete(id)}
+                                                className="rounded bg-red-600 px-3 py-1 text-white transition hover:bg-red-700"
+                                            >
+                                                Delete
+                                            </button>
+                                        )}
                                     </td>
                                 </tr>
                             ))}

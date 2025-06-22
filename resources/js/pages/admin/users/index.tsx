@@ -20,7 +20,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 export default function Index({ users }: { users: User[] }) {
 
-    const canCreate = useCan('users.create');
+const canCreate = useCan('users.create');
 const canView = useCan('users.view');
 const canEdit = useCan('users.edit');
 const canDelete = useCan('users.delete');
