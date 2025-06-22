@@ -7,8 +7,13 @@ use Inertia\Inertia;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
+
 class RoleController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Display a listing of the resource.
      */
@@ -25,6 +30,12 @@ class RoleController extends Controller
      */
     public function create()
     {
+        //  $this->authorize('create', Role::class);  //werkt niet goed 
+
+        if (!auth()->user()->can('roles.create')) {
+            abort(403);
+        }
+
         return Inertia::render('admin/roles/create', [
             'permissions' => Permission::pluck("name"),
         ]);
