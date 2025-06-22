@@ -7,14 +7,20 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class UserController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+
+        $this->authorize('viewAny', User::class);
+
         return Inertia::render('admin/users/index', [
             // "users" => User::all()
             "users" => User::with('roles')->get(),
@@ -27,6 +33,8 @@ class UserController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', User::class);
+
         return Inertia::render('admin/users/create', [
             'roles' => Role::pluck("name"),
         ]);
@@ -59,7 +67,10 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
+
         $user = User::findOrFail($id);
+      //  $this->authorize('view', $user); //nu hoeft niet dat alleen de ingelogde gebruiker zijn of haar eigen profiel kan bekijken via de show-pagina. 
+
         return inertia::render('admin/users/show', compact('user'));
     }
 
@@ -68,6 +79,8 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
+        $this->authorize('update', User::class);
+
         // $user = User::findOrFail($id);
         $user = User::with('roles')->findOrFail($id);
         $roles = Role::all();
@@ -108,6 +121,8 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
+        $this->authorize('delete', User::class);
+
         User::destroy($id);
         return to_route('users.index')->with('message', 'User was deleted!');
     }
