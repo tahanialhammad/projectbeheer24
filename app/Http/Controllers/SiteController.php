@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -13,6 +14,8 @@ class SiteController extends Controller
     }
         public function services()
     {
-        return Inertia::render('services/services');
+        return Inertia::render('services/services',[
+             "services" => Service::all()
+        ]);
     }
 }

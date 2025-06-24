@@ -1,7 +1,8 @@
+import FlashMessage from '@/components/FlashMessage';
 import { Head } from '@inertiajs/react';
 import { type ReactNode } from 'react';
-import SiteNav from './site/SiteNav';
 import SiteFooter from './site/SiteFooter';
+import SiteNav from './site/SiteNav';
 
 type SiteLayoutProps = {
     children: ReactNode;
@@ -9,7 +10,7 @@ type SiteLayoutProps = {
 };
 
 export default function SiteLayout({ children, title = 'Welcome' }: SiteLayoutProps) {
-//    const { auth } = usePage<SharedData>().props;
+    //    const { auth } = usePage<SharedData>().props;
 
     return (
         <>
@@ -18,14 +19,17 @@ export default function SiteLayout({ children, title = 'Welcome' }: SiteLayoutPr
                 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
             </Head>
 
-            <div className="lg:justify-centertt lg:p-8 flex min-h-screen flex-col bg-[#FDFDFC] px-6 text-[#1b1b18] dark:bg-[#0a0a0a]">
+            <div className="lg:justify-centertt flex min-h-screen flex-col bg-[#FDFDFC] px-6 text-[#1b1b18] lg:p-8 dark:bg-[#0a0a0a]">
                 <SiteNav />
 
                 {/* Page Content */}
-                <div className="m-4 mt-24">{children}</div>
+                <div className="m-4 mt-24">
+                    <FlashMessage />
+                    {children}
+                </div>
                 <footer>
-                <SiteFooter />
-            </footer>
+                    <SiteFooter />
+                </footer>
             </div>
         </>
     );

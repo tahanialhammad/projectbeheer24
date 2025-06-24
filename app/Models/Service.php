@@ -9,11 +9,16 @@ class Service extends Model
 {
     /** @use HasFactory<\Database\Factories\ServiceFactory> */
     use HasFactory;
-     protected $fillable = [
+    protected $fillable = [
         'name',
         'slug',
         'description',
         'price',
-        'image', 
+        'image',
     ];
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
 }
