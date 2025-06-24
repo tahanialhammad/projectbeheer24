@@ -15,9 +15,16 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
+   User::firstOrCreate(
+            ['email' => 'test@example.com'], // zoek op email
+            ['name' => 'Test User', 'password' => bcrypt('password')] // alleen invullen als hij nog niet bestaat
+        );
+        
+        $this->call(PermissionSeeder::class);
+        $this->call(ServiceSeeder::class);
     }
 }
