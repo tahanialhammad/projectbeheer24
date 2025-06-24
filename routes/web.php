@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\SiteController;
@@ -14,7 +15,8 @@ use App\Http\Controllers\UserController;
 // WEBSITE
 Route::controller(SiteController::class)->group(function () {
     Route::get('/', 'welcome')->name('home');
-    Route::get('/services', 'services')->name('services');
+    Route::get('/our-services', 'services')->name('services');
+
 });
 
 // Admin
@@ -24,6 +26,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
     Route::resource('users', UserController::class);
     Route::resource('roles', RoleController::class);
+    Route::resource('services', ServiceController::class);
+
 });
 
 require __DIR__ . '/settings.php';
