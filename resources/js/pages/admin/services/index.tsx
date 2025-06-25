@@ -1,7 +1,7 @@
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link, router } from '@inertiajs/react';
-// import { useCan } from '@/lib/can';
+import { useCan } from '@/lib/can';
 
 
 type Service = {
@@ -20,7 +20,9 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function Index({ services }: { services: Service[] }) {
-
+    const canCreate = useCan('services.create');
+    const canEdit = useCan('services.edit');
+    const canDelete = useCan('services.delete');
 
     function handleDelete(id: number) {
         if (confirm('Are you sure you want to remove this service?')) {
@@ -34,10 +36,10 @@ export default function Index({ services }: { services: Service[] }) {
             <div className="p-6">
                 <div className="mb-4 flex items-center justify-between">
                     <h2 className="text-3xl font-bold text-gray-800">services list</h2>
-                    
+                    {canCreate && (  
                     <Link href={route('services.create')} className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700">
                         Add new service
-                    </Link>
+                    </Link>)}
                 </div>
 
                 <div className="overflow-x-auto">
@@ -66,20 +68,20 @@ export default function Index({ services }: { services: Service[] }) {
                                         >
                                             view
                                         </Link>
-                                        
+                                  {canEdit && (       
                                         <Link
                                             href={route('services.edit', id)}
                                             className="rounded bg-green-600 px-3 py-1 text-white transition hover:bg-green-700"
                                         >
                                             Edit
-                                        </Link>
-                                         
+                                        </Link>)}
+                                        {canDelete && (  
                                         <button
                                             onClick={() => handleDelete(id)}
                                             className="rounded bg-red-600 px-3 py-1 text-white transition hover:bg-red-700"
                                         >
                                             Delete
-                                        </button>
+                                        </button>)}
                                     </td>
                                 </tr>
                             ))}

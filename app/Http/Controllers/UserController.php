@@ -69,7 +69,7 @@ class UserController extends Controller
     {
 
         $user = User::findOrFail($id);
-      //  $this->authorize('view', $user); //nu hoeft niet dat alleen de ingelogde gebruiker zijn of haar eigen profiel kan bekijken via de show-pagina. 
+        //  $this->authorize('view', $user); //nu hoeft niet dat alleen de ingelogde gebruiker zijn of haar eigen profiel kan bekijken via de show-pagina. 
 
         return inertia::render('admin/users/show', compact('user'));
     }

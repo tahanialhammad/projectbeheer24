@@ -8,10 +8,13 @@ use Illuminate\Http\Request;
 use App\Http\Requests\UpdateServiceRequest;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 
 class ServiceController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Display a listing of the resource.
      */
@@ -27,6 +30,8 @@ class ServiceController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Service::class);
+
         return Inertia::render('admin/services/create');
     }
 
@@ -65,6 +70,8 @@ class ServiceController extends Controller
      */
     public function edit(Service $service)
     {
+        $this->authorize('update', Service::class);
+
         return Inertia::render('admin/services/edit', compact('service'));
     }
 
@@ -94,7 +101,7 @@ class ServiceController extends Controller
      */
     public function destroy(Service $service)
     {
-       // Service::destroy($service->id); // destroy() verwacht een ID 
+        // Service::destroy($service->id); // destroy() verwacht een ID 
         $service->delete();
 
         return to_route('services.index')->with('message', 'service was deleted!');

@@ -29,6 +29,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('roles', RoleController::class);
     Route::resource('services', ServiceController::class);
     Route::resource('orders', OrderController::class);
+    Route::get('/my-orders', [OrderController::class, 'userOrders'])->name('orders.user');
 
 });
 

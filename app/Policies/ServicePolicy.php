@@ -29,15 +29,15 @@ class ServicePolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->can('services.create');
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Service $service): bool
+    public function update(User $user): bool
     {
-        return false;
+        return $user->can('services.edit');
     }
 
     /**
@@ -45,7 +45,7 @@ class ServicePolicy
      */
     public function delete(User $user, Service $service): bool
     {
-        return false;
+        return $user->can('services.delete');
     }
 
     /**
