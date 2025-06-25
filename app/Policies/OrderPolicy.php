@@ -2,26 +2,26 @@
 
 namespace App\Policies;
 
-use Spatie\Permission\Models\Role;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class RolePolicy
+class OrderPolicy
 {
     /**
      * Determine whether the user can view any models.
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('roles.view');
+        return $user->hasRole('Super Admin') && $user->can('users.view');
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Role $role): bool
+    public function view(User $user, Order $order): bool
     {
-        return $user->can('roles.view');
+        return $user->can('users.view') & $user->id === $model->id;
     }
 
     /**
@@ -29,29 +29,29 @@ class RolePolicy
      */
     public function create(User $user): bool
     {
-        return $user->can('roles.create');
+        return false;
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Role $role): bool
+    public function update(User $user, Order $order): bool
     {
-        return $user->can('roles.edit');
+        return false;
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Role $role): bool
+    public function delete(User $user, Order $order): bool
     {
-        return $user->can('roles.delete');
+        return false;
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Role $role): bool
+    public function restore(User $user, Order $order): bool
     {
         return false;
     }
@@ -59,7 +59,7 @@ class RolePolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Role $role): bool
+    public function forceDelete(User $user, Order $order): bool
     {
         return false;
     }

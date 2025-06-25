@@ -19,6 +19,10 @@ class RoleController extends Controller
      */
     public function index()
     {
+        if (!auth()->user()->can('roles.view')) {
+            abort(403);
+        }
+
         return Inertia::render('admin/roles/index', [
             // 'roles' => Role::all(),
             'roles' => Role::with('permissions')->get(),
@@ -73,7 +77,7 @@ class RoleController extends Controller
      */
     public function edit(string $id)
     {
-        if (!auth()->user()->can('roles.update')) {
+        if (!auth()->user()->can('roles.edit')) {
             abort(403);
         }
 

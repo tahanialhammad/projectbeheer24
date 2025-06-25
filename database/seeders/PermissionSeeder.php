@@ -21,10 +21,21 @@ class PermissionSeeder extends Seeder
             'users.edit',
             'users.delete',
             'users.create',
+
             'roles.view',
             'roles.edit',
             'roles.delete',
             'roles.create',
+            
+            'services.view',
+            'services.edit',
+            'services.delete',
+            'services.create',
+
+            'orders.view',
+            'orders.edit',
+            'orders.delete',
+            'orders.create',
         ];
 
         //   Permission::create(['name' => 'edit articles']);
