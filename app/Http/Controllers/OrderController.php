@@ -38,39 +38,66 @@ class OrderController extends Controller
         ]);
     }
 
+    // public function create(Request $request)
+    // {
+    //     $services = Service::all();
+
+    //     return Inertia::render('admin/orders/create', [
+    //         'services' => $services,
+    //         'selected_service_id' => $request->service_id, // vanuit query parameter
+    //     ]);
+    // }
+
     public function create(Request $request)
     {
-        $services = Service::all();
+        $service = Service::with('formFields')->findOrFail($request->service_id);
 
         return Inertia::render('admin/orders/create', [
-            'services' => $services,
-            'selected_service_id' => $request->service_id, // vanuit query parameter
+            'service' => $service,
         ]);
     }
 
 
+    // public function store(Request $request)
+    // {
+
+    //     $validated = $request->validate([
+    //         'service_id' => 'required|exists:services,id',
+    //     ]);
+
+    //     //       $order = Order::create([
+    //     //     'user_id' => auth()->id(),
+    //     //     'service_id' => $request->service_id,
+    //     //     'quantity' => 1,
+    //     //     'status' => 'pending',
+    //     // ]);
+
+    //     Order::create([
+    //         'user_id' => Auth::id(),
+    //         'service_id' => $validated['service_id'],
+    //     ]);
+
+    //     // return back()->with('success', 'Service succesvol besteld!');
+    //     return to_route('services')->with('success', 'Service succesvol besteld! !');
+    // }
+
     public function store(Request $request)
     {
-
+        // dd($request->all());
         $validated = $request->validate([
             'service_id' => 'required|exists:services,id',
+            'form_data' => 'required|array',
         ]);
-
-        //       $order = Order::create([
-        //     'user_id' => auth()->id(),
-        //     'service_id' => $request->service_id,
-        //     'quantity' => 1,
-        //     'status' => 'pending',
-        // ]);
 
         Order::create([
             'user_id' => Auth::id(),
             'service_id' => $validated['service_id'],
+            'form_data' => json_encode($validated['form_data']),
         ]);
 
-        // return back()->with('success', 'Service succesvol besteld!');
-        return to_route('services')->with('success', 'Service succesvol besteld! !');
+        return redirect()->route('services')->with('success', 'Bestelling geplaatst!');
     }
+
 
     public function edit(Order $order)
     {
