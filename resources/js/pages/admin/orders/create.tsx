@@ -1,7 +1,6 @@
 import DynamicFormField from '@/components/DynamicFormField';
 import SiteLayout from '@/layouts/site-layout';
 import { useForm } from '@inertiajs/react';
-import React, { useState } from 'react';
 
 type FormField = {
     id: number;
@@ -21,7 +20,6 @@ type Props = {
 };
 
 export default function CreateOrder({ service }: Props) {
-    const [formData, setFormData] = useState<Record<string, string>>({});
 
     // const { data, setData, post, processing, errors } = useForm({
     //     service_id: service.id,

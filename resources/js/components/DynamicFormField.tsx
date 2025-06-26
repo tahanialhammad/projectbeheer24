@@ -11,7 +11,9 @@ type Props = {
     field: FormField;
     value: string;
     error?: string;
-    onChange: (e: React.ChangeEvent<any>) => void;
+   // onChange: (e: React.ChangeEvent<any>) => void;
+   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
+
 };
 
 export default function DynamicFormField({ field, value, error, onChange }: Props) {
