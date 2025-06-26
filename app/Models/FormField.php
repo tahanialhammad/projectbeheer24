@@ -9,7 +9,7 @@ class FormField extends Model
 {
     /** @use HasFactory<\Database\Factories\FormFieldFactory> */
     use HasFactory;
-       protected $fillable = [
+    protected $fillable = [
         'service_id',
         'label',
         'name',
@@ -17,7 +17,7 @@ class FormField extends Model
         'options',
         'required',
     ];
-     protected $casts = [
+    protected $casts = [
         'options' => 'array',
         'required' => 'boolean',
     ];
@@ -25,5 +25,9 @@ class FormField extends Model
     public function service()
     {
         return $this->belongsTo(Service::class);
+    }
+    public function orderValues()
+    {
+        return $this->hasMany(OrderFieldValue::class);
     }
 }
