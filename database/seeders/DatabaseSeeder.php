@@ -19,12 +19,16 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-   User::firstOrCreate(
+        User::firstOrCreate(
             ['email' => 'test@example.com'], // zoek op email
             ['name' => 'Test User', 'password' => bcrypt('password')] // alleen invullen als hij nog niet bestaat
         );
-        
+
         $this->call(PermissionSeeder::class);
         $this->call(ServiceSeeder::class);
+
+        $this->call([
+            FormFieldSeeder::class,
+        ]);
     }
 }

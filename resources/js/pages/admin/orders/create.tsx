@@ -1,74 +1,71 @@
-import { useForm } from '@inertiajs/react';
+import DynamicFormField from '@/components/DynamicFormField';
 import SiteLayout from '@/layouts/site-layout';
+import { useForm } from '@inertiajs/react';
+import React, { useState } from 'react';
 
-type Service = {
-  id: number;
-  name: string;
+type FormField = {
+    id: number;
+    label: string;
+    name: string;
+    type: 'text' | 'textarea' | 'select';
+    required: boolean;
+    options?: string | null;
 };
 
 type Props = {
-  services: Service[];
-  selected_service_id?: number;
+    service: {
+        id: number;
+        name: string;
+        form_fields: FormField[];
+    };
 };
 
-export default function Create({ services, selected_service_id }: Props) {
-  const { data, setData, post, processing, errors } = useForm({
-    service_id: selected_service_id || '',
-    quantity: 1,
-  });
+export default function CreateOrder({ service }: Props) {
+    const [formData, setFormData] = useState<Record<string, string>>({});
 
-  // Zoek de geselecteerde service voor weergave
-  const selectedService = services.find(s => s.id === Number(data.service_id));
+    // const { data, setData, post, processing, errors } = useForm({
+    //     service_id: service.id,
+    //     form_data: {},
+    // });
+    const { data, setData, post, processing, errors } = useForm<{
+        service_id: number;
+        form_data: Record<string, string>;
+    }>({
+        service_id: service.id,
+        form_data: {},
+    });
 
-  function submit(e: React.FormEvent) {
-    e.preventDefault();
-    post(route('orders.store'));
-  }
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+        setData('form_data', {
+            ...data.form_data,
+            [e.target.name]: e.target.value,
+        });
+    };
 
-  return (
-    <SiteLayout title="Nieuwe bestelling">
-      <h1 className="text-2xl font-bold mb-4">Bestel een service</h1>
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        post(route('orders.store'));
+    };
 
-      <form onSubmit={submit} className="max-w-md space-y-4">
-        <div>
-          <label className="block mb-1 font-medium">Service</label>
-          <input
-            type="text"
-            value={selectedService ? selectedService.name : ''}
-            readOnly
-            className="w-full border px-3 py-2 rounded bg-gray-100 cursor-not-allowed"
-          />
-          <input
-            type="hidden"
-            value={data.service_id}
-            name="service_id"
-          />
-          {errors.service_id && <div className="text-red-600">{errors.service_id}</div>}
-        </div>
+    return (
+        <SiteLayout title="Bestelling plaatsen">
+            <h1 className="mb-6 text-2xl font-bold">Bestel: {service.name}</h1>
 
-        <div>
-          <label className="block mb-1 font-medium">Aantal</label>
-          <input
-            type="number"
-            value={data.quantity}
-            min={1}
-            onChange={e => setData('quantity', parseInt(e.target.value, 10))}
-            className="w-full border px-3 py-2 rounded"
-            required
-          />
-          {errors.quantity && <div className="text-red-600">{errors.quantity}</div>}
-        </div>
+            <form onSubmit={handleSubmit} className="space-y-4">
+                {service.form_fields.map((field) => (
+                    <DynamicFormField
+                        key={field.id}
+                        field={field}
+                        value={data.form_data[field.name] || ''}
+                        error={(errors as Record<string, string>)[`form_data.${field.name}`]}
+                        onChange={handleChange}
+                    />
+                ))}
 
-        {/* Meer velden kan je hier toevoegen */}
-
-        <button
-          type="submit"
-          disabled={processing}
-          className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-        >
-          Bestel
-        </button>
-      </form>
-    </SiteLayout>
-  );
+                <button type="submit" disabled={processing} className="mt-4 rounded bg-green-600 px-6 py-2 text-white hover:bg-green-700">
+                    Bestellen
+                </button>
+            </form>
+        </SiteLayout>
+    );
 }
