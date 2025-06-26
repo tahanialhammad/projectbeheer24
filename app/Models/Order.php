@@ -22,4 +22,13 @@ class Order extends Model
     {
         return $this->belongsTo(Service::class);
     }
+    public function fieldValues()
+    {
+        return $this->hasMany(OrderFieldValue::class);
+    }
+    // fieldValues with label
+    public function valuesWithLabels()
+    {
+        return $this->fieldValues()->with('formField');
+    }
 }
