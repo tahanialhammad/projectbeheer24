@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use App\Models\Service;
 use App\Models\User;
+use App\Notifications\OrderStatusUpdated;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -122,6 +123,9 @@ class OrderController extends Controller
         $order->update([
             'status' => $validated['status'],
         ]);
+
+            // أرسل الإشعار للمستخدم المرتبط بالطلب
+    $order->user->notify(new OrderStatusUpdated($order));
 
         return to_route('orders.index')->with('success', 'Order succesvol bijgewerkt!');
     }
