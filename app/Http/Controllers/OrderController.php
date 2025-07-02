@@ -124,8 +124,8 @@ class OrderController extends Controller
             'status' => $validated['status'],
         ]);
 
-            // أرسل الإشعار للمستخدم المرتبط بالطلب
-    $order->user->notify(new OrderStatusUpdated($order));
+        // أرسل الإشعار للمستخدم المرتبط بالطلب
+        $order->user->notify(new OrderStatusUpdated($order));
 
         return to_route('orders.index')->with('success', 'Order succesvol bijgewerkt!');
     }

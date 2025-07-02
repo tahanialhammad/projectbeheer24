@@ -4,8 +4,9 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, Folder, LayoutGrid, Notebook, UsersRound, Layers, ShoppingCart  } from 'lucide-react';
+import { BookOpen, Folder, Layers, LayoutGrid, Notebook, ShoppingCart, UsersRound } from 'lucide-react';
 import AppLogo from './app-logo';
+import NotificationBell from './NotificationBell';
 
 const mainNavItems: NavItem[] = [
     {
@@ -23,20 +24,20 @@ const mainNavItems: NavItem[] = [
         href: '/roles',
         icon: Notebook,
     },
-     {
+    {
         title: 'Services',
         href: '/services',
-        icon: Layers ,
+        icon: Layers,
     },
-     {
+    {
         title: 'Orders',
         href: '/orders',
-        icon: ShoppingCart ,
+        icon: ShoppingCart,
     },
     {
         title: 'My Orders',
         href: '/my-orders',
-        icon: ShoppingCart ,
+        icon: ShoppingCart,
     },
 ];
 
@@ -70,6 +71,10 @@ export function AppSidebar() {
 
             <SidebarContent>
                 <NavMain items={mainNavItems} />
+                <div className="mt-4 flex justify-center">
+                    Notification
+                    <NotificationBell />
+                </div>
             </SidebarContent>
 
             <SidebarFooter>

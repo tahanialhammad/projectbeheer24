@@ -29,7 +29,8 @@ class OrderStatusUpdated extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['mail'];
+        //return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -38,15 +39,12 @@ class OrderStatusUpdated extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            // ->line('The introduction to the notification.')
-            // ->action('Notification Action', url('/'))
-            // ->line('Thank you for using our application!');
-             ->subject('تم تحديث حالة طلبك')
-            ->greeting('مرحبًا ' . $notifiable->name . ' 👋')
-            ->line('طلبك رقم #' . $this->order->id . ' تم تحديث حالته.')
-            ->line('🔄 الحالة الجديدة: ' . $this->order->status)
-            ->action('عرض الطلب', url('/orders/' . $this->order->id))
-            ->line('شكرًا لاستخدامك خدماتنا!');
+            ->subject('De status van uw bestelling is bijgewerkt.')
+            ->greeting('Dag ' . $notifiable->name . ' 👋')
+            ->line('Je bestelling met nummer #' . $this->order->id . ' is bijgewerkt.')
+            ->line('🔄 Nieuwe status: ' . $this->order->status)
+            ->action('Bekijk bestelling', url('/orders/' . $this->order->id))
+            ->line('Bedankt voor het gebruiken van onze diensten!');
     }
 
     /**
@@ -57,7 +55,9 @@ class OrderStatusUpdated extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            //
+            'message' => 'Je bestelling #' . $this->order->id . ' is bijgewerkt naar status: ' . $this->order->status,
+            'order_id' => $this->order->id,
+            'status' => $this->order->status,
         ];
     }
 }
