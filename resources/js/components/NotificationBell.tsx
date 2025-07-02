@@ -1,5 +1,7 @@
 import { Bell } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { router } from '@inertiajs/react';
+
 
 export default function NotificationBell() {
     // 1. حالة لتتبع إذا كانت قائمة الإشعارات مفتوحة أم لا
@@ -15,18 +17,32 @@ export default function NotificationBell() {
             .catch(() => setNotifications([])); // في حالة خطأ نترك الإشعارات فارغة
     }, []);
 
+    // const handleMarkAsRead = (id) => {
+    //     fetch(`/notifications/${id}/mark-as-read`, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //                             // إضافة CSRF token للحماية من الهجمات
+    //             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+    //         },
+    //     }).then(() => {
+    //         setNotifications((prev) => prev.map((item) => (item.id === id ? { ...item, read_at: new Date().toISOString() } : item)));
+    //     });
+    // };
+
+
     const handleMarkAsRead = (id) => {
-        fetch(`/notifications/${id}/mark-as-read`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                                // إضافة CSRF token للحماية من الهجمات
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-            },
-        }).then(() => {
-            setNotifications((prev) => prev.map((item) => (item.id === id ? { ...item, read_at: new Date().toISOString() } : item)));
-        });
-    };
+    router.post(`/notifications/${id}/mark-as-read`, {}, {
+        preserveScroll: true,
+        onSuccess: () => {
+            setNotifications((prev) =>
+                prev.map((item) =>
+                    item.id === id ? { ...item, read_at: new Date().toISOString() } : item
+                )
+            );
+        },
+    });
+};
 
     // Alleen ongelezen notificaties tellen read_at == null
     const unread = notifications.filter((n) => !n.read_at);
