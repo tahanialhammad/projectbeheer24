@@ -6,7 +6,6 @@ import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
 import { BookOpen, Folder, Layers, LayoutGrid, Notebook, ShoppingCart, UsersRound } from 'lucide-react';
 import AppLogo from './app-logo';
-import NotificationBell from './NotificationBell';
 
 const mainNavItems: NavItem[] = [
     {
@@ -71,10 +70,6 @@ export function AppSidebar() {
 
             <SidebarContent>
                 <NavMain items={mainNavItems} />
-                <div className="mt-4 flex justify-center">
-                    Notification
-                    <NotificationBell />
-                </div>
             </SidebarContent>
 
             <SidebarFooter>
