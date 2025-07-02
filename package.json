@@ -23,6 +23,7 @@
         "typescript-eslint": "^8.23.0"
     },
     "dependencies": {
+        "@contentful/rich-text-react-renderer": "^16.0.2",
         "@headlessui/react": "^2.2.0",
         "@inertiajs/react": "^2.0.0",
         "@radix-ui/react-avatar": "^1.1.3",
