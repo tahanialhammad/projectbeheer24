@@ -8,7 +8,7 @@ type Notification = {
     created_at: string;
     data: {
         message?: string;
-        [key: string]: any;
+        [key: string]: unknown;
     };
 };
 

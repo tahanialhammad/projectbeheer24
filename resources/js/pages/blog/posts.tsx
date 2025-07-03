@@ -1,11 +1,12 @@
 import SiteLayout from '@/layouts/site-layout';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { Document } from '@contentful/rich-text-types';
 
 interface Post {
     sys: { id: string };
     fields: {
         title: string;
-        content: any;
+        content: Document;  // in plaats van any
         imageUrl?: string;
     };
 }
