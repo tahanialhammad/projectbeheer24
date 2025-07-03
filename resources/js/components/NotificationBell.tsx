@@ -1,13 +1,24 @@
+import { router } from '@inertiajs/react';
 import { Bell } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { router } from '@inertiajs/react';
 
+type Notification = {
+    id: string | number;
+    read_at: string | null;
+    created_at: string;
+    data: {
+        message?: string;
+        [key: string]: unknown;
+    };
+};
 
 export default function NotificationBell() {
     // 1. حالة لتتبع إذا كانت قائمة الإشعارات مفتوحة أم لا
     const [open, setOpen] = useState(false);
     // 2. حالة لتخزين الإشعارات التي نأتي بها من السيرفر
-    const [notifications, setNotifications] = useState([]);
+    //    const [notifications, setNotifications] = useState([]);
+    //typescript
+    const [notifications, setNotifications] = useState<Notification[]>([]);
 
     // 3. تحميل الإشعارات مرة واحدة عندما يفتح المكون (Component)
     useEffect(() => {
@@ -30,19 +41,18 @@ export default function NotificationBell() {
     //     });
     // };
 
-
-    const handleMarkAsRead = (id) => {
-    router.post(`/notifications/${id}/mark-as-read`, {}, {
-        preserveScroll: true,
-        onSuccess: () => {
-            setNotifications((prev) =>
-                prev.map((item) =>
-                    item.id === id ? { ...item, read_at: new Date().toISOString() } : item
-                )
-            );
-        },
-    });
-};
+    const handleMarkAsRead = (id: string | number) => {
+        router.post(
+            `/notifications/${id}/mark-as-read`,
+            {},
+            {
+                preserveScroll: true,
+                onSuccess: () => {
+                    setNotifications((prev) => prev.map((item) => (item.id === id ? { ...item, read_at: new Date().toISOString() } : item)));
+                },
+            },
+        );
+    };
 
     // Alleen ongelezen notificaties tellen read_at == null
     const unread = notifications.filter((n) => !n.read_at);

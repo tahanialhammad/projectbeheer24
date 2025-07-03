@@ -36,21 +36,11 @@ class NotificationController extends Controller
     {
         return  $request->user()->unreadNotifications;
     }
+    
     // public function markAllAsRead(Request $request)
     // {
     //     $request->user()->unreadNotifications->markAsRead();
-
     //     return redirect()->back()->with('success', 'Alle notificaties gemarkeerd als gelezen.');
-    // }
-
-
-    // public function markAsRead(Request $request, $id)
-    // {
-    //   //  dd('ff');
-    //     $notification = $request->user()->notifications()->findOrFail($id);
-    //     $notification->markAsRead();
-
-    //     return response()->json(['message' => 'Gemarkeerd als gelezen.']);
     // }
 
     public function markAsRead(Request $request, $id)
