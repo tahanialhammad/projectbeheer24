@@ -1,13 +1,15 @@
 import SiteLayout from '@/layouts/site-layout';
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
 import { Document } from '@contentful/rich-text-types';
+import { Link } from '@inertiajs/react';
 
 interface Post {
     sys: { id: string };
     fields: {
         title: string;
-        content: Document;  // in plaats van any
+        content: Document; // in plaats van any
         imageUrl?: string;
+        slug: string;
     };
 }
 
@@ -31,15 +33,23 @@ export default function BlogPosts({ posts }: Props) {
             <div>
                 <h1>Blog Posts van Contentful</h1>
                 <ul>
-                    {posts.map((post) => (
-                        <li key={post.sys.id}>
-                            <h2>{post.fields.title}</h2>
-                            {post.fields.imageUrl && (
-                                <img src={post.fields.imageUrl} alt={post.fields.title} className="my-4 w-full max-w-md rounded shadow" />
-                            )}
-                            <div>{documentToReactComponents(post.fields.content)}</div>
-                        </li>
-                    ))}
+                    {posts.map((post) => {
+                        const plainText = documentToPlainTextString(post.fields.content);
+                        const shortText = plainText.slice(0, 200) + '...';
+
+                        return (
+                            <li key={post.sys.id}>
+                                <Link href={`/post/${post.fields.slug}`}>
+                                    <h2 className="text-blue-600 hover:underline">{post.fields.title}</h2>
+                                </Link>
+
+                                {post.fields.imageUrl && (
+                                    <img src={post.fields.imageUrl} alt={post.fields.title} className="my-4 w-full max-w-md rounded shadow" />
+                                )}
+                                <div>{shortText}</div>
+                            </li>
+                        );
+                    })}
                 </ul>
             </div>
         </SiteLayout>

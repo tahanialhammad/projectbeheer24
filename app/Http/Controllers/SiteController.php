@@ -83,6 +83,33 @@ class SiteController extends Controller
         return null;
     }
 
+    public function showPost(ContentfulService $contentful, $slug)
+    {
+
+        $data = $contentful->fetchEntries('blogPost', 1);
+
+         $assets = collect($data['includes']['Asset'] ?? [])->keyBy('sys.id');
+
+        // // Zoek de post met de gevraagde ID
+        // $postItem = collect($data['items'])->firstWhere('sys.id', $id);
+    $postItem = collect($data['items'])->firstWhere('fields.slug', $slug);
+
+        if (!$postItem) {
+            abort(404, 'Post niet gevonden');
+        }
+
+        // Voeg image URL toe zoals je al doet
+        $post = [
+            'sys' => $postItem['sys'],
+            'fields' => array_merge($postItem['fields'], [
+                'imageUrl' => $this->extractImageUrl($postItem, $assets),
+            ]),
+        ];
+
+        return Inertia::render('blog/show', [
+            'post' => $post,
+        ]);
+    }
 
     public function faqs(ContentfulService $contentful)
     {
