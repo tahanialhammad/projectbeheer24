@@ -19,6 +19,8 @@ Route::controller(SiteController::class)->group(function () {
     Route::get('/', 'welcome')->name('home');
     Route::get('/our-services', 'services')->name('services');
     Route::get('/post', 'posts')->name('posts');
+    Route::get('/faqs', 'faqs')->name('faqs');
+
 });
 
 // Admin
