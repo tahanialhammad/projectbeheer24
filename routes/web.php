@@ -18,8 +18,8 @@ use App\Http\Controllers\UserController;
 Route::controller(SiteController::class)->group(function () {
     Route::get('/', 'welcome')->name('home');
     Route::get('/our-services', 'services')->name('services');
-    Route::get('/post', 'posts')->name('posts');
-    Route::get('/post/{slug}', 'showPost')->name('post.show');
+    Route::get('/posts', 'posts')->name('posts');
+    Route::get('/posts/{slug}', 'showPost')->name('post.show');
     Route::get('/faqs', 'faqs')->name('faqs');
 
 });

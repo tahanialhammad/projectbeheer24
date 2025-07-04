@@ -39,7 +39,7 @@ export default function BlogPosts({ posts }: Props) {
 
                         return (
                             <li key={post.sys.id}>
-                                <Link href={`/post/${post.fields.slug}`}>
+                                <Link href={`/posts/${post.fields.slug}`}>
                                     <h2 className="text-blue-600 hover:underline">{post.fields.title}</h2>
                                 </Link>
 
