@@ -11,6 +11,7 @@ const navigation = [
     // { name: "Shop", href: "products.index" },
     { name: 'Services', href: 'services' },
     { name: 'Blog', href: 'posts' },
+    { name: 'FAQs', href: 'faqs' },
     // { name: "About", href: "about" },
 ];
 
