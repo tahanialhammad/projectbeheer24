@@ -1,7 +1,7 @@
+import CardSimple  from '@/components/ui/card-simple';
 import SiteLayout from '@/layouts/site-layout';
 import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
 import { Document } from '@contentful/rich-text-types';
-import { Link } from '@inertiajs/react';
 
 interface Post {
     sys: { id: string };
@@ -32,25 +32,23 @@ export default function BlogPosts({ posts }: Props) {
             <h1 className="mb-1 font-medium">Blog page</h1>
             <div>
                 <h1>Blog Posts van Contentful</h1>
-                <ul>
+                <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
                     {posts.map((post) => {
                         const plainText = documentToPlainTextString(post.fields.content);
                         const shortText = plainText.slice(0, 200) + '...';
 
                         return (
-                            <li key={post.sys.id}>
-                                <Link href={`/posts/${post.fields.slug}`}>
-                                    <h2 className="text-blue-600 hover:underline">{post.fields.title}</h2>
-                                </Link>
-
-                                {post.fields.imageUrl && (
-                                    <img src={post.fields.imageUrl} alt={post.fields.title} className="my-4 w-full max-w-md rounded shadow" />
-                                )}
-                                <div>{shortText}</div>
-                            </li>
+                            <CardSimple
+                                key={post.sys.id}
+                                title={post.fields.title}
+                                description={shortText}
+                                link={`/posts/${post.fields.slug}`}
+                                image={post.fields.imageUrl}
+                                imageAlt={post.fields.title}
+                            />
                         );
                     })}
-                </ul>
+                </div>
             </div>
         </SiteLayout>
     );
