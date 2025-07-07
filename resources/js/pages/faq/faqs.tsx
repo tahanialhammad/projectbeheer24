@@ -1,32 +1,36 @@
 import SiteLayout from '@/layouts/site-layout';
-import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { Document } from '@contentful/rich-text-types'; //handig voot typescript inplats van answer: any;
+import Accordion from '@/components/ui/Accordion';
+import { useState } from 'react';
+import { Document } from '@contentful/rich-text-types';
+
 type Props = {
-    faqGroups: {
-        title: string;
-        faqs: {
-            question: string;
-            answer: Document; // rich text JSON
-        }[];
+  faqGroups: {
+    title: string;
+    faqs: {
+      question: string;
+      answer: Document;
     }[];
+  }[];
 };
 
 export default function Faqs({ faqGroups }: Props) {
-    return (
-        <SiteLayout title="FAQ's">
-            <h1 className="mb-6 text-2xl font-semibold">Veelgestelde vragen</h1>
+  const [active, setActive] = useState<{ groupId: number; index: number } | null>(null);
 
-            {faqGroups.map((group, i) => (
-                <div key={i} className="mb-6">
-                    <h2 className="mb-2 text-lg font-bold">{group.title}</h2>
-                    {group.faqs.map((faq, j) => (
-                        <div key={j} className="mb-4">
-                            <strong>{faq.question}</strong>
-                            <div>{documentToReactComponents(faq.answer)}</div>
-                        </div>
-                    ))}
-                </div>
-            ))}
-        </SiteLayout>
-    );
+  return (
+    <SiteLayout title="FAQ's">
+      <h1 className="mb-6 text-2xl font-semibold">Veelgestelde vragen</h1>
+
+      {faqGroups.map((group, i) => (
+        <div key={i} className="mb-6">
+          <h2 className="mb-2 text-lg font-bold">{group.title}</h2>
+          <Accordion
+            groupId={i}
+            items={group.faqs}
+            active={active}
+            setActive={setActive}
+          />
+        </div>
+      ))}
+    </SiteLayout>
+  );
 }
