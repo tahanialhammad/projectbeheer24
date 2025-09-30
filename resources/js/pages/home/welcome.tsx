@@ -1,13 +1,9 @@
 // 'use client';
 
-import NavLink from '@/components/NavLink';
-import { Dialog, DialogPanel, Transition, TransitionChild } from '@headlessui/react';
-import { Menu, X } from 'lucide-react';
-import { Fragment, useState } from 'react';
-import AppLogo from '@/components/app-logo';
-import { Link } from '@inertiajs/react';
 import SiteLayout from '@/layouts/site-layout copy';
+import { useState } from 'react';
 import HeroSection from './partials/HeroSection';
+import WebProducts from './partials/WebProducts';
 
 const navigation = [
     { name: 'Home', href: 'home' },
@@ -16,17 +12,12 @@ const navigation = [
     { name: 'FAQs', href: 'faqs' },
 ];
 
-export default function Welcome() {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
+export default function Welcome({ services }) {
     return (
         <div className="bg-white">
-
-        <SiteLayout title="Welcome">
-
-               <HeroSection />
-
-
+            <SiteLayout title="Welcome">
+                <HeroSection />
+                <WebProducts products={services} />
             </SiteLayout>
         </div>
     );

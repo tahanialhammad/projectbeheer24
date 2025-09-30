@@ -12,7 +12,9 @@ class SiteController extends Controller
 {
     public function welcome()
     {
-        return Inertia::render('home/welcome');
+        return Inertia::render('home/welcome',[
+              "services" => Service::all()
+        ]);
     }
 
     public function services()
