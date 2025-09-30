@@ -28,7 +28,7 @@ export default function BlogPosts({ posts }: Props) {
     }
 
     return (
-        <SiteLayout title="Welcome">
+        <SiteLayout title="Blog">
             <h1 className="mb-1 font-medium">Blog page</h1>
             <div>
                 <h1>Blog Posts van Contentful</h1>
