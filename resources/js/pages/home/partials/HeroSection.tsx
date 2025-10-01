@@ -1,4 +1,3 @@
-
 import PrimaryButton from '@/components/PrimaryButton';
 import SecondaryButton from '@/components/SecondaryButton';
 import { motion } from 'framer-motion';
@@ -25,6 +24,17 @@ export default function HeroSection() {
                     ></motion.div>
                 </div>
 
+                <div className="mb-8 flex w-full items-center justify-center">
+                    <div className="max-w-[50vw] text-center">
+                        <h1 className="text-8xl">Moderniseer uw bedrijf</h1>
+                        <div className='flex gap-2 my-4 justify-center'>
+<PrimaryButton href={route('contact')}>Contact Us</PrimaryButton>
+                        <SecondaryButton>Ontdek prijzen</SecondaryButton>
+                        </div>
+                        
+                    </div>
+                </div>
+
                 <div className="flex w-full gap-8">
                     <div className="relative w-2/5 rounded-3xl bg-lime-200 p-4">
                         <img src=".\images\56FFDEB.png" alt="" className="rounded-3xl" />
@@ -33,17 +43,15 @@ export default function HeroSection() {
                             <h4 className="text-xl font-bold text-red-500 uppercase">Freelance </h4>
                             <h1 className="text-3xl font-black capitalize">webontwikkelaar </h1>
                             <h3 className="text-2xl capitalize">in Groningen</h3>
-                            <PrimaryButton className="mt-4">Afspraak maken</PrimaryButton>
+                            <PrimaryButton href={route('contact')} className="mt-4">
+                                Afspraak maken
+                            </PrimaryButton>
                         </div>
                     </div>
 
                     <div className="flex w-3/5 flex-col gap-8">
                         <div className="relative rounded-3xl">
-                            <img
-                                className="rounded-3xl"
-                                src=".\images\119567.jpg"
-                                alt=""
-                            />
+                            <img className="rounded-3xl" src=".\images\119567.jpg" alt="" />
                             <div className="absolute top-1/3 right-4 m-4">
                                 <h4 className="text-xl font-bold text-indigo-500 uppercase"> 25% korting </h4>
                                 <h1 className="text-3xl font-black capitalize">Jaarcontract</h1>
@@ -53,11 +61,7 @@ export default function HeroSection() {
                         </div>
 
                         <div className="relative">
-                            <img
-                                className="rounded-3xl"
-                                src=".\images\7073.jpg"
-                                alt=""
-                            />
+                            <img className="rounded-3xl" src=".\images\7073.jpg" alt="" />
                             <div className="absolute top-1/3 left-4 m-4">
                                 <h4 className="text-xl font-bold text-indigo-500 uppercase">Trendtech</h4>
                                 <h1 className="text-3xl font-black capitalize">Maatwerk & Innovatie</h1>
