@@ -17,7 +17,7 @@ export default function Welcome({ services }) {
         <div className="bg-white">
             <SiteLayout title="Welcome">
                 <HeroSection />
-                <WebProducts products={services} />
+                <WebProducts services={services} />
             </SiteLayout>
         </div>
     );

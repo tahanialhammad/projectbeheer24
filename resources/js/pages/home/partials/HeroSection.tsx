@@ -27,11 +27,10 @@ export default function HeroSection() {
                 <div className="mb-8 flex w-full items-center justify-center">
                     <div className="max-w-[50vw] text-center">
                         <h1 className="text-8xl">Moderniseer uw bedrijf</h1>
-                        <div className='flex gap-2 my-4 justify-center'>
-<PrimaryButton href={route('contact')}>Contact Us</PrimaryButton>
-                        <SecondaryButton>Ontdek prijzen</SecondaryButton>
+                        <div className="my-4 flex justify-center gap-2">
+                            <PrimaryButton href={route('contact')}>Contact Us</PrimaryButton>
+                            <SecondaryButton>Ontdek prijzen</SecondaryButton>
                         </div>
-                        
                     </div>
                 </div>
 
