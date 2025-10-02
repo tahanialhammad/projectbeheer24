@@ -37,7 +37,7 @@ export default function Features() {
 function FeaturesItem({ item }) {
     return (
         <div className="flex">
-            <div className="text-rose-500 me-4">{item.icon}</div>
+            <div className="text-fuchsia-500 me-4">{item.icon}</div>
             <div>
                 <h4 className="text-2xl font-bold">{item.name}</h4>
                 <p>{item.description}</p>

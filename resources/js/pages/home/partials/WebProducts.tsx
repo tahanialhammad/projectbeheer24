@@ -8,10 +8,9 @@ export default function WebProducts({ services }) {
             <div className="mt-20 mb-10 flex w-full gap-8">
                 {/* Promo blok */}
                 <div
-                    className="flex w-1/4 flex-col items-center justify-center rounded-3xl bg-auto bg-bottom bg-no-repeat p-4 text-black"
+                    className="flex w-1/4 flex-col items-center justify-center rounded-3xl bg-auto bg-bottom bg-no-repeat p-4 bg-fuchsia-100 text-black"
                     style={{
-                        backgroundImage: "url('/images/webdesign-tahanina-home.webp')",
-                        backgroundColor: 'pink',
+                        backgroundImage: "url('/images/3dimage.png')",
                         backgroundPositionY: '100px',
                     }}
                 >
@@ -75,7 +74,7 @@ export default function WebProducts({ services }) {
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 24 24"
                                                 fill="currentColor"
-                                                className="-mt-0.5 h-5 w-5 text-yellow-700"
+                                                className="-mt-0.5 h-5 w-5 text-fuchsia-800"
                                             >
                                                 <path
                                                     fill-rule="evenodd"

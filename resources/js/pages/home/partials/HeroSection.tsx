@@ -35,11 +35,11 @@ export default function HeroSection() {
                 </div>
 
                 <div className="flex w-full gap-8">
-                    <div className="relative w-2/5 rounded-3xl bg-lime-200 p-4">
+                    <div className="relative w-2/5 rounded-3xl bg-fuchsia-200 p-4">
                         <img src=".\images\56FFDEB.png" alt="" className="rounded-3xl" />
-                        <div className="absolute inset-0 mb-4 bg-gradient-to-t from-lime-200 via-transparent"></div>
+                        <div className="absolute inset-0 mb-4tt rounded-3xl bg-gradient-to-t from-indigo-200 via-transparent"></div>
                         <div className="absolute top-2/3 w-full text-center">
-                            <h4 className="text-xl font-bold text-red-500 uppercase">Freelance </h4>
+                            <h4 className="text-xl font-bold text-fuchsia-800 uppercase">Freelance </h4>
                             <h1 className="text-3xl font-black capitalize">webontwikkelaar </h1>
                             <h3 className="text-2xl capitalize">in Groningen</h3>
                             <PrimaryButton href={route('contact')} className="mt-4">

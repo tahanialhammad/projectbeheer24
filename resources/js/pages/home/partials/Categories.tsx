@@ -25,7 +25,7 @@ export default function Categories({ initialTime }) {
 
     return (
         <div className="flex flex-row my-6 gap-4">
-            <div className="w-1/2 bg-indigo-200 rounded-3xl p-4 capitalize text-center relative">
+            <div className="w-1/2 bg-fuchsia-200 rounded-3xl p-4 capitalize text-center relative">
                 <h3 className="text-lg font-bold tracking-tight text-red-500 uppercase mt-4">
                     25% korting 
                 </h3>
