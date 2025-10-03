@@ -21,6 +21,8 @@ Route::controller(SiteController::class)->group(function () {
     Route::get('/posts', 'posts')->name('posts');
     Route::get('/posts/{slug}', 'showPost')->name('post.show');
     Route::get('/faqs', 'faqs')->name('faqs');
+    Route::get('/contact', 'contact')->name('contact');
+    Route::get('/about', 'about')->name('about');
 
 });
 

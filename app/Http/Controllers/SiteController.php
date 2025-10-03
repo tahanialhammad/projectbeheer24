@@ -12,7 +12,10 @@ class SiteController extends Controller
 {
     public function welcome()
     {
-        return Inertia::render('home/welcome');
+
+        $services = Service::all();
+        $initialTime = 7200;
+        return Inertia::render('home/welcome', compact('services', 'initialTime'));
     }
 
     public function services()
@@ -88,11 +91,11 @@ class SiteController extends Controller
 
         $data = $contentful->fetchEntries('blogPost', 1);
 
-         $assets = collect($data['includes']['Asset'] ?? [])->keyBy('sys.id');
+        $assets = collect($data['includes']['Asset'] ?? [])->keyBy('sys.id');
 
         // // Zoek de post met de gevraagde ID
         // $postItem = collect($data['items'])->firstWhere('sys.id', $id);
-    $postItem = collect($data['items'])->firstWhere('fields.slug', $slug);
+        $postItem = collect($data['items'])->firstWhere('fields.slug', $slug);
 
         if (!$postItem) {
             abort(404, 'Post niet gevonden');
@@ -135,5 +138,15 @@ class SiteController extends Controller
         return Inertia::render('faq/faqs', [
             'faqGroups' => $groups,
         ]);
+    }
+
+    public function about()
+    {
+        return Inertia::render('about/about');
+    }
+
+    public function contact()
+    {
+        return Inertia::render('contact/contact');
     }
 }
