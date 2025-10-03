@@ -1,5 +1,6 @@
 import PrimaryButton from '@/components/PrimaryButton';
 import CountdownTimer from './CountdownTimer';
+import AnimatedWrapper from '@/components/AnimatedWrapper';
 
 export default function Categories({ initialTime }) {
     const categories = [
@@ -49,11 +50,11 @@ export default function Categories({ initialTime }) {
 
 function CategoryItem({ item }) {
     return (
-        <div className="flex flex-col items-center gap-2">
+        <AnimatedWrapper className="flex flex-col items-center gap-2">
             <img src={item.image} style={{ width: '124px', hight: '220px' }} className="m-auto max-w-full" alt="" />
 
             <h3 className="text-center text-2xl font-bold capitalize">{item.name}</h3>
             <p className="text-center">{item.description}</p>
-        </div>
+        </AnimatedWrapper>
     );
 }

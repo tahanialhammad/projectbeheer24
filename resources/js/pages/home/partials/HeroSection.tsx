@@ -1,3 +1,4 @@
+import AnimatedWrapper from '@/components/AnimatedWrapper';
 import PrimaryButton from '@/components/PrimaryButton';
 import SecondaryButton from '@/components/SecondaryButton';
 import { motion } from 'framer-motion';
@@ -35,7 +36,7 @@ export default function HeroSection() {
                 </div>
 
                 <div className="flex w-full gap-8">
-                    <div className="relative w-2/5 rounded-3xl bg-fuchsia-200 p-4">
+                    <AnimatedWrapper className="relative w-2/5 rounded-3xl bg-fuchsia-200 p-4">
                         <img src=".\images\56FFDEB.png" alt="" className="rounded-3xl" />
                         <div className="mb-4tt absolute inset-0 rounded-3xl bg-gradient-to-t from-indigo-200 via-transparent"></div>
                         <div className="absolute top-2/3 w-full text-center">
@@ -46,10 +47,9 @@ export default function HeroSection() {
                                 Afspraak maken
                             </PrimaryButton>
                         </div>
-                    </div>
-
+                    </AnimatedWrapper>
                     <div className="flex w-3/5 flex-col gap-8">
-                        <div className="relative rounded-3xl">
+                        <AnimatedWrapper className="relative rounded-3xl">
                             <img className="rounded-3xl" src=".\images\119567.jpg" alt="" />
                             <div className="absolute top-1/3 right-4 m-4">
                                 <h4 className="text-xl font-bold text-indigo-500 uppercase"> 25% korting </h4>
@@ -57,9 +57,9 @@ export default function HeroSection() {
                                 <h3 className="text-2xl capitalize">Met professionele diensten</h3>
                                 <PrimaryButton className="mt-4">Bekijk Aanbieding</PrimaryButton>
                             </div>
-                        </div>
+                        </AnimatedWrapper>
 
-                        <div className="relative">
+                        <AnimatedWrapper className="relative">
                             <img className="rounded-3xl" src=".\images\7073.jpg" alt="" />
                             <div className="absolute top-1/3 left-4 m-4">
                                 <h4 className="text-xl font-bold text-indigo-500 uppercase">Trendtech</h4>
@@ -67,7 +67,7 @@ export default function HeroSection() {
                                 <h3 className="text-2xl capitalize">fashion on fleek</h3>
                                 <SecondaryButton className="mt-4">Bekijk Diensten</SecondaryButton>
                             </div>
-                        </div>
+                        </AnimatedWrapper>
                     </div>
                 </div>
             </div>
