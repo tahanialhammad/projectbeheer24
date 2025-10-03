@@ -1,6 +1,5 @@
 import PrimaryButton from '@/components/PrimaryButton';
 import SiteLayout from '@/layouts/site-layout';
-import { Link } from '@inertiajs/react';
 
 type Service = {
     id: number;

@@ -1,5 +1,4 @@
 import React from "react";
-import { motion } from "framer-motion";
 import PrimaryButton from "@/Components/PrimaryButton";
 import CountdownTimer from "./CountdownTimer";
 

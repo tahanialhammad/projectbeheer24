@@ -6,13 +6,6 @@ import Features from './partials/Features';
 import HeroSection from './partials/HeroSection';
 import WebProducts from './partials/WebProducts';
 
-const navigation = [
-    { name: 'Home', href: 'home' },
-    { name: 'Services', href: 'services' },
-    { name: 'Blog', href: 'posts' },
-    { name: 'FAQs', href: 'faqs' },
-];
-
 export default function Welcome({ services, initialTime }) {
     return (
         <div className="bg-white">
