@@ -105,7 +105,7 @@ export default function SiteNav() {
                                             key={item.name}
                                             href={item.href && route(item.href)}
                                             className={`-mx-3 block rounded-lg px-3 py-2 text-base leading-7 font-semibold hover:bg-gray-50 ${
-                                                item.href && route().current(item.href) ? 'text-indigo-600' : 'text-gray-900'
+                                                item.href && route().current(item.href) ? 'text-fuchsia-600' : 'text-gray-900'
                                             }`}
                                         >
                                             {item.name}

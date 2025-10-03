@@ -37,7 +37,7 @@ export default function HeroSection() {
                 <div className="flex w-full gap-8">
                     <div className="relative w-2/5 rounded-3xl bg-fuchsia-200 p-4">
                         <img src=".\images\56FFDEB.png" alt="" className="rounded-3xl" />
-                        <div className="absolute inset-0 mb-4tt rounded-3xl bg-gradient-to-t from-indigo-200 via-transparent"></div>
+                        <div className="mb-4tt absolute inset-0 rounded-3xl bg-gradient-to-t from-indigo-200 via-transparent"></div>
                         <div className="absolute top-2/3 w-full text-center">
                             <h4 className="text-xl font-bold text-fuchsia-800 uppercase">Freelance </h4>
                             <h1 className="text-3xl font-black capitalize">webontwikkelaar </h1>
