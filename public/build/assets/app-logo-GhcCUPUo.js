@@ -1,0 +1,1 @@
+import{j as r}from"./app-BLXI4NUk.js";import{A as e}from"./app-logo-icon-56czpVrP.js";function o(){return r.jsx(r.Fragment,{children:r.jsx("div",{className:"flex aspect-square size-8 items-center justify-center rounded-md bg-sidebar-primary text-sidebar-primary-foreground",children:r.jsx(e,{className:"block h-12 bg-white w-auto fill-current text-gray-800"})})})}export{o as A};

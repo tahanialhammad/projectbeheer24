@@ -1,6 +1,6 @@
 import React from "react";
-import PrimaryButton from "@/Components/PrimaryButton";
 import CountdownTimer from "./CountdownTimer";
+import PrimaryButton from "@/components/PrimaryButton";
 
 export default function Categories({ initialTime }) {
     const categories = [
