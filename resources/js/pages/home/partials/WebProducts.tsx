@@ -1,3 +1,4 @@
+import AnimatedWrapper from '@/components/AnimatedWrapper';
 import SecondaryButton from '@/components/SecondaryButton';
 import { Link } from '@inertiajs/react';
 import { Plus } from 'lucide-react';
@@ -7,8 +8,8 @@ export default function WebProducts({ services }) {
         <div>
             <div className="mt-20 mb-10 flex w-full gap-8">
                 {/* Promo blok */}
-                <div
-                    className="flex w-1/4 flex-col items-center justify-center rounded-3xl bg-auto bg-bottom bg-no-repeat p-4 bg-fuchsia-100 text-black"
+                <AnimatedWrapper
+                    className="flex w-1/4 flex-col items-center justify-center rounded-3xl bg-fuchsia-100 bg-auto bg-bottom bg-no-repeat p-4 text-black"
                     style={{
                         backgroundImage: "url('/images/3dimage.png')",
                         backgroundPositionY: '100px',
@@ -19,7 +20,7 @@ export default function WebProducts({ services }) {
                         <h1 className="text-3xl leading-tight font-bold capitalize">Op onze nieuwe</h1>
                         <h3 className="text-3xl">Diensten</h3>
                     </div>
-                </div>
+                </AnimatedWrapper>
 
                 {/* Meest gekozen diensten */}
                 <div className="-mt-10 w-3/4">
@@ -27,7 +28,12 @@ export default function WebProducts({ services }) {
 
                     <div className="flex snap-x scroll-pl-6 space-x-6 overflow-x-auto p-4">
                         {services.map((service) => (
-                            <div key={service.id} className="relative w-60 flex-shrink-0 snap-start rounded-3xl border-2 bg-white p-4">
+                            <AnimatedWrapper
+                                direction="left"
+                                duration={Math.min(2, 1.2 + service.id * 0.1)}
+                                key={service.id}
+                                className="relative w-60 flex-shrink-0 snap-start rounded-3xl border-2 bg-white p-4"
+                            >
                                 <div className="!absolute top-4 left-4">
                                     <span
                                         className={`rounded-full bg-black px-3 py-1 text-white ${
@@ -86,7 +92,7 @@ export default function WebProducts({ services }) {
                                         </p>
                                     </div>
                                 </div>
-                            </div>
+                            </AnimatedWrapper>
                         ))}
                     </div>
                 </div>

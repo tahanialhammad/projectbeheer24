@@ -1,3 +1,4 @@
+import HeroSection from '@/components/HeroSection';
 import PrimaryButton from '@/components/PrimaryButton';
 import SiteLayout from '@/layouts/site-layout';
 
@@ -10,8 +11,9 @@ type Service = {
 
 export default function Services({ services }: { services: Service[] }) {
     return (
-        <SiteLayout title="Services">
-            <h1 className="mb-6 text-2xl font-semibold text-gray-800">Onze diensten</h1>
+        <SiteLayout title="diensten">
+            <HeroSection title="Onze diensten" />
+
             <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 {services.map(({ id, name, description, price }) => (
                     <div key={id} className="rounded-lg border border-gray-200 bg-white p-5 shadow transition-shadow duration-300 hover:shadow-lg">
@@ -24,9 +26,7 @@ export default function Services({ services }: { services: Service[] }) {
                         >
                             Bestel
                         </Link> */}
-                        <PrimaryButton href={route('orders.create', { service_id: id })}>
-                             Bestel
-                        </PrimaryButton>
+                        <PrimaryButton href={route('orders.create', { service_id: id })}>Bestel</PrimaryButton>
                     </div>
                 ))}
             </div>
