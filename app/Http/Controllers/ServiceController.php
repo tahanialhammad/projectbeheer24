@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateServiceRequest;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Storage;
 
 
 class ServiceController extends Controller
@@ -38,24 +39,53 @@ class ServiceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    // public function store(Request $request)
+    // {
+    //     $service = $request->validate([
+    //         'name' => 'required|string|max:255',
+    //         'description' => 'required|string|max:255',
+    //         'price' => 'required',
+
+    //     ]);
+    //     $service = Service::create([
+    //         'name' => $request->name,
+    //         'slug' => Str::slug($request->name),
+    //         'description' => $request->description,
+    //         'price' => $request->price,
+
+    //     ]);
+
+    //     return to_route('services.index');
+    // }
+
+
+
     public function store(Request $request)
     {
-        $service = $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
-            'price' => 'required',
-
-        ]);
-        $service = Service::create([
-            'name' => $request->name,
-            'slug' => Str::slug($request->name),
-            'description' => $request->description,
-            'price' => $request->price,
-
+            'description' => 'nullable|string',
+            'price' => 'nullable|numeric',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'discount' => 'nullable|numeric|min:0',
+            'discount_type' => 'required|in:fixed,percentage',
+            'discount_expires_at' => 'nullable|date',
         ]);
 
-        return to_route('services.index');
+        // Voeg de slug toe
+        $validated['slug'] = Str::slug($request->name);
+
+        // Opslaan van image als aanwezig
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('services', 'public');
+        }
+
+        Service::create($validated);
+
+        return redirect()->route('services.index')->with('success', 'Service created successfully!');
     }
+
+
 
     /**
      * Display the specified resource.
