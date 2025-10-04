@@ -25,6 +25,12 @@ class SiteController extends Controller
         return Inertia::render('services/services', compact('services'));
     }
 
+    public function showService(Service $service)
+    {
+        return Inertia::render('services/show', [
+            'service' => $service,
+        ]);
+    }
 
     public function posts(ContentfulService $contentful)
     {

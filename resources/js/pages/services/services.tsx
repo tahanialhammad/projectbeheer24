@@ -1,5 +1,6 @@
 import HeroSection from '@/components/HeroSection';
 import PrimaryButton from '@/components/PrimaryButton';
+import SecondaryButton from '@/components/SecondaryButton';
 import SiteLayout from '@/layouts/site-layout';
 
 type Service = {
@@ -46,7 +47,11 @@ export default function Services({ services }: ServicesProps) {
                             <h2 className="mb-2 text-xl font-bold text-gray-900">{name}</h2>
                             <p className="mb-4 line-clamp-3 text-gray-600">{description}</p>
                             <p className="text-lg font-semibold text-fuchsia-500">€{price}</p>
-                            <PrimaryButton href={route('orders.create', { service_id: id })}>Bestel</PrimaryButton>
+
+                            <div className="flex justify-between">
+                                <PrimaryButton href={route('orders.create', { service_id: id })}>Bestel</PrimaryButton>
+                                <SecondaryButton href={route('services.showService', id)}>Meer info</SecondaryButton>
+                            </div>
                         </div>
                     </div>
                 ))}
