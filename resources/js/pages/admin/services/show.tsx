@@ -28,7 +28,7 @@ export default function Show({ service }: { service: Service }) {
 
              <div className="flex items-center justify-between">
                 <h2 className="text-3xl font-bold text-gray-800">Role: {service.name}</h2>
-                <Link href="/roles" className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700">
+                <Link href="/services" className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700">
                     Back to all service
                 </Link>
             </div>
