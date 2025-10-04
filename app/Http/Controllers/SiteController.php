@@ -13,16 +13,16 @@ class SiteController extends Controller
     public function welcome()
     {
 
-        $services = Service::all();
+        $services = Service::latest()->take(10)->get();
         $initialTime = 7200;
         return Inertia::render('home/welcome', compact('services', 'initialTime'));
     }
 
     public function services()
     {
-        return Inertia::render('services/services', [
-            "services" => Service::all()
-        ]);
+        $services = Service::latest()->paginate(10);
+
+        return Inertia::render('services/services', compact('services'));
     }
 
 
