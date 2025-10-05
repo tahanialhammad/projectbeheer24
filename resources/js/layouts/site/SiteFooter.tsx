@@ -1,6 +1,7 @@
 import AppLogo from '@/components/app-logo';
 import NavLink from '@/components/NavLink';
 import { Link } from '@inertiajs/react';
+import { Facebook, Github, Instagram, Linkedin, MessageCircleHeart } from 'lucide-react';
 
 const platformNav = [
     { name: 'Diensten', href: 'services' },
@@ -14,7 +15,34 @@ const quickLinks = [
 ];
 
 const categories = [{ name: 'Diensten', href: 'services' }];
-const socialLinks = [{ name: 'FaceBook', href: 'https://facebook.com' }];
+const socialLinks = [
+    { name: 'FaceBook', icon: <Facebook fontSize="large" />, href: 'https://www.facebook.com/profile.php?id=61567786149478' },
+    {
+        name: 'linkedin',
+        icon: <Linkedin fontSize="large" />,
+        href: 'https://www.linkedin.com/in/tahanialhammad/',
+    },
+    {
+        name: 'github',
+        icon: <Github fontSize="large" />,
+        href: 'https://github.com/tahanialhammad',
+    },
+    {
+        name: 'behance',
+        icon: <MessageCircleHeart fontSize="large" />,
+        href: 'https://www.behance.net/tahani-ali-alhammad',
+    },
+    {
+        name: 'pinterest',
+        icon: <MessageCircleHeart fontSize="large" />,
+        href: 'https://nl.pinterest.com/tahanialhammad/',
+    },
+    {
+        name: 'instagram',
+        icon: <Instagram fontSize="large" />,
+        href: 'https://www.instagram.com/tahani.webdeveloper/',
+    },
+];
 
 export default function SiteFooter() {
     return (
@@ -87,15 +115,13 @@ export default function SiteFooter() {
                     {/* Column 5: Follow Us */}
                     <div>
                         <h4 className="mb-3 text-lg font-bold">Follow Us</h4>
-                        <ul className="space-y-2">
+                        <div className="flex space-y-2">
                             {socialLinks.map((item) => (
-                                <li key={item.name}>
-                                    <Link href={item.href} target="_blank">
-                                        {item.name}
-                                    </Link>
-                                </li>
+                                <Link key={item.name} href={item.href} target="_blank">
+                                    {item.icon}
+                                </Link>
                             ))}
-                        </ul>
+                        </div>
                     </div>
                 </div>
 
