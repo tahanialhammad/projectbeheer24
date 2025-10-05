@@ -19,7 +19,7 @@ export default function SiteLayout({ children, title = 'Welcome' }: SiteLayoutPr
                 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
             </Head>
 
-            <div className="lg:justify-centertt flex min-h-screen flex-col bg-[#FDFDFC] px-6 text-[#1b1b18] lg:p-8 dark:bg-[#0a0a0a]">
+            <div className="lg:justify-centertt flex min-h-screen flex-col bg-[#FDFDFC] px-6 text-[#1b1b18] lg:px-8 dark:bg-[#0a0a0a]">
                 <SiteNav />
 
                 {/* Page Content */}
