@@ -75,10 +75,10 @@ class ServiceController extends Controller
         // Voeg de slug toe
         $validated['slug'] = Str::slug($request->name);
 
-        // Opslaan van image als aanwezig , WERKT NIET
-        // if ($request->hasFile('image')) {
-        //     $validated['image'] = $request->file('image')->store('services', 'public');
-        // }
+        // Opslaan van image als aanwezig 
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('services', 'public');
+        }
 
         Service::create($validated);
 
@@ -142,7 +142,7 @@ class ServiceController extends Controller
             'image' => 'nullable|image|max:2048',
         ]);
 
-        // Image upload
+        // Image upload , WERKT NIET
         if ($request->hasFile('image')) {
             $validated['image'] = $request->file('image')->store('services', 'public');
         }
