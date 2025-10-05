@@ -47,7 +47,7 @@ const socialLinks = [
 export default function SiteFooter() {
     return (
         <footer className="mt-8 bg-gray-100 text-gray-800">
-            <div className="container mx-auto px-4 py-10tt">
+            <div className="py-10tt container mx-auto px-4">
                 {/* Footer Columns */}
                 <div className="grid grid-cols-1 gap-8 text-sm sm:grid-cols-2 md:grid-cols-5">
                     {/* Column 1: Logo and Description */}
@@ -117,11 +117,11 @@ export default function SiteFooter() {
                         <h4 className="mb-3 text-lg font-bold">Follow Us</h4>
                         <div className="flex space-y-2">
                             {socialLinks.map((item) => (
-                            <span key={item.name}>
-<Link href={item.href} target="_blank">
-                                    {item.icon}
-                                </Link>
-                            </span>    
+                                <span key={item.name}>
+                                    <Link href={item.href} target="_blank">
+                                        {item.icon}
+                                    </Link>
+                                </span>
                             ))}
                         </div>
                     </div>
