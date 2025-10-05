@@ -143,14 +143,9 @@ class ServiceController extends Controller
         ]);
 
         // Image upload , WERKT NIET
-        // if ($request->hasFile('image')) {
-        //     $validated['image'] = $request->file('image')->store('services', 'public');
-        // }
-
         if ($request->hasFile('image')) {
-    $validated['image'] = $request->file('image')->store('', 'hostinger_public');
-}
-
+            $validated['image'] = $request->file('image')->store('services', 'public');
+        }
 
         // Slug automatisch bijwerken
         $validated['slug'] = Str::slug($validated['name']);

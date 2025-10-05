@@ -59,12 +59,6 @@ return [
             'throw' => false,
             'report' => false,
         ],
-         'hostinger_public' => [
-        'driver' => 'local',
-        'root' => public_path('storage/services'), // direct in public_html/public/storage/services
-        'url' => env('APP_URL') . '/storage/services',
-        'visibility' => 'public',
-    ],
 
     ],
 
