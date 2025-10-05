@@ -55,12 +55,12 @@ export default function Index({ services }: { services: Service[] }) {
                         </thead>
                         <tbody>
                             {services.map(({ id, name, description, price }) => (
-                                <tr key={id} className="transition even:bg-gray-50 hover:bg-gray-100">
-                                    <td className="border-b p-3">{id}</td>
-                                    <td className="border-b p-3">{name}</td>
-                                    <td className="border-b p-3">{description}</td>
-                                    <td className="border-b p-3">{price}</td>
-                                    <td className="flex space-x-2 border-b p-3">
+                                <tr key={id} className="transition even:bg-gray-50 hover:bg-gray-100 border-b-1 border-gray-200">
+                                    <td className="px-2">{id}</td>
+                                    <td className="px-2">{name}</td>
+                                    <td className="px-2 line-clamp-2">{description}</td>
+                                    <td className="px-2">{price}</td>
+                                    <td className="flex space-x-2 px-2">
                                         
                                         <Link
                                             href={route('services.show', id)}

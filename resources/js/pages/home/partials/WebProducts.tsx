@@ -32,9 +32,9 @@ export default function WebProducts({ services }) {
                                 direction="left"
                                 duration={Math.min(2, 1.2 + service.id * 0.1)}
                                 key={service.id}
-                                className="relative w-60 flex-shrink-0 snap-start rounded-3xl border-2 bg-white p-4"
+                                className="relative w-60 flex-shrink-0 snap-start rounded-3xl border-2 bg-white"
                             >
-                                <div className="!absolute top-4 left-4">
+                                <div className="absolute top-4 left-4">
                                     <span
                                         className={`rounded-full bg-black px-3 py-1 text-white ${
                                             service.discounted_price < service.price ? '' : 'hidden'
@@ -43,11 +43,11 @@ export default function WebProducts({ services }) {
                                         Actie
                                     </span>
                                 </div>
-                                <div className="mt-4 flex h-full flex-col">
+                                <div className="flex h-full flex-col">
                                     <div className="mb-3 flex flex-col items-center justify-between">
                                         <img
                                             src={service.image ? `/storage/${service.image}` : '/images/Dashboard.webp'}
-                                            className="rounded-lg"
+                                            className="h-48 w-full rounded-lg object-cover"
                                             alt={service.name}
                                         />
 
