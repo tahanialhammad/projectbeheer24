@@ -45,8 +45,8 @@ export default function Services({ services }: ServicesProps) {
                         />
                         <div className="p-4">
                             <h2 className="mb-2 text-xl font-bold text-gray-900">{name}</h2>
-                            <p className="mb-4 line-clamp-3 text-gray-600">{description}</p>
-                            <p className="text-lg font-semibold text-fuchsia-500">€{price}</p>
+                            <p className="mb-4 line-clamp-2 text-gray-600">{description}</p>
+                            <p className="text-lg font-semibold text-fuchsia-500">€ {price}</p>
 
                             <div className="flex justify-between">
                                 <PrimaryButton href={route('orders.create', { service_id: id })}>Bestel</PrimaryButton>
