@@ -1,0 +1,1 @@
+import{K as o,j as c}from"./app-BwUkAx0K.js";function a(){var t,n;const{props:s}=o(),e=(t=s.flash)==null?void 0:t.success,r=(n=s.flash)==null?void 0:n.error;return!e&&!r?null:c.jsx("div",{className:`mb-4 rounded px-4 py-3 text-sm font-medium ${e?"bg-green-100 text-green-800":"bg-red-100 text-red-800"}`,children:e||r})}export{a as F};
