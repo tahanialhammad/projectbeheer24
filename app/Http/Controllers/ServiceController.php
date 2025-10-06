@@ -79,6 +79,7 @@ class ServiceController extends Controller
         if ($request->hasFile('image')) {
             $validated['image'] = $request->file('image')->store('services', 'public');
         }
+        //in Hostonger : cp -r storage/app/public/services/* public/storage/services/ 
 
         Service::create($validated);
 
