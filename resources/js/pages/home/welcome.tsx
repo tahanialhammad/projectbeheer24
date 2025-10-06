@@ -7,6 +7,7 @@ import Categories from './partials/Categories';
 import Features from './partials/Features';
 import HeroSection from './partials/HeroSection';
 import WebProducts from './partials/WebProducts';
+import CallToAction from '@/components/callToAction';
 
 export default function Welcome({ services, initialTime }) {
     return (
@@ -33,9 +34,11 @@ export default function Welcome({ services, initialTime }) {
                         Als ondernemer wil je een professionele website die niet alleen goed werkt, maar ook jouw merk tot leven brengt. Bij Tahanina
                         krijg je geen standaardoplossing, maar een persoonlijke aanpak die echt bij jouw bedrijf past.
                     </p>
-                    <CountUp end={95} duration={3} />
-                    <p>Veel tevreden klanten kiezen ervoor om opnieuw met mij samen te werken.</p>
+                 
+                    <CountUp end={95} duration={3} className="text-fuchsia-500" >%</CountUp>
+                    <p className='font-bold'>Veel tevreden klanten kiezen ervoor om opnieuw met mij samen te werken.</p>
                 </div>
+                <CallToAction />
             </SiteLayout>
         </div>
     );
