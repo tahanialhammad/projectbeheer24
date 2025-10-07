@@ -157,3 +157,24 @@
         @apply bg-background text-foreground;
     }
 }
+
+
+  /* SCROLLBAR
+  /* width */
+ div ::-webkit-scrollbar {
+    width: 6px;
+    height: 3px;
+  }
+
+  /* Track */
+  div ::-webkit-scrollbar-track {
+    background: #e4e6e6;
+    border-radius: 4px;
+  }
+
+  /* Handle */
+  div ::-webkit-scrollbar-thumb {
+    background: #31383d;
+    border-radius: 4px;
+  }
+

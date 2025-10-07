@@ -51,7 +51,7 @@ export default function WebProducts({ services }) {
                                             alt={service.name}
                                         />
 
-                                        <div className="my-2 flex w-full justify-between align-middle">
+                                        <div className="my-2 flex w-full justify-between px-4 align-middle">
                                             <div>
                                                 <Link href={route('services.show', service)} className="text-blue-gray-900 block text-xl font-bold">
                                                     {service.name}
@@ -74,7 +74,7 @@ export default function WebProducts({ services }) {
                                     </div>
 
                                     {/* ⭐ Rating altijd onderaan */}
-                                    <div className="mx-2 mt-auto">
+                                    <div className="mx-2 mt-auto p-4">
                                         <p className="text-blue-gray-900 flex items-center gap-1.5 text-base leading-relaxed font-normal antialiased">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
