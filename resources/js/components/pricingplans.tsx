@@ -1,45 +1,42 @@
-import PrimaryButton from "./PrimaryButton";
+import PrimaryButton from './PrimaryButton';
 
 function PricingPlans() {
-  const plans = [
-    {
-      name: "Basic",
-      price: "$10/mo",
-      features: ["Feature 1", "Feature 2", "Feature 3"],
-    },
-    {
-      name: "Standard",
-      price: "$20/mo",
-      features: ["Feature 1", "Feature 2", "Feature 3", "Feature 4"],
-    },
-    {
-      name: "Premium",
-      price: "$30/mo",
-      features: ["Feature 1", "Feature 2", "Feature 3", "Feature 4", "Feature 5"],
-    },
-  ];
+    const plans = [
+        {
+            name: 'Basic',
+            price: '€10/mo',
+            features: ['Gratis WP-thema', 'Mobielvriendelijk', 'SEO-optimalisatie'],
+        },
+        {
+            name: 'Standard',
+            price: '€20/mo',
+            features: ['Premium Divi-thema', 'Professionele templates', 'SEO-optimalisatie', 'reCAPTCHA beveiliging'],
+        },
+        {
+            name: 'Premium',
+            price: '€30/mo',
+            features: ['Webshop met Divi', 'WooCommerce integratie', 'iDEAL & PayPal', 'Voorraadbeheer', 'Kortingscodes & filters'],
+        },
+    ];
 
-  return (
-    <div className="max-w-6xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-      {plans.map((plan, index) => (
-        <div
-          key={index}
-          className="p-6 bg-white rounded-xl shadow-md flex flex-col items-center text-center hover:bg-fuchsia-100"
-        >
-          <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
-          <p className="text-3xl font-semibold mb-4">{plan.price}</p>
-          <ul className="mb-6 space-y-2">
-            {plan.features.map((feature, i) => (
-              <li key={i} className="text-gray-600">{feature}</li>
+    return (
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-4 py-12 md:grid-cols-3">
+            {plans.map((plan, index) => (
+                <div key={index} className="flex flex-col items-center rounded-xl bg-white p-6 text-center shadow-md hover:bg-fuchsia-100">
+                    <h3 className="mb-2 text-xl font-bold">{plan.name}</h3>
+                    <p className="mb-4 text-3xl font-semibold">{plan.price}</p>
+                    <ul className="mb-6 space-y-2">
+                        {plan.features.map((feature, i) => (
+                            <li key={i} className="text-gray-600">
+                                {feature}
+                            </li>
+                        ))}
+                    </ul>
+                    <PrimaryButton>Choose Plan</PrimaryButton>
+                </div>
             ))}
-          </ul>
-          <PrimaryButton>
-            Choose Plan
-          </PrimaryButton>
         </div>
-      ))}
-    </div>
-  );
+    );
 }
 
 export default PricingPlans;
