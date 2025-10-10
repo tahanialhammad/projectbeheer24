@@ -118,9 +118,10 @@ export default function SiteFooter() {
                         <div className="flex space-y-2">
                             {socialLinks.map((item) => (
                                 <span key={item.name}>
-                                    <Link href={item.href} target="_blank">
+                                    {/* Link van @inertiajs/react is voor interne navigatie */}
+                                    <a href={item.href} target="_blank">
                                         {item.icon}
-                                    </Link>
+                                    </a>
                                 </span>
                             ))}
                         </div>
