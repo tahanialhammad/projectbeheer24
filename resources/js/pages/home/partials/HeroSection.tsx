@@ -2,8 +2,9 @@ import AnimatedWrapper from '@/components/AnimatedWrapper';
 import PrimaryButton from '@/components/PrimaryButton';
 import SecondaryButton from '@/components/SecondaryButton';
 import { motion } from 'framer-motion';
+import ImageCarousel from './ImageCarousel';
 
-export default function HeroSection() {
+export default function HeroSection({ sliderImages }) {
     return (
         <section>
             {/* hero section*/}
@@ -50,13 +51,14 @@ export default function HeroSection() {
                     </AnimatedWrapper>
                     <div className="flex w-3/5 flex-col gap-8">
                         <AnimatedWrapper className="relative rounded-3xl">
-                            <img className="rounded-3xl" src=".\images\119567.jpg" alt="" />
+                            {/* <img className="rounded-3xl" src=".\images\119567.jpg" alt="" />
                             <div className="absolute top-1/3 right-4 m-4">
                                 <h4 className="text-xl font-bold text-indigo-500 uppercase"> 25% korting </h4>
                                 <h1 className="text-3xl font-black capitalize">Jaarcontract</h1>
                                 <h3 className="text-2xl capitalize">Met professionele diensten</h3>
                                 <PrimaryButton className="mt-4">Bekijk Aanbieding</PrimaryButton>
-                            </div>
+                            </div> */}
+                            <ImageCarousel images={sliderImages} />
                         </AnimatedWrapper>
 
                         <AnimatedWrapper className="relative">

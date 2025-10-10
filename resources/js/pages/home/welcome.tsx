@@ -1,5 +1,6 @@
 // 'use client';
 
+import CallToAction from '@/components/callToAction';
 import CountUp from '@/components/countup';
 import PricingPlans from '@/components/pricingplans';
 import SiteLayout from '@/layouts/site-layout copy';
@@ -7,13 +8,18 @@ import Categories from './partials/Categories';
 import Features from './partials/Features';
 import HeroSection from './partials/HeroSection';
 import WebProducts from './partials/WebProducts';
-import CallToAction from '@/components/callToAction';
 
 export default function Welcome({ services, initialTime }) {
+    const sliderImages = [
+        { src: '/images/blonde-influencer-using-laptop.jpg', alt: 'Slide 1' },
+        { src: '/images/digital-tablet-stylus-pen-laptop-desktop-close-up.jpg', alt: 'Slide 2' },
+        { src: '/images/front-view-female-office-worker-black-strict-jacket-using-her-laptop-pink-wall.jpg', alt: 'Slide 3' },
+    ];
+
     return (
         <div className="bg-white">
             <SiteLayout title="Welcome">
-                <HeroSection />
+                <HeroSection sliderImages={sliderImages} />
                 <WebProducts services={services} />
                 <Categories initialTime={initialTime} />
                 <Features />
@@ -34,9 +40,11 @@ export default function Welcome({ services, initialTime }) {
                         Als ondernemer wil je een professionele website die niet alleen goed werkt, maar ook jouw merk tot leven brengt. Bij Tahanina
                         krijg je geen standaardoplossing, maar een persoonlijke aanpak die echt bij jouw bedrijf past.
                     </p>
-                 
-                    <CountUp end={95} duration={3} className="text-fuchsia-500" >%</CountUp>
-                    <p className='font-bold'>Veel tevreden klanten kiezen ervoor om opnieuw met mij samen te werken.</p>
+
+                    <CountUp end={95} duration={3} className="text-fuchsia-500">
+                        %
+                    </CountUp>
+                    <p className="font-bold">Veel tevreden klanten kiezen ervoor om opnieuw met mij samen te werken.</p>
                 </div>
                 <CallToAction />
             </SiteLayout>
