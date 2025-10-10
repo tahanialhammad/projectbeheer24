@@ -5,6 +5,11 @@ import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createRoot } from 'react-dom/client';
 import { initializeTheme } from './hooks/use-appearance';
 
+import 'swiper/css';                // core styles
+import 'swiper/css/navigation';     // navigation module styles (optioneel)
+import 'swiper/css/pagination';     // pagination styles (optioneel)
+
+
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
