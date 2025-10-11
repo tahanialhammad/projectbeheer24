@@ -3,11 +3,11 @@
 import CallToAction from '@/components/callToAction';
 import CountUp from '@/components/countup';
 import PricingPlans from '@/components/pricingplans';
-import SiteLayout from '@/layouts/site-layout copy';
 import Categories from './partials/Categories';
 import Features from './partials/Features';
 import HeroSection from './partials/HeroSection';
 import WebProducts from './partials/WebProducts';
+import SiteLayout from '@/layouts/site-layout';
 
 export default function Welcome({ services, initialTime }) {
     const sliderImages = [

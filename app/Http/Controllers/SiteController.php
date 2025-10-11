@@ -49,8 +49,6 @@ class SiteController extends Controller
         // $data = $response->json();
 
         $data = $contentful->fetchEntries('blogPost', 1);
-
-
         // Stuur alleen de ruwe data door naar de view of frontend
         // return Inertia::render('blog/posts', [
         //     'posts' => $data['items']

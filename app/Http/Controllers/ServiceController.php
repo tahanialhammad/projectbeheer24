@@ -39,27 +39,6 @@ class ServiceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    // public function store(Request $request)
-    // {
-    //     $service = $request->validate([
-    //         'name' => 'required|string|max:255',
-    //         'description' => 'required|string|max:255',
-    //         'price' => 'required',
-
-    //     ]);
-    //     $service = Service::create([
-    //         'name' => $request->name,
-    //         'slug' => Str::slug($request->name),
-    //         'description' => $request->description,
-    //         'price' => $request->price,
-
-    //     ]);
-
-    //     return to_route('services.index');
-    // }
-
-
-
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -80,20 +59,17 @@ class ServiceController extends Controller
             $validated['image'] = $request->file('image')->store('services', 'public');
         }
         //in Hostonger : cp -r storage/app/public/services/* public/storage/services/ 
-
         Service::create($validated);
 
         return redirect()->route('services.index')->with('success', 'Service created successfully!');
     }
-
-
 
     /**
      * Display the specified resource.
      */
     public function show(Service $service)
     {
-          return Inertia::render('admin/services/show', [
+        return Inertia::render('admin/services/show', [
             'service' => $service,
         ]);
     }
@@ -111,26 +87,6 @@ class ServiceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    // public function update(Request $request, Service $service)
-    // {
-    //     $validated = $request->validate([
-    //         'name' => 'required|string|max:255',
-    //         'description' => 'required|string|max:255',
-    //         'price' => 'required|numeric',
-    //     ]);
-
-    //     $service->update([
-    //         'name' => $validated['name'],
-    //         'slug' => Str::slug($validated['name']),
-    //         'description' => $validated['description'],
-    //         'price' => $validated['price'],
-    //     ]);
-
-    //     return to_route('services.index');
-    // }
-
-
-
     public function update(Request $request, Service $service)
     {
         $validated = $request->validate([
@@ -155,16 +111,6 @@ class ServiceController extends Controller
 
         return to_route('services.index')->with('success', 'Service updated successfully!');
     }
-
-
-
-
-
-
-
-
-
-
     /**
      * Remove the specified resource from storage.
      */

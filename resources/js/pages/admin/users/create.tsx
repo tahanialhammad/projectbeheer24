@@ -103,24 +103,6 @@ export default function CreateUser({ roles }) {
                     <InputError message={errors.password} className="mt-2" />
                 </div>
 
-                {/* <div>
-                    <Label htmlFor="role">Role</Label>
-                    <select
-                        id="role"
-                        tabIndex={4}
-                        value={data.role}
-                        onChange={(e) => setData('role', e.target.value)}
-                        disabled={processing}
-                        className="mt-1 w-full rounded border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200"
-                    >
-                        <option value="">Select a role</option>
-                        <option value="super admin">Super Admin</option>
-                        <option value="clientadmin">Client Admin</option>
-                        <option value="user">User</option>
-                    </select>
-                    <InputError message={errors.role} className="mt-2" />
-                </div> */}
-
                 <div>
                     <Label className="mb-2 block">Roles</Label>
                     <div className="grid grid-cols-1 gap-2">
