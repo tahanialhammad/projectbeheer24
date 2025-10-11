@@ -107,7 +107,7 @@ class OrderController extends Controller
 
     public function edit(Order $order)
     {
-        $order->load('service'); // optioneel, als je service info wil tonen
+        $order->load('service'); // Optioneel: als je service-informatie wilt tonen
 
         return Inertia::render('admin/orders/edit', [
             'order' => $order,

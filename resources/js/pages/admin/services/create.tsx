@@ -39,7 +39,7 @@ export default function CreateService() {
         e.preventDefault();
         post(route('services.store'), {
             onSuccess: () => reset(),
-            forceFormData: true, // ⚡ belangrijk om file upload via multipart/form-data te sturen
+            forceFormData: true, // belangrijk om file upload via multipart/form-data te sturen
         });
     };
 

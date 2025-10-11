@@ -3,13 +3,13 @@ import { useCan } from '@/lib/can';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link, router } from '@inertiajs/react';
 
-// ✅ FIX: Define permission type properly
+// permission type properly
 type Permission = {
     id: number;
     name: string;
 };
 
-// ✅ FIX: Make permissions type-specific, not just an empty array
+// permissions type-specific
 type Role = {
     id: number;
     name: string;

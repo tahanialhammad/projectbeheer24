@@ -17,7 +17,7 @@ interface ServicesData {
     discount_expires_at: '';
 }
 
-// 👇 Verwacht een 'service' prop via de pagina
+// Verwacht een 'service' prop via de pagina
 export default function EditService({ service }: { service: ServicesData }) {
     const { data, setData, put, processing, errors } = useForm<ServicesData>({
         id: service.id,

@@ -25,7 +25,7 @@ export default function EditUser({
         name: user.name || '',
         email: user.email || '',
         password: '',
-        roles: user.roles.map((role) => role.name), // hier fix
+        roles: user.roles.map((role) => role.name),
     });
 
     function handleCheckBoxChanges(roleName: string, checked: boolean) {
