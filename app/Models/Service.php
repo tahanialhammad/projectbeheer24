@@ -29,11 +29,15 @@ class Service extends Model
         return $this->hasMany(Order::class);
     }
 
-    public function formFields()
-    {
-        return $this->hasMany(FormField::class);
-    }
+    // public function formFields()
+    // {
+    //     return $this->hasMany(FormField::class);
+    // }
 
+     public function formFields()
+    {
+        return $this->belongsToMany(FormField::class, 'service_form_field');
+    }
     /**
      * Accessor: discounted_price
      */

@@ -49,6 +49,17 @@ class ServiceController extends Controller
             'discount' => 'nullable|numeric|min:0',
             'discount_type' => 'required|in:fixed,percentage',
             'discount_expires_at' => 'nullable|date',
+
+
+
+
+
+                  'form_fields' => 'array',
+        'form_fields.*.label' => 'required|string|max:255',
+        'form_fields.*.name' => 'required|string|max:255',
+        'form_fields.*.type' => 'required|string',
+        'form_fields.*.options' => 'nullable|array',
+        'form_fields.*.required' => 'boolean',
         ]);
 
         // Voeg de slug toe
@@ -67,12 +78,18 @@ class ServiceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Service $service)
-    {
-        return Inertia::render('admin/services/show', [
-            'service' => $service,
-        ]);
-    }
+public function show($id)
+{
+  
+    $service = Service::with('formFields')->findOrFail($id);
+
+    return Inertia::render('admin/services/show', [
+        'service' => $service,
+    ]);
+}
+
+
+
 
     /**
      * Show the form for editing the specified resource.
