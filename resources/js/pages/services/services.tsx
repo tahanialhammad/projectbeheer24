@@ -48,7 +48,15 @@ export default function Services({ services }: ServicesProps) {
                             <div className="flex-1">
                                 <h2 className="mb-2 text-xl font-bold text-gray-900">{name}</h2>
                                 <p className="mb-4 line-clamp-2 text-gray-600">{description}</p>
-                                <p className="text-lg font-semibold text-fuchsia-500">€ {price}</p>
+
+                                {discounted_price < price ? (
+                                    <p>
+                                        <span className="text-lg font-semibold text-fuchsia-500">€{discounted_price}</span>
+                                        <span className="ms-1 text-gray-400 line-through">€{price}</span>
+                                    </p>
+                                ) : (
+                                    <p className="text-lg font-semibold text-fuchsia-500">€{price}</p>
+                                )}
                             </div>
 
                             <div className="mt-4 flex justify-between">
@@ -62,17 +70,16 @@ export default function Services({ services }: ServicesProps) {
 
             {/* Pagina navigatie */}
             {services.total > services.per_page && (
-
-            <div className="mt-6 flex justify-center space-x-2">
-                {services.links.map((link, index) => (
-                    <a
-                        key={index}
-                        href={link.url || '#'}
-                        className={`rounded border px-3 py-1 ${link.active ? 'bg-fuchsia-500 text-white' : 'bg-white text-fuchsia-500'}`}
-                        dangerouslySetInnerHTML={{ __html: link.label }}
-                    />
-                ))}
-            </div>
+                <div className="mt-6 flex justify-center space-x-2">
+                    {services.links.map((link, index) => (
+                        <a
+                            key={index}
+                            href={link.url || '#'}
+                            className={`rounded border px-3 py-1 ${link.active ? 'bg-fuchsia-500 text-white' : 'bg-white text-fuchsia-500'}`}
+                            dangerouslySetInnerHTML={{ __html: link.label }}
+                        />
+                    ))}
+                </div>
             )}
         </SiteLayout>
     );
