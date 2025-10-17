@@ -6,7 +6,6 @@ import InputError from '@/components/input-error';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { FormEventHandler } from 'react';
 
 type FormField = {
     id: number;
@@ -29,8 +28,12 @@ interface ServicesData {
 }
 
 // Verwacht een 'service' prop via de pagina
-export default function EditService({ service }: { service: ServicesData }) {
-    const { data, setData, put, processing, errors } = useForm<ServicesData>({
+export default function EditService({ service, form_fields, selected_form_fields }: { 
+    service: ServicesData; 
+    form_fields: FormField[]; 
+    selected_form_fields: number[]; 
+}) {
+    const { data, setData, put, processing, errors } = useForm({
         id: service.id,
         name: service.name,
         description: service.description,
@@ -38,6 +41,7 @@ export default function EditService({ service }: { service: ServicesData }) {
         discount: service.discount ?? 0,
         discount_type: service.discount_type ?? 'fixed',
         discount_expires_at: service.discount_expires_at ?? '',
+        form_fields: selected_form_fields || [],
     });
 
     const breadcrumbs: BreadcrumbItem[] = [
@@ -51,8 +55,18 @@ export default function EditService({ service }: { service: ServicesData }) {
         },
     ];
 
+    function handleCheckBoxChanges(fieldId, checked) {
+        if (checked) {
+            setData('form_fields', [...data.form_fields, fieldId]);
+        } else {
+            setData(
+                'form_fields',
+                data.form_fields.filter((id) => id !== fieldId),
+            );
+        }
+    }
 
-    const submit: FormEventHandler = (e) => {
+    const submit = (e) => {
         e.preventDefault();
         put(route('services.update', service.id));
     };
@@ -66,8 +80,7 @@ export default function EditService({ service }: { service: ServicesData }) {
                     Back to all services
                 </Link>
             </div>
-
-            <form className="" onSubmit={submit}>
+            <form onSubmit={submit} className="">
                 <div className="grid grid-cols-1 gap-6 rounded bg-white p-6 shadow-md md:grid-cols-3">
                     {/* Linker kolom: 2/3 van de breedte */}
                     <div className="space-y-4 border-b border-gray-300 pb-4 md:col-span-2 md:border-r-2 md:border-b-0 md:pb-0">
@@ -83,7 +96,6 @@ export default function EditService({ service }: { service: ServicesData }) {
                             />
                             <InputError message={errors.name} className="mt-2" />
                         </div>
-
                         <div>
                             <Label htmlFor="description">Description</Label>
                             <Input
@@ -97,84 +109,95 @@ export default function EditService({ service }: { service: ServicesData }) {
                             <InputError message={errors.description} className="mt-2" />
                         </div>
 
-                        <div>
-                            {service.form_fields.map((field) => (
-                                <div key={field.id}>
-                                    {field.name} : {field.type}
-                                </div>
-                            ))}
+                        {/* ✅ Dropdown met checkboxes */}
+                        <div className="flex flex-col space-y-2">
+                            <Label>Form fields</Label>
+                            <DropdownMenu>
+                                <DropdownMenuTrigger className="rounded border-2 border-gray-200 px-2 py-1 text-start">
+                                    Choose form fields ({data.form_fields.length} selected)
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent className="rounded border-2 border-gray-200 bg-white p-2 shadow">
+                                    {form_fields.map((field) => (
+                                        <label key={field.id} className="flex gap-2 py-1">
+                                            <input
+                                                type="checkbox"
+                                                checked={data.form_fields.includes(field.id)}
+                                                onChange={(e) => handleCheckBoxChanges(field.id, e.target.checked)}
+                                            />
+                                            <span>{field.label}</span>
+                                        </label>
+                                    ))}
+                                </DropdownMenuContent>
+                            </DropdownMenu>
                         </div>
-
-                     
                     </div>
-
                     {/* Rechter kolom: 1/3 van de breedte */}
                     <div className="space-y-4">
-                        <div>
-                            <Label htmlFor="price">Price (€)</Label>
-                            <Input
-                                id="price"
-                                type="number"
-                                value={data.price}
-                                onChange={(e) => setData('price', parseFloat(e.target.value))}
-                                disabled={processing}
-                                placeholder="Service price"
-                            />
-                            <InputError message={errors.price} className="mt-2" />
-                        </div>
+                        <div className="space-y-4">
+                            <div>
+                                <Label htmlFor="price">Price (€)</Label>
+                                <Input
+                                    id="price"
+                                    type="number"
+                                    value={data.price}
+                                    onChange={(e) => setData('price', parseFloat(e.target.value))}
+                                    disabled={processing}
+                                    placeholder="Service price"
+                                />
+                                <InputError message={errors.price} className="mt-2" />
+                            </div>
 
-                        {/* Discount */}
-                        <div>
-                            <Label htmlFor="discount">Discount</Label>
-                            <Input
-                                id="discount"
-                                type="number"
-                                value={data.discount}
-                                onChange={(e) => setData('discount', parseFloat(e.target.value))}
-                                disabled={processing}
-                                placeholder="Discount amount"
-                            />
-                            <InputError message={errors.discount} className="mt-2" />
-                        </div>
+                            {/* Discount */}
+                            <div>
+                                <Label htmlFor="discount">Discount</Label>
+                                <Input
+                                    id="discount"
+                                    type="number"
+                                    value={data.discount}
+                                    onChange={(e) => setData('discount', parseFloat(e.target.value))}
+                                    disabled={processing}
+                                    placeholder="Discount amount"
+                                />
+                                <InputError message={errors.discount} className="mt-2" />
+                            </div>
 
-                        {/* Discount Type */}
-                        <div>
-                            <Label htmlFor="discount_type">Discount Type</Label>
-                            <select
-                                id="discount_type"
-                                value={data.discount_type}
-                                onChange={(e) => setData('discount_type', e.target.value as 'fixed' | 'percentage')}
-                                disabled={processing}
-                                className="w-full rounded border px-2 py-1"
-                            >
-                                <option value="fixed">Fixed</option>
-                                <option value="percentage">Percentage</option>
-                            </select>
-                            <InputError message={errors.discount_type} className="mt-2" />
-                        </div>
+                            {/* Discount Type */}
+                            <div>
+                                <Label htmlFor="discount_type">Discount Type</Label>
+                                <select
+                                    id="discount_type"
+                                    value={data.discount_type}
+                                    onChange={(e) => setData('discount_type', e.target.value as 'fixed' | 'percentage')}
+                                    disabled={processing}
+                                    className="w-full rounded border px-2 py-1"
+                                >
+                                    <option value="fixed">Fixed</option>
+                                    <option value="percentage">Percentage</option>
+                                </select>
+                                <InputError message={errors.discount_type} className="mt-2" />
+                            </div>
 
-                        {/* Discount Expiry */}
-                        <div>
-                            <Label htmlFor="discount_expires_at">Discount Expires At</Label>
-                            <Input
-                                id="discount_expires_at"
-                                type="date"
-                                value={data.discount_expires_at}
-                                onChange={(e) => setData('discount_expires_at', e.target.value)}
-                                disabled={processing}
-                            />
-                            <InputError message={errors.discount_expires_at} className="mt-2" />
+                            {/* Discount Expiry */}
+                            <div>
+                                <Label htmlFor="discount_expires_at">Discount Expires At</Label>
+                                <Input
+                                    id="discount_expires_at"
+                                    type="date"
+                                    value={data.discount_expires_at}
+                                    onChange={(e) => setData('discount_expires_at', e.target.value)}
+                                    disabled={processing}
+                                />
+                                <InputError message={errors.discount_expires_at} className="mt-2" />
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <button
-                    type="submit"
-                    disabled={processing}
-                    className="rounded-md bg-green-600 px-4 py-2 text-white shadow transition hover:bg-green-700"
-                >
-                    Update
-                </button>
+                <div className="flex justify-end md:col-span-3">
+                    <button type="submit" disabled={processing} className="rounded bg-green-600 px-4 py-2 text-white hover:bg-green-700">
+                        Update
+                    </button>
+                </div>
             </form>
         </AppLayout>
     );
