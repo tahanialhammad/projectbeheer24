@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('form_fields', function (Blueprint $table) {
             $table->id();
-                $table->foreignId('service_id')->constrained()->onDelete('cascade'); // gekoppeld aan de service
-    $table->string('label');       // bv. "Wat is je domeinnaam?"
-    $table->string('name');        // bv. "domain_name"
-    $table->string('type');        // text, textarea, select, checkbox, etc.
-    $table->json('options')->nullable(); // alleen nodig bij select/checkbox/radio
-    $table->boolean('required')->default(false);
+            // $table->foreignId('service_id')->constrained()->onDelete('cascade'); // gekoppeld aan de service
+            $table->string('label');       // bv. "Wat is je domeinnaam?"
+            $table->string('name');        // bv. "domain_name"
+            $table->string('type');        // text, textarea, select, checkbox, etc.
+            $table->json('options')->nullable(); // alleen nodig bij select/checkbox/radio
+            $table->boolean('required')->default(false);
 
             $table->timestamps();
         });

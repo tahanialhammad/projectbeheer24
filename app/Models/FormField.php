@@ -22,10 +22,15 @@ class FormField extends Model
         'required' => 'boolean',
     ];
 
-    public function service()
+    // public function service()
+    // {
+    //     return $this->belongsTo(Service::class);
+    // }
+     public function services()
     {
-        return $this->belongsTo(Service::class);
+        return $this->belongsToMany(Service::class, 'service_form_field');
     }
+    
     public function orderValues()
     {
         return $this->hasMany(OrderFieldValue::class);
