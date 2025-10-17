@@ -99,13 +99,24 @@ class ServiceController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
+    // public function edit(Service $service)
+    // {
+    //     $this->authorize('update', Service::class);
+    //     // Laad de form fields via de pivot-tabel
+    //     $service->load('formFields');
+
+    //     return Inertia::render('admin/services/edit', compact('service'));
+    // }
     public function edit(Service $service)
     {
-        $this->authorize('update', Service::class);
-        // Laad de form fields via de pivot-tabel
-        $service->load('formFields');
+        $formFields = FormField::all(); // alle beschikbare velden
+        $selectedFields = $service->formFields()->pluck('form_field_id')->toArray();
 
-        return Inertia::render('admin/services/edit', compact('service'));
+        return Inertia::render('admin/services/edit', [
+            'service' => $service->load('formFields'),
+            'form_fields' => $formFields,
+            'selected_form_fields' => $selectedFields,
+        ]);
     }
 
     /**
@@ -121,6 +132,8 @@ class ServiceController extends Controller
             'discount_type' => 'nullable|required_if:discount,>,0|in:fixed,percentage',
             'discount_expires_at' => 'nullable|required_if:discount,>,0|date',
             'image' => 'nullable|image|max:2048',
+            'form_fields' => 'array',
+
         ]);
 
         // Image upload , WERKT NIET
@@ -132,6 +145,12 @@ class ServiceController extends Controller
         $validated['slug'] = Str::slug($validated['name']);
 
         $service->update($validated);
+
+        // ✅ Form fields updaten in pivot table
+        if ($request->has('form_fields')) {
+            $service->formFields()->sync($request->form_fields);
+        }
+
 
         return to_route('services.index')->with('success', 'Service updated successfully!');
     }
