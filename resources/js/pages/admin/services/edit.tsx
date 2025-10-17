@@ -7,6 +7,15 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { FormEventHandler } from 'react';
 
+type FormField = {
+    id: number;
+    label: string;
+    name: string;
+    type: 'text' | 'textarea' | 'select';
+    required: boolean;
+    options?: string | null;
+};
+
 interface ServicesData {
     id: number;
     name: string;
@@ -15,6 +24,7 @@ interface ServicesData {
     discount: 0;
     discount_type: 'fixed';
     discount_expires_at: '';
+    form_fields: FormField[];
 }
 
 // Verwacht een 'service' prop via de pagina
@@ -137,6 +147,12 @@ export default function EditService({ service }: { service: ServicesData }) {
                     />
                     <InputError message={errors.discount_expires_at} className="mt-2" />
                 </div>
+
+                {service.form_fields.map((field) => (
+                    <div key={field.id}>
+                        {field.name} : {field.type}
+                    </div>
+                ))}
 
                 <button
                     type="submit"

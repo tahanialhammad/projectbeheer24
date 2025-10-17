@@ -6,6 +6,7 @@ use App\Models\Service;
 use App\Http\Requests\StoreServiceRequest;
 use Illuminate\Http\Request;
 use App\Http\Requests\UpdateServiceRequest;
+use App\Models\FormField;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -33,7 +34,12 @@ class ServiceController extends Controller
     {
         $this->authorize('create', Service::class);
 
-        return Inertia::render('admin/services/create');
+        // Alle master form fields ophalen
+        $fields = FormField::all();
+
+        return Inertia::render('admin/services/create', [
+            'form_fields' => $fields,
+        ]);
     }
 
     /**
@@ -50,16 +56,8 @@ class ServiceController extends Controller
             'discount_type' => 'required|in:fixed,percentage',
             'discount_expires_at' => 'nullable|date',
 
+            'form_fields' => 'array',
 
-
-
-
-                  'form_fields' => 'array',
-        'form_fields.*.label' => 'required|string|max:255',
-        'form_fields.*.name' => 'required|string|max:255',
-        'form_fields.*.type' => 'required|string',
-        'form_fields.*.options' => 'nullable|array',
-        'form_fields.*.required' => 'boolean',
         ]);
 
         // Voeg de slug toe
@@ -70,23 +68,30 @@ class ServiceController extends Controller
             $validated['image'] = $request->file('image')->store('services', 'public');
         }
         //in Hostonger : cp -r storage/app/public/services/* public/storage/services/ 
-        Service::create($validated);
+        // Service::create($validated);
+        $service = Service::create($validated);
 
+        // ✅ ربط الحقول المختارة بالخدمة
+        if ($request->has('form_fields')) {
+            $service->formFields()->sync($request->form_fields);
+        }
+
+        // dd($service);
         return redirect()->route('services.index')->with('success', 'Service created successfully!');
     }
 
     /**
      * Display the specified resource.
      */
-public function show($id)
-{
-  
-    $service = Service::with('formFields')->findOrFail($id);
+    public function show($id)
+    {
 
-    return Inertia::render('admin/services/show', [
-        'service' => $service,
-    ]);
-}
+        $service = Service::with('formFields')->findOrFail($id);
+
+        return Inertia::render('admin/services/show', [
+            'service' => $service,
+        ]);
+    }
 
 
 
@@ -97,6 +102,8 @@ public function show($id)
     public function edit(Service $service)
     {
         $this->authorize('update', Service::class);
+        // Laad de form fields via de pivot-tabel
+        $service->load('formFields');
 
         return Inertia::render('admin/services/edit', compact('service'));
     }

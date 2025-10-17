@@ -3,16 +3,21 @@ import { type BreadcrumbItem } from '@/types';
 import { Head, Link, useForm } from '@inertiajs/react';
 
 import InputError from '@/components/input-error';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { FormEventHandler } from 'react';
 
-const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Create services',
-        href: '/services/create',
-    },
-];
+const breadcrumbs: BreadcrumbItem[] = [{ title: 'Create services', href: '/services/create' }];
+
+type FormField = {
+    id: number;
+    label: string;
+    name: string;
+    type: 'text' | 'textarea' | 'select';
+    required: boolean;
+    options?: string | null;
+};
 
 interface ServicesData {
     name: string;
@@ -22,9 +27,10 @@ interface ServicesData {
     discount: number;
     discount_type: 'fixed' | 'percentage';
     discount_expires_at: string;
+    form_fields: number[];
 }
 
-export default function CreateService() {
+export default function CreateService({ form_fields }: { form_fields: FormField[] }) {
     const { data, setData, post, processing, errors, reset } = useForm<ServicesData>({
         name: '',
         description: '',
@@ -33,13 +39,26 @@ export default function CreateService() {
         discount: 0,
         discount_type: 'fixed',
         discount_expires_at: '',
+        form_fields: [],
     });
+
+    // ✅ Checkbox handler
+    function handleCheckBoxChanges(fieldId: number, checked: boolean) {
+        if (checked) {
+            setData('form_fields', [...(data.form_fields || []), fieldId]);
+        } else {
+            setData(
+                'form_fields',
+                (data.form_fields || []).filter((id) => id !== fieldId),
+            );
+        }
+    }
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
         post(route('services.store'), {
             onSuccess: () => reset(),
-            forceFormData: true, // belangrijk om file upload via multipart/form-data te sturen
+            // forceFormData: true,
         });
     };
 
@@ -54,7 +73,27 @@ export default function CreateService() {
             </div>
 
             <form className="max-w-xl space-y-6 rounded bg-white p-6 shadow-md" onSubmit={submit}>
-                {/* Name */}
+                {/* ✅ Dropdown met checkboxes */}
+                <DropdownMenu>
+                    <DropdownMenuTrigger className="rounded border-2 border-amber-300 px-3 py-1">
+                        Choose form fields ({data.form_fields.length} selected)
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="rounded border-2 border-amber-500 bg-white p-2 shadow">
+                        {form_fields.map((field) => (
+                            <label key={field.id} className="flex items-center gap-2 py-1">
+                                <input
+                                    type="checkbox"
+                                    value={field.id}
+                                    checked={data.form_fields.includes(field.id)}
+                                    onChange={(e) => handleCheckBoxChanges(field.id, e.target.checked)}
+                                />
+                                <span>{field.label}</span>
+                            </label>
+                        ))}
+                    </DropdownMenuContent>
+                </DropdownMenu>
+
+                {/* Rest van het formulier */}
                 <div>
                     <Label htmlFor="name">Name</Label>
                     <Input
@@ -68,7 +107,6 @@ export default function CreateService() {
                     <InputError message={errors.name} className="mt-2" />
                 </div>
 
-                {/* Description */}
                 <div>
                     <Label htmlFor="description">Description</Label>
                     <Input
@@ -82,7 +120,6 @@ export default function CreateService() {
                     <InputError message={errors.description} className="mt-2" />
                 </div>
 
-                {/* Price */}
                 <div>
                     <Label htmlFor="price">Price</Label>
                     <Input
@@ -96,7 +133,6 @@ export default function CreateService() {
                     <InputError message={errors.price} className="mt-2" />
                 </div>
 
-                {/* Image Upload */}
                 <div>
                     <Label htmlFor="image">Service Image</Label>
                     <Input
@@ -109,7 +145,6 @@ export default function CreateService() {
                     <InputError message={errors.image} className="mt-2" />
                 </div>
 
-                {/* Discount */}
                 <div>
                     <Label htmlFor="discount">Discount</Label>
                     <Input
@@ -123,7 +158,6 @@ export default function CreateService() {
                     <InputError message={errors.discount} className="mt-2" />
                 </div>
 
-                {/* Discount Type */}
                 <div>
                     <Label htmlFor="discount_type">Discount Type</Label>
                     <select
@@ -139,7 +173,6 @@ export default function CreateService() {
                     <InputError message={errors.discount_type} className="mt-2" />
                 </div>
 
-                {/* Discount Expiry */}
                 <div>
                     <Label htmlFor="discount_expires_at">Discount Expires At</Label>
                     <Input
