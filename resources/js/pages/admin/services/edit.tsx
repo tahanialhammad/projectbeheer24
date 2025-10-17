@@ -65,94 +65,104 @@ export default function EditService({ service }: { service: ServicesData }) {
                 </Link>
             </div>
 
-            <form className="max-w-xl space-y-6 rounded bg-white p-6 shadow-md" onSubmit={submit}>
-                <div>
-                    <Label htmlFor="name">Name</Label>
-                    <Input
-                        id="name"
-                        type="text"
-                        value={data.name}
-                        onChange={(e) => setData('name', e.target.value)}
-                        disabled={processing}
-                        placeholder="Service name"
-                    />
-                    <InputError message={errors.name} className="mt-2" />
-                </div>
+            <form className="" onSubmit={submit}>
+                <div className="grid grid-cols-1 gap-6 rounded bg-white p-6 shadow-md md:grid-cols-3">
+                    {/* Linker kolom: 2/3 van de breedte */}
+                    <div className="space-y-4 border-b border-gray-300 pb-4 md:col-span-2 md:border-r-2 md:border-b-0 md:pb-0">
+                        <div>
+                            <Label htmlFor="name">Name</Label>
+                            <Input
+                                id="name"
+                                type="text"
+                                value={data.name}
+                                onChange={(e) => setData('name', e.target.value)}
+                                disabled={processing}
+                                placeholder="Service name"
+                            />
+                            <InputError message={errors.name} className="mt-2" />
+                        </div>
 
-                <div>
-                    <Label htmlFor="description">Description</Label>
-                    <Input
-                        id="description"
-                        type="text"
-                        value={data.description}
-                        onChange={(e) => setData('description', e.target.value)}
-                        disabled={processing}
-                        placeholder="Service description"
-                    />
-                    <InputError message={errors.description} className="mt-2" />
-                </div>
+                        <div>
+                            <Label htmlFor="description">Description</Label>
+                            <Input
+                                id="description"
+                                type="text"
+                                value={data.description}
+                                onChange={(e) => setData('description', e.target.value)}
+                                disabled={processing}
+                                placeholder="Service description"
+                            />
+                            <InputError message={errors.description} className="mt-2" />
+                        </div>
 
-                <div>
-                    <Label htmlFor="price">Price (€)</Label>
-                    <Input
-                        id="price"
-                        type="number"
-                        value={data.price}
-                        onChange={(e) => setData('price', parseFloat(e.target.value))}
-                        disabled={processing}
-                        placeholder="Service price"
-                    />
-                    <InputError message={errors.price} className="mt-2" />
-                </div>
-
-                {/* Discount */}
-                <div>
-                    <Label htmlFor="discount">Discount</Label>
-                    <Input
-                        id="discount"
-                        type="number"
-                        value={data.discount}
-                        onChange={(e) => setData('discount', parseFloat(e.target.value))}
-                        disabled={processing}
-                        placeholder="Discount amount"
-                    />
-                    <InputError message={errors.discount} className="mt-2" />
-                </div>
-
-                {/* Discount Type */}
-                <div>
-                    <Label htmlFor="discount_type">Discount Type</Label>
-                    <select
-                        id="discount_type"
-                        value={data.discount_type}
-                        onChange={(e) => setData('discount_type', e.target.value as 'fixed' | 'percentage')}
-                        disabled={processing}
-                        className="w-full rounded border px-2 py-1"
-                    >
-                        <option value="fixed">Fixed</option>
-                        <option value="percentage">Percentage</option>
-                    </select>
-                    <InputError message={errors.discount_type} className="mt-2" />
-                </div>
-
-                {/* Discount Expiry */}
-                <div>
-                    <Label htmlFor="discount_expires_at">Discount Expires At</Label>
-                    <Input
-                        id="discount_expires_at"
-                        type="date"
-                        value={data.discount_expires_at}
-                        onChange={(e) => setData('discount_expires_at', e.target.value)}
-                        disabled={processing}
-                    />
-                    <InputError message={errors.discount_expires_at} className="mt-2" />
-                </div>
-
-                {service.form_fields.map((field) => (
-                    <div key={field.id}>
-                        {field.name} : {field.type}
+                        <div>
+                            {service.form_fields.map((field) => (
+                                <div key={field.id}>
+                                    {field.name} : {field.type}
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                ))}
+
+                    {/* Rechter kolom: 1/3 van de breedte */}
+                    <div className="space-y-4 bg-amber-100">
+                        <div>
+                            <Label htmlFor="price">Price (€)</Label>
+                            <Input
+                                id="price"
+                                type="number"
+                                value={data.price}
+                                onChange={(e) => setData('price', parseFloat(e.target.value))}
+                                disabled={processing}
+                                placeholder="Service price"
+                            />
+                            <InputError message={errors.price} className="mt-2" />
+                        </div>
+
+                        {/* Discount */}
+                        <div>
+                            <Label htmlFor="discount">Discount</Label>
+                            <Input
+                                id="discount"
+                                type="number"
+                                value={data.discount}
+                                onChange={(e) => setData('discount', parseFloat(e.target.value))}
+                                disabled={processing}
+                                placeholder="Discount amount"
+                            />
+                            <InputError message={errors.discount} className="mt-2" />
+                        </div>
+
+                        {/* Discount Type */}
+                        <div>
+                            <Label htmlFor="discount_type">Discount Type</Label>
+                            <select
+                                id="discount_type"
+                                value={data.discount_type}
+                                onChange={(e) => setData('discount_type', e.target.value as 'fixed' | 'percentage')}
+                                disabled={processing}
+                                className="w-full rounded border px-2 py-1"
+                            >
+                                <option value="fixed">Fixed</option>
+                                <option value="percentage">Percentage</option>
+                            </select>
+                            <InputError message={errors.discount_type} className="mt-2" />
+                        </div>
+
+                        {/* Discount Expiry */}
+                        <div>
+                            <Label htmlFor="discount_expires_at">Discount Expires At</Label>
+                            <Input
+                                id="discount_expires_at"
+                                type="date"
+                                value={data.discount_expires_at}
+                                onChange={(e) => setData('discount_expires_at', e.target.value)}
+                                disabled={processing}
+                            />
+                            <InputError message={errors.discount_expires_at} className="mt-2" />
+                        </div>
+                    </div>
+                </div>
 
                 <button
                     type="submit"
