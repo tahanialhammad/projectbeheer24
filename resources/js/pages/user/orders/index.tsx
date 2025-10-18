@@ -34,12 +34,12 @@ export default function Index({ orders }: { orders: Order[] }) {
             <Head title="Orders" />
             <div className="p-6">
                 <div className="mb-4 flex items-center justify-between">
-                    <h2 className="text-3xl font-bold text-gray-800">All Orders</h2>
+                    <h2 className="text-3xl font-bold text-neutral-800">All Orders</h2>
                 </div>
 
                 <div className="overflow-x-auto">
-                    <table className="min-w-full rounded-lg border border-gray-300 shadow-md">
-                        <thead className="bg-gray-100">
+                    <table className="min-w-full rounded-lg border border-neutral-300 shadow-md">
+                        <thead className="bg-neutral-100">
                             <tr>
                                 <th className="border-b p-3 text-left">ID</th>
                                 <th className="border-b p-3 text-left">User</th>
@@ -50,7 +50,7 @@ export default function Index({ orders }: { orders: Order[] }) {
                         </thead>
                         <tbody>
                             {orders.map((order) => (
-                                <tr key={order.id} className="transition even:bg-gray-50 hover:bg-gray-100">
+                                <tr key={order.id} className="transition even:bg-neutral-50 hover:bg-neutral-100">
                                     <td className="border-b p-3">{order.id}</td>
                                     <td className="border-b p-3">{order.user?.name ?? order.user_id}</td>
                                     <td className="border-b p-3">{order.service?.name ?? order.service_id}</td>
@@ -58,7 +58,7 @@ export default function Index({ orders }: { orders: Order[] }) {
                                     <td className="flex space-x-2 border-b p-3">
                                         <Link
                                             href={route('orders.show', order.id)}
-                                            className="rounded bg-gray-600 px-3 py-1 text-white transition hover:bg-gray-700"
+                                            className="rounded bg-neutral-600 px-3 py-1 text-white transition hover:bg-neutral-700"
                                         >
                                             View
                                         </Link>

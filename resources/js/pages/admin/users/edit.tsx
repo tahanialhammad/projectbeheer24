@@ -49,7 +49,7 @@ export default function EditUser({
             <Head title="Edit user" />
 
             <div className="mb-6 flex items-center justify-between">
-                <h2 className="text-3xl font-bold text-gray-800">Edit User {user.name}</h2>
+                <h2 className="text-3xl font-bold text-neutral-800">Edit User {user.name}</h2>
                 <Link href="/users" className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700">
                     Back to all users
                 </Link>

@@ -53,13 +53,13 @@ export default function WebProducts({ services }) {
 
                                         <div className="my-2 flex w-full justify-between px-4 align-middle">
                                             <div>
-                                                <Link href={route('services.show', service)} className="text-blue-gray-900 block text-xl font-bold">
+                                                <Link href={route('services.show', service)} className="text-blue-neutral-900 block text-xl font-bold">
                                                     {service.name}
                                                 </Link>
                                                 {service.discounted_price < service.price ? (
                                                     <p>
                                                         <span>€{service.discounted_price}</span>
-                                                        <span className="ms-1 text-gray-400 line-through">€{service.price}</span>
+                                                        <span className="ms-1 text-neutral-400 line-through">€{service.price}</span>
                                                     </p>
                                                 ) : (
                                                     <p>€{service.price}</p>
@@ -75,7 +75,7 @@ export default function WebProducts({ services }) {
 
                                     {/* ⭐ Rating altijd onderaan */}
                                     <div className="mx-2 mt-auto p-4">
-                                        <p className="text-blue-gray-900 flex items-center gap-1.5 text-base leading-relaxed font-normal antialiased">
+                                        <p className="text-blue-neutral-900 flex items-center gap-1.5 text-base leading-relaxed font-normal antialiased">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 24 24"

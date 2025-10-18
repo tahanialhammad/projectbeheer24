@@ -32,7 +32,7 @@ export default function Services({ services }: ServicesProps) {
                 {services.data.map(({ id, name, description, price, image, discounted_price }) => (
                     <div
                         key={id}
-                        className="relative flex flex-col rounded-lg border border-gray-200 bg-white shadow transition-shadow duration-300 hover:shadow-lg"
+                        className="relative flex flex-col rounded-lg border border-neutral-200 bg-white shadow transition-shadow duration-300 hover:shadow-lg"
                     >
                         <div className="absolute top-4 left-4">
                             <span className={`rounded-full bg-black px-3 py-1 text-white ${discounted_price < price ? '' : 'hidden'}`}>Actie</span>
@@ -46,13 +46,13 @@ export default function Services({ services }: ServicesProps) {
 
                         <div className="flex flex-1 flex-col p-4">
                             <div className="flex-1">
-                                <h2 className="mb-2 text-xl font-bold text-gray-900">{name}</h2>
-                                <p className="mb-4 line-clamp-2 text-gray-600">{description}</p>
+                                <h2 className="mb-2 text-xl font-bold text-neutral-900">{name}</h2>
+                                <p className="mb-4 line-clamp-2 text-neutral-600">{description}</p>
 
                                 {discounted_price < price ? (
                                     <p>
                                         <span className="text-lg font-semibold text-fuchsia-500">€{discounted_price}</span>
-                                        <span className="ms-1 text-gray-400 line-through">€{price}</span>
+                                        <span className="ms-1 text-neutral-400 line-through">€{price}</span>
                                     </p>
                                 ) : (
                                     <p className="text-lg font-semibold text-fuchsia-500">€{price}</p>

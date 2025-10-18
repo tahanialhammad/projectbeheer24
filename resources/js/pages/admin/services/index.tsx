@@ -35,7 +35,7 @@ export default function Index({ services }: { services: Service[] }) {
             <Head title="Services" />
             <div className="p-6">
                 <div className="mb-4 flex items-center justify-between">
-                    <h2 className="text-3xl font-bold text-gray-800">services list</h2>
+                    <h2 className="text-3xl font-bold text-neutral-800">services list</h2>
                     {canCreate && (  
                     <Link href={route('services.create')} className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700">
                         Add new service
@@ -43,8 +43,8 @@ export default function Index({ services }: { services: Service[] }) {
                 </div>
 
                 <div className="overflow-x-auto">
-                    <table className="min-w-full rounded-lg border border-gray-300 shadow-md">
-                        <thead className="bg-gray-100">
+                    <table className="min-w-full rounded-lg border border-neutral-300 shadow-md">
+                        <thead className="bg-neutral-100 dark:bg-neutral-700">
                             <tr>
                                 <th className="border-b p-3 text-left">ID</th>
                                 <th className="border-b p-3 text-left">Name</th>
@@ -55,7 +55,7 @@ export default function Index({ services }: { services: Service[] }) {
                         </thead>
                         <tbody>
                             {services.map(({ id, name, description, price }) => (
-                                <tr key={id} className="transition even:bg-gray-50 hover:bg-gray-100 border-b-1 border-gray-200">
+                                <tr key={id} className="transition even:bg-neutral-50 hover:bg-neutral-100 border-b-1 border-neutral-200">
                                     <td className="px-2">{id}</td>
                                     <td className="px-2">{name}</td>
                                     <td className="px-2 line-clamp-2">{description}</td>
@@ -64,7 +64,7 @@ export default function Index({ services }: { services: Service[] }) {
                                         
                                         <Link
                                             href={route('services.show', id)}
-                                            className="rounded bg-gray-600 px-3 py-1 text-white transition hover:bg-green-700"
+                                            className="rounded bg-neutral-600 px-3 py-1 text-white transition hover:bg-green-700"
                                         >
                                             view
                                         </Link>

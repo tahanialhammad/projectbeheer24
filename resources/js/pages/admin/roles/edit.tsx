@@ -41,7 +41,7 @@ export default function EditRole({ role, permissions }) {
             <Head title="Edit role" />
 
             <div className="mb-6 flex items-center justify-between">
-                <h2 className="text-3xl font-bold text-gray-800">Edit role</h2>
+                <h2 className="text-3xl font-bold text-neutral-800">Edit role</h2>
                 <Link href="/roles" className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700">
                     Back to all roles
                 </Link>

@@ -45,7 +45,7 @@ export default function Show({ service }: { service: Service }) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <div className="flex items-center justify-between">
-                <h2 className="text-3xl font-bold text-gray-800">Service: {service.name}</h2>
+                <h2 className="text-3xl font-bold text-neutral-800">Service: {service.name}</h2>
                 <Link href="/services" className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700">
                     Back to all service
                 </Link>
@@ -60,12 +60,12 @@ export default function Show({ service }: { service: Service }) {
 
                 <div className="p-6">
                     <h1 className="mb-4 text-3xl font-bold">{service.name}</h1>
-                    <p className="mb-4 text-gray-700">{service.description}</p>
+                    <p className="mb-4 text-neutral-700">{service.description}</p>
 
                     <p className="text-xl font-semibold text-fuchsia-500">€{service.discounted_price ?? service.price}</p>
 
                     {service.discounted_price && service.discounted_price < service.price && (
-                        <p className="text-sm text-gray-500 line-through">€{service.price}</p>
+                        <p className="text-sm text-neutral-500 line-through">€{service.price}</p>
                     )}
 
                     {service.form_fields.map((field) => (
@@ -76,9 +76,9 @@ export default function Show({ service }: { service: Service }) {
                             {field.required}
                         </div>
                     ))}
-                    <div className="overflow-hidden rounded-lg border border-gray-200 shadow-sm">
-                        <table className="min-w-full border-collapse bg-white text-left text-sm text-gray-700">
-                            <thead className="bg-gray-100">
+                    <div className="overflow-hidden rounded-lg border border-neutral-200 shadow-sm">
+                        <table className="min-w-full border-collapse bg-white text-left text-sm text-neutral-700">
+                            <thead className="bg-neutral-100">
                                 <tr>
                                     <th scope="col" className="px-4 py-3 font-medium">
                                         Label
@@ -109,14 +109,14 @@ export default function Show({ service }: { service: Service }) {
                                             {field.required ? (
                                                 <span className="rounded bg-red-100 px-2 py-1 text-xs font-semibold text-red-700">Ja</span>
                                             ) : (
-                                                <span className="rounded bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600">Nee</span>
+                                                <span className="rounded bg-neutral-100 px-2 py-1 text-xs font-medium text-neutral-600">Nee</span>
                                             )}
                                         </td>
                                         {/* <td className="p-2"> {field.options}</td> */}
 
                                         {/* <td className="p-2">
   {(() => {
-    if (!field.options) return <span className="italic text-gray-400">—</span>;
+    if (!field.options) return <span className="italic text-neutral-400">—</span>;
     try {
       const opts = JSON.parse(field.options);
       return Array.isArray(opts) ? opts.join(', ') : String(field.options);
@@ -126,7 +126,7 @@ export default function Show({ service }: { service: Service }) {
   })()}
 </td> */}
 
-                                        <td className="p-2 text-sm text-gray-700">{formatOptions(field.options)}</td>
+                                        <td className="p-2 text-sm text-neutral-700">{formatOptions(field.options)}</td>
                                     </tr>
                                 ))}
                             </tbody>

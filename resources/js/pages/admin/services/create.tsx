@@ -66,7 +66,7 @@ export default function CreateService({ form_fields }: { form_fields: FormField[
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Create service" />
             <div className="mb-6 flex items-center justify-between">
-                <h2 className="text-3xl font-bold text-gray-800">Create services</h2>
+                <h2 className="text-3xl font-bold text-neutral-800">Create services</h2>
                 <Link href="/services" className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700">
                     Back to all services
                 </Link>
@@ -75,7 +75,7 @@ export default function CreateService({ form_fields }: { form_fields: FormField[
             <form onSubmit={submit} className="space-y-6">
                 <div className="grid grid-cols-1 gap-6 rounded bg-white p-6 shadow-md md:grid-cols-3">
                     {/* Linker kolom: 2/3 van de breedte */}
-                    <div className="space-y-4 border-b border-gray-300 pb-4 md:col-span-2 md:border-r-2 md:border-b-0 md:pb-0">
+                    <div className="space-y-4 border-b border-neutral-300 pb-4 md:col-span-2 md:border-r-2 md:border-b-0 md:pb-0">
                         <div>
                             <Label htmlFor="name">Name</Label>
                             <Input
@@ -105,10 +105,10 @@ export default function CreateService({ form_fields }: { form_fields: FormField[
                         <div className="flex flex-col space-y-2">
                             <Label htmlFor="form_fields">Form fields</Label>
                             <DropdownMenu>
-                                <DropdownMenuTrigger className="rounded border-2 border-gray-200 px-2 py-1 text-start">
+                                <DropdownMenuTrigger className="rounded border-2 border-neutral-200 px-2 py-1 text-start">
                                     Choose form fields ({data.form_fields.length} selected)
                                 </DropdownMenuTrigger>
-                                <DropdownMenuContent className="rounded border-2 border-gray-200 bg-white p-2 shadow">
+                                <DropdownMenuContent className="rounded border-2 border-neutral-200 bg-white p-2 shadow">
                                     {form_fields.map((field) => (
                                         <label key={field.id} className="flex gap-2 py-1">
                                             <input

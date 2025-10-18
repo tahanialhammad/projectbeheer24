@@ -35,7 +35,7 @@ export default function About() {
               <h3 className="text-xl font-semibold mb-2">
                 Heldere communicatie
               </h3>
-              <p className="text-gray-600">
+              <p className="text-neutral-600">
                 Vanaf het begin weet je waar je aan toe bent – ik leg alles
                 duidelijk uit, zonder vakjargon.
               </p>
@@ -43,7 +43,7 @@ export default function About() {
 
             <div className="p-6 bg-white rounded-xl shadow">
               <h3 className="text-xl font-semibold mb-2">Samenwerking</h3>
-              <p className="text-gray-600">
+              <p className="text-neutral-600">
                 Ik denk actief met je mee en neem beslissingen in overleg – we
                 creëren het eindresultaat echt samen.
               </p>
@@ -51,7 +51,7 @@ export default function About() {
 
             <div className="p-6 bg-white rounded-xl shadow">
               <h3 className="text-xl font-semibold mb-2">Duidelijke prijzen</h3>
-              <p className="text-gray-600">
+              <p className="text-neutral-600">
                 Geen verborgen kosten – je krijgt altijd vooraf een transparante
                 offerte, zodat je precies weet waar je aan toe bent.
               </p>
