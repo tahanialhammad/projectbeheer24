@@ -45,13 +45,13 @@ export default function Show({ service }: { service: Service }) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <div className="flex items-center justify-between">
-                <h2 className="text-3xl font-bold text-neutral-800">Service: {service.name}</h2>
+                <h2 className="text-xl font-bold">Service: {service.name}</h2>
                 <Link href="/services" className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700">
                     Back to all service
                 </Link>
             </div>
 
-            <div className="max-w-xl rounded-md bg-white p-6 shadow">
+            <div className="max-w-xl rounded-md bg-neutral-100 dark:bg-neutral-800 p-6 shadow">
                 <img
                     src={service.image ? `/storage/${service.image}` : '/images/Dashboard.webp'}
                     className="h-64 w-full rounded-lg object-cover"
@@ -60,7 +60,7 @@ export default function Show({ service }: { service: Service }) {
 
                 <div className="p-6">
                     <h1 className="mb-4 text-3xl font-bold">{service.name}</h1>
-                    <p className="mb-4 text-neutral-700">{service.description}</p>
+                    <p className="mb-4 text-neutral-700 dark:text-neutral-200">{service.description}</p>
 
                     <p className="text-xl font-semibold text-fuchsia-500">€{service.discounted_price ?? service.price}</p>
 
@@ -77,8 +77,8 @@ export default function Show({ service }: { service: Service }) {
                         </div>
                     ))}
                     <div className="overflow-hidden rounded-lg border border-neutral-200 shadow-sm">
-                        <table className="min-w-full border-collapse bg-white text-left text-sm text-neutral-700">
-                            <thead className="bg-neutral-100">
+                        <table className="min-w-full border-collapse bg-neutral-100 dark:bg-neutral-800 text-left text-sm">
+                            <thead className="bg-neutral-100 dark:bg-neutral-700">
                                 <tr>
                                     <th scope="col" className="px-4 py-3 font-medium">
                                         Label
@@ -126,7 +126,7 @@ export default function Show({ service }: { service: Service }) {
   })()}
 </td> */}
 
-                                        <td className="p-2 text-sm text-neutral-700">{formatOptions(field.options)}</td>
+                                        <td className="p-2 text-sm">{formatOptions(field.options)}</td>
                                     </tr>
                                 ))}
                             </tbody>

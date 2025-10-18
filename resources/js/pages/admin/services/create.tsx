@@ -66,14 +66,14 @@ export default function CreateService({ form_fields }: { form_fields: FormField[
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Create service" />
             <div className="mb-6 flex items-center justify-between">
-                <h2 className="text-3xl font-bold text-neutral-800">Create services</h2>
+                <h2 className="text-xl font-bold text-neutral-800">Create services</h2>
                 <Link href="/services" className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700">
                     Back to all services
                 </Link>
             </div>
 
             <form onSubmit={submit} className="space-y-6">
-                <div className="grid grid-cols-1 gap-6 rounded bg-white p-6 shadow-md md:grid-cols-3">
+                <div className="grid grid-cols-1 gap-6 rounded bg-neutral-100 dark:bg-neutral-700 p-6 shadow-md md:grid-cols-3">
                     {/* Linker kolom: 2/3 van de breedte */}
                     <div className="space-y-4 border-b border-neutral-300 pb-4 md:col-span-2 md:border-r-2 md:border-b-0 md:pb-0">
                         <div>
