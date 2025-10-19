@@ -12,7 +12,7 @@ export default function Contact() {
                     <div className="flex flex-col items-center p-6 text-center">
                         <MapPin size={32} className="text-fuchsia-600" />
                         <h3 className="mb-2 text-xl font-semibold">Werkgebied</h3>
-                        <p className="text-gray-600">
+                        <p className="text-neutral-600">
                             Nederland <br />
                             Groningen en omgeving
                         </p>
@@ -21,7 +21,7 @@ export default function Contact() {
                     <div className="flex flex-col items-center p-6 text-center">
                         <Mail size={32} className="text-fuchsia-600" />
                         <h3 className="mb-2 text-xl font-semibold">E-mailadres</h3>
-                        <a href="mailto:info@tahanina.nl" className="text-gray-600">
+                        <a href="mailto:info@tahanina.nl" className="text-neutral-600">
                             info@tahanina.nl
                         </a>
                     </div>
@@ -29,7 +29,7 @@ export default function Contact() {
                     <div className="flex flex-col items-center p-6 text-center">
                         <Smartphone size={32} className="text-fuchsia-600" />
                         <h3 className="mb-2 text-xl font-semibold">Telefoonnummers</h3>
-                        <p className="text-gray-600">
+                        <p className="text-neutral-600">
                             <a href="tel:+31621942804" className="hover:underline">
                                 06 219 428 04
                             </a>

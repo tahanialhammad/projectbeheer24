@@ -36,14 +36,14 @@ export default function ShowOrder({ order }: Props) {
             <Head title={`Bestelling #${order.id}`} />
 
             <div className="mb-6 flex items-center justify-between">
-                <h2 className="text-3xl font-bold text-gray-800">Bewerk Order #{order.id}</h2>
+                <h2 className="text-xl font-bold">Bewerk Order #{order.id}</h2>
                 <Link href="/orders" className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700">
                     Back to all orders
                 </Link>
             </div>
 
-            <div className="max-w-xl space-y-6 rounded bg-white p-6 shadow-md">
-                <h1 className="text-2xl font-bold">Bestelling voor: {order.service.name}</h1>
+            <div className="max-w-xl space-y-6 rounded bg-white dark:bg-neutral-700 p-6 shadow-md">
+                <h1 className="text-xl font-bold">Bestelling voor: {order.service.name}</h1>
                 <p>
                     <strong>Status:</strong> {order.status}
                 </p>

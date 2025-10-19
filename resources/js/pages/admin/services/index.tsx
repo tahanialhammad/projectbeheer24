@@ -1,15 +1,14 @@
+import Heading from '@/components/heading';
 import AppLayout from '@/layouts/app-layout';
+import { useCan } from '@/lib/can';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link, router } from '@inertiajs/react';
-import { useCan } from '@/lib/can';
-
 
 type Service = {
     id: number;
     name: string;
     description: string;
     price: number;
-
 };
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -35,16 +34,20 @@ export default function Index({ services }: { services: Service[] }) {
             <Head title="Services" />
             <div className="p-6">
                 <div className="mb-4 flex items-center justify-between">
-                    <h2 className="text-3xl font-bold text-gray-800">services list</h2>
-                    {canCreate && (  
-                    <Link href={route('services.create')} className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700">
-                        Add new service
-                    </Link>)}
+                    <Heading title="Services list" description="" />
+                    {canCreate && (
+                        <Link
+                            href={route('services.create')}
+                            className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700"
+                        >
+                            Add new service
+                        </Link>
+                    )}
                 </div>
 
                 <div className="overflow-x-auto">
-                    <table className="min-w-full rounded-lg border border-gray-300 shadow-md">
-                        <thead className="bg-gray-100">
+                    <table className="min-w-full rounded-lg border border-neutral-300 shadow-md">
+                        <thead className="bg-neutral-100 dark:bg-neutral-700">
                             <tr>
                                 <th className="border-b p-3 text-left">ID</th>
                                 <th className="border-b p-3 text-left">Name</th>
@@ -55,33 +58,37 @@ export default function Index({ services }: { services: Service[] }) {
                         </thead>
                         <tbody>
                             {services.map(({ id, name, description, price }) => (
-                                <tr key={id} className="transition even:bg-gray-50 hover:bg-gray-100 border-b-1 border-gray-200">
+                                <tr
+                                    key={id}
+                                    className="border-b-1 border-neutral-200 transition even:bg-neutral-50 hover:bg-neutral-100 dark:even:bg-neutral-700 dark:hover:bg-neutral-700/60"
+                                >
                                     <td className="px-2">{id}</td>
                                     <td className="px-2">{name}</td>
-                                    <td className="px-2 line-clamp-2">{description}</td>
+                                    <td className="line-clamp-2 px-2">{description}</td>
                                     <td className="px-2">{price}</td>
                                     <td className="flex space-x-2 px-2">
-                                        
                                         <Link
                                             href={route('services.show', id)}
-                                            className="rounded bg-gray-600 px-3 py-1 text-white transition hover:bg-green-700"
+                                            className="rounded bg-neutral-600 px-3 py-1 text-white transition hover:bg-neutral-700 dark:hover:bg-neutral-700/60"
                                         >
                                             view
                                         </Link>
-                                  {canEdit && (       
-                                        <Link
-                                            href={route('services.edit', id)}
-                                            className="rounded bg-green-600 px-3 py-1 text-white transition hover:bg-green-700"
-                                        >
-                                            Edit
-                                        </Link>)}
-                                        {canDelete && (  
-                                        <button
-                                            onClick={() => handleDelete(id)}
-                                            className="rounded bg-red-600 px-3 py-1 text-white transition hover:bg-red-700"
-                                        >
-                                            Delete
-                                        </button>)}
+                                        {canEdit && (
+                                            <Link
+                                                href={route('services.edit', id)}
+                                                className="rounded bg-green-600 px-3 py-1 text-white transition hover:bg-green-700 dark:hover:bg-green-700/60"
+                                            >
+                                                Edit
+                                            </Link>
+                                        )}
+                                        {canDelete && (
+                                            <button
+                                                onClick={() => handleDelete(id)}
+                                                className="rounded bg-red-600 px-3 py-1 text-white transition hover:bg-red-700 dark:hover:bg-red-700/60"
+                                            >
+                                                Delete
+                                            </button>
+                                        )}
                                     </td>
                                 </tr>
                             ))}

@@ -23,7 +23,7 @@ export default function SiteLayout({ children, title = 'Welcome' }: SiteLayoutPr
                 <SiteNav />
 
                 {/* Page Content */}
-                <div className="m-4 mt-24">
+                <div className="m-4 mt-24 dark:text-neutral-100">
                     <FlashMessage />
                     {children}
                 </div>

@@ -2,6 +2,7 @@ import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link, useForm } from '@inertiajs/react';
 
+import Heading from '@/components/heading';
 import InputError from '@/components/input-error';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -50,13 +51,14 @@ export default function CreateUser({ roles }) {
             <Head title="Create user" />
 
             <div className="mb-6 flex items-center justify-between">
-                <h2 className="text-3xl font-bold text-gray-800">Create User</h2>
+                <Heading title="Create User" description="" />
+
                 <Link href="/users" className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700">
                     Back to all users
                 </Link>
             </div>
 
-            <form className="max-w-xl space-y-6 rounded bg-white p-6 shadow-md" onSubmit={submit}>
+            <form className="max-w-xl space-y-6 rounded bg-white p-6 shadow-md dark:bg-neutral-700" onSubmit={submit}>
                 <div>
                     <Label htmlFor="name">Name</Label>
                     <Input

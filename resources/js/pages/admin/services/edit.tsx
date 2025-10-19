@@ -2,6 +2,7 @@ import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link, useForm } from '@inertiajs/react';
 
+import Heading from '@/components/heading';
 import InputError from '@/components/input-error';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
@@ -28,10 +29,14 @@ interface ServicesData {
 }
 
 // Verwacht een 'service' prop via de pagina
-export default function EditService({ service, form_fields, selected_form_fields }: { 
-    service: ServicesData; 
-    form_fields: FormField[]; 
-    selected_form_fields: number[]; 
+export default function EditService({
+    service,
+    form_fields,
+    selected_form_fields,
+}: {
+    service: ServicesData;
+    form_fields: FormField[];
+    selected_form_fields: number[];
 }) {
     const { data, setData, put, processing, errors } = useForm({
         id: service.id,
@@ -75,15 +80,16 @@ export default function EditService({ service, form_fields, selected_form_fields
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title={`Edit ${service.name}`} />
             <div className="mb-6 flex items-center justify-between">
-                <h2 className="text-3xl font-bold text-gray-800">Edit Service</h2>
+                <Heading title="Edit service" description="" />
+
                 <Link href="/services" className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700">
                     Back to all services
                 </Link>
             </div>
             <form onSubmit={submit} className="">
-                <div className="grid grid-cols-1 gap-6 rounded bg-white p-6 shadow-md md:grid-cols-3">
+                <div className="grid grid-cols-1 gap-6 rounded bg-neutral-100 dark:bg-neutral-800 p-6 shadow-md md:grid-cols-3">
                     {/* Linker kolom: 2/3 van de breedte */}
-                    <div className="space-y-4 border-b border-gray-300 pb-4 md:col-span-2 md:border-r-2 md:border-b-0 md:pb-0">
+                    <div className="space-y-4 border-b border-neutral-300 p-2 md:col-span-2 md:border-r-2 md:border-b-0 ">
                         <div>
                             <Label htmlFor="name">Name</Label>
                             <Input
@@ -113,10 +119,10 @@ export default function EditService({ service, form_fields, selected_form_fields
                         <div className="flex flex-col space-y-2">
                             <Label>Form fields</Label>
                             <DropdownMenu>
-                                <DropdownMenuTrigger className="rounded border-2 border-gray-200 px-2 py-1 text-start">
+                                <DropdownMenuTrigger className="rounded border-2 px-2 py-1 text-start">
                                     Choose form fields ({data.form_fields.length} selected)
                                 </DropdownMenuTrigger>
-                                <DropdownMenuContent className="rounded border-2 border-gray-200 bg-white p-2 shadow">
+                                <DropdownMenuContent className="rounded border-2 border-neutral-50 bg-neutral-100 dark:bg-neutral-700 p-2 shadow">
                                     {form_fields.map((field) => (
                                         <label key={field.id} className="flex gap-2 py-1">
                                             <input

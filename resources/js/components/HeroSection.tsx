@@ -10,7 +10,7 @@ export default function HeroSection({ title, children }: HeroSectionProps) {
   return (
     <section>
       {/* hero section*/}
-      <div className="relative isolate px-6 pt-14 lg:px-8">
+      <div className="relative isolate px-6 pt-14 lg:px-8 ">
         <div
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
           aria-hidden="true"
@@ -36,7 +36,7 @@ export default function HeroSection({ title, children }: HeroSectionProps) {
 
         <div className="mb-8 flex w-full items-center justify-center">
           <div className="max-w-[50vw] text-center">
-            <h1 className="text-2xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
+            <h1 className="text-2xl font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 sm:text-5xl">
               {title}
             </h1>
             {children && <div>{children}</div>}

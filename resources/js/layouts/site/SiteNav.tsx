@@ -48,7 +48,7 @@ export default function SiteNav() {
                                 key={item.name}
                                 href={item.href && route(item.href)}
                                 active={!!(item.href && route().current(item.href))}
-                                className="text-sm leading-6 font-semibold text-gray-900"
+                                className="text-sm leading-6 font-semibold text-neutral-900 dark:text-neutral-100"
                             >
                                 {item.name}
                             </NavLink>

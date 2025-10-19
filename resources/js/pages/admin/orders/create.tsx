@@ -47,9 +47,9 @@ export default function CreateOrder({ service }: Props) {
 
     return (
         <SiteLayout title="Bestelling plaatsen">
-            <h1 className="mb-6 text-2xl font-bold">Bestel: {service.name}</h1>
+            <h1 className="mb-6 text-xl font-bold ">Bestel: {service.name}</h1>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-4 dark:text-neutral-100">
                 {service.form_fields.map((field) => (
                     <DynamicFormField
                         key={field.id}
@@ -59,7 +59,6 @@ export default function CreateOrder({ service }: Props) {
                         onChange={handleChange}
                     />
                 ))}
-
                 <button type="submit" disabled={processing} className="mt-4 rounded bg-green-600 px-6 py-2 text-white hover:bg-green-700">
                     Bestellen
                 </button>

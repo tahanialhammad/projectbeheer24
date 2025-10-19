@@ -15,7 +15,7 @@ export default function ShowUser({ user }: { user: { id: number; name: string; e
             <Head title={`User: ${user.name}`} />
 
             <div className="mb-6 flex items-center justify-between">
-                <h2 className="text-3xl font-bold text-gray-800">User: {user.name}</h2>
+                <h2 className="text-3xl font-bold text-neutral-800">User: {user.name}</h2>
                 <Link
                     href="/users"
                     className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700"
@@ -24,20 +24,20 @@ export default function ShowUser({ user }: { user: { id: number; name: string; e
                 </Link>
             </div>
 
-            <div className="max-w-xl rounded-md bg-white p-6 shadow">
-                <h3 className="mb-4 text-xl font-semibold text-gray-700">User Information</h3>
+            <div className="max-w-xl rounded-md bg-white dark:bg-neutral-700 p-6 shadow">
+                <h3 className="mb-4 text-xl font-semibold">User Information</h3>
                 <div className="space-y-4">
                     <div>
-                        <span className="text-gray-500">Name:</span>
-                        <p className="text-lg text-gray-800">{user.name}</p>
+                        <span className="">Name:</span>
+                        <p className="text-lg">{user.name}</p>
                     </div>
                     <div>
-                        <span className="text-gray-500">Email:</span>
-                        <p className="text-lg text-gray-800">{user.email}</p>
+                        <span className="text-neutral-500">Email:</span>
+                        <p className="text-lg">{user.email}</p>
                     </div>
                     {/* <div>
-                        <span className="text-gray-500">Role:</span>
-                        <p className="text-lg text-gray-800 capitalize">{user.role}</p>
+                        <span className="text-neutral-500">Role:</span>
+                        <p className="text-lg text-neutral-800 capitalize">{user.role}</p>
                     </div> */}
                 </div>
             </div>

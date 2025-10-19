@@ -2,6 +2,7 @@ import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link, useForm } from '@inertiajs/react';
 
+import Heading from '@/components/heading';
 import InputError from '@/components/input-error';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -41,13 +42,14 @@ export default function EditRole({ role, permissions }) {
             <Head title="Edit role" />
 
             <div className="mb-6 flex items-center justify-between">
-                <h2 className="text-3xl font-bold text-gray-800">Edit role</h2>
+                <Heading title="Edit Role" description="" />
+
                 <Link href="/roles" className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700">
                     Back to all roles
                 </Link>
             </div>
 
-            <form className="max-w-xl space-y-6 rounded bg-white p-6 shadow-md" onSubmit={submit}>
+            <form className="max-w-xl space-y-6 rounded bg-white dark:bg-neutral-700 p-6 shadow-md" onSubmit={submit}>
                 <div>
                     <Label htmlFor="name">Name</Label>
                     <Input
