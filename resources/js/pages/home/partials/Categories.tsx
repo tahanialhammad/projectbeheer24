@@ -29,11 +29,11 @@ export default function Categories({ initialTime }) {
     return (
         <div className="my-6 flex flex-row gap-4">
             <div className="relative w-1/2 rounded-3xl bg-fuchsia-200 px-4 pt-4 text-center capitalize">
-                <h3 className="mt-4 text-lg font-bold tracking-tight text-red-500 uppercase">25% korting</h3>
-                <h1 className="text-3xl font-bold text-neutral-900">op de aanbieding van de dag</h1>
+                <h3 className="mt-4 text-lg font-bold tracking-tight text-red-500 uppercase">25% Discount</h3>
+                <h1 className="text-3xl font-bold text-neutral-900">on the offer of the day</h1>
                 <h3 className="text-2xl font-bold text-neutral-900">Black Friday</h3>
                 <CountdownTimer initialTime={initialTime} />
-                <PrimaryButton className="mt-4">Bestel Nu</PrimaryButton>
+                <PrimaryButton className="mt-4">Order Now</PrimaryButton>
                 <img className="absolute top-2/5 left-0" src="" alt="" />
                 <img className="" src=".\images\woman-working-with-laptop.png" alt="" />
             </div>

@@ -28,10 +28,10 @@ export default function HeroSection({ sliderImages }) {
 
                 <div className="mb-8 flex w-full items-center justify-center">
                     <div className="max-w-[50vw] text-center">
-                        <h1 className="text-8xl">Moderniseer uw bedrijf</h1>
+                        <h1 className="text-8xl">Modernize your business</h1>
                         <div className="my-4 flex justify-center gap-2">
                             <PrimaryButton href={route('contact')}>Contact Us</PrimaryButton>
-                            <SecondaryButton>Ontdek prijzen</SecondaryButton>
+                            <SecondaryButton>Discover prices</SecondaryButton>{' '}
                         </div>
                     </div>
                 </div>
@@ -42,10 +42,10 @@ export default function HeroSection({ sliderImages }) {
                         <div className="mb-4tt absolute inset-0 rounded-3xl bg-gradient-to-t from-indigo-200 via-transparent"></div>
                         <div className="absolute top-2/3 w-full text-center">
                             <h4 className="text-xl font-bold text-fuchsia-800 uppercase">Freelance </h4>
-                            <h1 className="text-3xl font-black capitalize">webontwikkelaar </h1>
-                            <h3 className="text-2xl capitalize">in Groningen</h3>
+                            <h1 className="text-3xl font-black capitalize">web developer </h1>
+                            <h3 className="text-2xl capitalize">From Groningen</h3>
                             <PrimaryButton href={route('contact')} className="mt-4">
-                                Afspraak maken
+                                Make an appointment{' '}
                             </PrimaryButton>
                         </div>
                     </AnimatedWrapper>
@@ -65,9 +65,9 @@ export default function HeroSection({ sliderImages }) {
                             <img className="rounded-3xl" src=".\images\7073.jpg" alt="" />
                             <div className="absolute top-1/3 left-4 m-4">
                                 <h4 className="text-xl font-bold text-indigo-500 uppercase">Trendtech</h4>
-                                <h1 className="text-3xl font-black capitalize">Maatwerk & Innovatie</h1>
+                                <h1 className="text-3xl font-black capitalize">Customization & Innovation</h1>{' '}
                                 <h3 className="text-2xl capitalize">fashion on fleek</h3>
-                                <SecondaryButton className="mt-4">Bekijk Diensten</SecondaryButton>
+                                <SecondaryButton className="mt-4">View Services</SecondaryButton>{' '}
                             </div>
                         </AnimatedWrapper>
                     </div>

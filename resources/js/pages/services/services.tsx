@@ -26,8 +26,8 @@ type ServicesProps = {
 
 export default function Services({ services }: ServicesProps) {
     return (
-        <SiteLayout title="diensten">
-            <HeroSection title="Onze diensten" />
+        <SiteLayout title="services">
+            <HeroSection title="Our services" />
             <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 {services.data.map(({ id, name, description, price, image, discounted_price }) => (
                     <div
@@ -60,8 +60,8 @@ export default function Services({ services }: ServicesProps) {
                             </div>
 
                             <div className="mt-4 flex justify-between">
-                                <PrimaryButton href={route('orders.create', { service_id: id })}>Bestel</PrimaryButton>
-                                <SecondaryButton href={route('services.showService', id)}>Meer info</SecondaryButton>
+                                <PrimaryButton href={route('orders.create', { service_id: id })}>Order now</PrimaryButton>
+                                <SecondaryButton href={route('services.showService', id)}>More info</SecondaryButton>
                             </div>
                         </div>
                     </div>

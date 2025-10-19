@@ -35,7 +35,7 @@ export default function Index({ orders }: { orders: Order[] }) {
             <Head title="Orders" />
             <div className="p-6">
                 <div className="mb-4 flex items-center justify-between">
-                    <Heading title="Mijn Orders" description="" />
+                    <Heading title="My Orders" description="" />
                 </div>
 
                 <div className="overflow-x-auto">
