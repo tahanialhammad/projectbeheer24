@@ -24,16 +24,16 @@ export default function ShowUser({ user }: { user: { id: number; name: string; e
                 </Link>
             </div>
 
-            <div className="max-w-xl rounded-md bg-white p-6 shadow">
-                <h3 className="mb-4 text-xl font-semibold text-neutral-700">User Information</h3>
+            <div className="max-w-xl rounded-md bg-white dark:bg-neutral-700 p-6 shadow">
+                <h3 className="mb-4 text-xl font-semibold">User Information</h3>
                 <div className="space-y-4">
                     <div>
-                        <span className="text-neutral-500">Name:</span>
-                        <p className="text-lg text-neutral-800">{user.name}</p>
+                        <span className="">Name:</span>
+                        <p className="text-lg">{user.name}</p>
                     </div>
                     <div>
                         <span className="text-neutral-500">Email:</span>
-                        <p className="text-lg text-neutral-800">{user.email}</p>
+                        <p className="text-lg">{user.email}</p>
                     </div>
                     {/* <div>
                         <span className="text-neutral-500">Role:</span>

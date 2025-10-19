@@ -1,3 +1,4 @@
+import Heading from '@/components/heading';
 import AppLayout from '@/layouts/app-layout';
 import { useCan } from '@/lib/can';
 import { type BreadcrumbItem } from '@/types';
@@ -40,7 +41,8 @@ export default function Index({ roles }: { roles: Role[] }) {
             <Head title="Roles" />
             <div className="p-6">
                 <div className="mb-4 flex items-center justify-between">
-                    <h2 className="text-3xl font-bold text-neutral-800">Roles list</h2>
+                    <Heading title="Roles list" description="" />
+
                     {canCreate && (
                         <Link
                             href={route('roles.create')}
@@ -53,7 +55,7 @@ export default function Index({ roles }: { roles: Role[] }) {
 
                 <div className="overflow-x-auto">
                     <table className="min-w-full rounded-lg border border-neutral-300 shadow-md">
-                        <thead className="bg-neutral-100">
+                        <thead className="bg-neutral-100 dark:bg-neutral-700">
                             <tr>
                                 <th className="border-b p-3 text-left">ID</th>
                                 <th className="border-b p-3 text-left">Name</th>
@@ -63,7 +65,10 @@ export default function Index({ roles }: { roles: Role[] }) {
                         </thead>
                         <tbody>
                             {roles.map(({ id, name, permissions }) => (
-                                <tr key={id} className="transition even:bg-neutral-50 hover:bg-neutral-100">
+                                <tr
+                                    key={id}
+                                    className="transition even:bg-neutral-50 hover:bg-neutral-100 dark:even:bg-neutral-700/60 dark:hover:bg-neutral-700/60"
+                                >
                                     <td className="border-b p-3">{id}</td>
                                     <td className="border-b p-3">{name}</td>
                                     <td className="border-b p-3">

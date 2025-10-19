@@ -49,13 +49,13 @@ export default function EditUser({
             <Head title="Edit user" />
 
             <div className="mb-6 flex items-center justify-between">
-                <h2 className="text-3xl font-bold text-neutral-800">Edit User {user.name}</h2>
+                <h2 className="text-xl font-bold text-neutral-800">Edit User {user.name}</h2>
                 <Link href="/users" className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700">
                     Back to all users
                 </Link>
             </div>
 
-            <form className="max-w-xl space-y-6 rounded bg-white p-6 shadow-md" onSubmit={submit}>
+            <form className="max-w-xl space-y-6 rounded bg-white dark:bg-neutral-700 p-6 shadow-md" onSubmit={submit}>
                 <div>
                     <Label htmlFor="name">Name</Label>
                     <Input id="name" type="text" value={data.name} onChange={(e) => setData('name', e.target.value)} disabled={processing} />
