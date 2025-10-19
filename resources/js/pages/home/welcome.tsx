@@ -3,11 +3,11 @@
 import CallToAction from '@/components/callToAction';
 import CountUp from '@/components/countup';
 import PricingPlans from '@/components/pricingplans';
+import SiteLayout from '@/layouts/site-layout';
 import Categories from './partials/Categories';
 import Features from './partials/Features';
 import HeroSection from './partials/HeroSection';
 import WebProducts from './partials/WebProducts';
-import SiteLayout from '@/layouts/site-layout';
 
 export default function Welcome({ services, initialTime }) {
     const sliderImages = [
@@ -24,27 +24,27 @@ export default function Welcome({ services, initialTime }) {
                 <Categories initialTime={initialTime} />
                 <Features />
                 <div className="mx-auto my-8 flex w-2/3 flex-col gap-2 text-center">
-                    <h1 className="">PRIJSPLANNEN</h1>
-                    <h2 className="text-4xl font-bold">De beste oplossingen voor onze klanten</h2>
+                    <h1 className="">PRICING PLANS</h1>
+                    <h2 className="text-4xl font-bold">The best solutions for our customers</h2>
                     <p>
-                        De onderstaande prijsplannen gelden voor <b> WordPress-websites </b>. Heb je een complexere wens of wil je een op maat
-                        gemaakte webapplicatie <b>(bijvoorbeeld met Laravel) </b>? Dan maak ik graag een aparte offerte, afgestemd op jouw project,
-                        doelen en budget.
+                        The pricing plans below are for WordPress websites. Do you have a more complex request or would you like a custom-built web
+                        application <b>(for example, with Laravel)</b>? Then I'd be happy to create a separate quote tailored to your project, goals,
+                        and budget.
                     </p>
                 </div>
                 <PricingPlans />
 
                 <div className="mx-auto my-8 flex w-2/3 flex-col gap-2 text-center">
-                    <h2 className="text-4xl font-bold">Waarom kiezen ondernemers voor Tahanina?</h2>
+                    <h2 className="text-4xl font-bold">Why do entrepreneurs choose Tahanina?</h2>
                     <p>
-                        Als ondernemer wil je een professionele website die niet alleen goed werkt, maar ook jouw merk tot leven brengt. Bij Tahanina
-                        krijg je geen standaardoplossing, maar een persoonlijke aanpak die echt bij jouw bedrijf past.
+                        As an entrepreneur, you want a professional website that not only works well but also brings your brand to life. At Tahanina,
+                        you don't get a standard solution, but a personalized approach that truly suits your business.
                     </p>
 
                     <CountUp end={95} duration={3} className="text-fuchsia-500">
                         %
                     </CountUp>
-                    <p className="font-bold">Veel tevreden klanten kiezen ervoor om opnieuw met mij samen te werken.</p>
+                    <p className="font-bold">Many satisfied customers choose to work with me again.</p>
                 </div>
                 <CallToAction />
             </SiteLayout>

@@ -40,7 +40,7 @@ export default function WebProducts({ services }) {
                                             service.discounted_price < service.price ? '' : 'hidden'
                                         }`}
                                     >
-                                        Actie
+                                        Sale
                                     </span>
                                 </div>
                                 <div className="flex h-full flex-col">

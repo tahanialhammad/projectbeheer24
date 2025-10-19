@@ -11,16 +11,16 @@ export default function Contact() {
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
                     <div className="flex flex-col items-center p-6 text-center">
                         <MapPin size={32} className="text-fuchsia-600" />
-                        <h3 className="mb-2 text-xl font-semibold">Werkgebied</h3>
+                        <h3 className="mb-2 text-xl font-semibold">Working area</h3>
                         <p className="text-neutral-600">
-                            Nederland <br />
-                            Groningen en omgeving
+                            The Netherlands <br />
+                            Groningen and surroundings
                         </p>
                     </div>
 
                     <div className="flex flex-col items-center p-6 text-center">
                         <Mail size={32} className="text-fuchsia-600" />
-                        <h3 className="mb-2 text-xl font-semibold">E-mailadres</h3>
+                        <h3 className="mb-2 text-xl font-semibold">Email address</h3>
                         <a href="mailto:info@tahanina.nl" className="text-neutral-600">
                             info@tahanina.nl
                         </a>
@@ -28,13 +28,13 @@ export default function Contact() {
 
                     <div className="flex flex-col items-center p-6 text-center">
                         <Smartphone size={32} className="text-fuchsia-600" />
-                        <h3 className="mb-2 text-xl font-semibold">Telefoonnummers</h3>
+                        <h3 className="mb-2 text-xl font-semibold">Phone numbers</h3>
                         <p className="text-neutral-600">
                             <a href="tel:+31621942804" className="hover:underline">
                                 06 219 428 04
                             </a>
                             <br />
-                            Maandag t/m vrijdag van 12.00 - 17.00 uur
+                            Monday to Friday from 12:00 to 17:00{' '}
                         </p>
                     </div>
                 </div>

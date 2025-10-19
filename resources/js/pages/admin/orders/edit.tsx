@@ -24,7 +24,7 @@ export default function Edit({ order }: { order: Order }) {
             <Head title="Order bewerken" />
 
             <div className="mb-6 flex items-center justify-between">
-                <h2 className="text-xl font-bold">Bewerk Order Id #{order.id}</h2>
+                <h2 className="text-xl font-bold">Edit Order Id #{order.id}</h2>
                 <Link href="/orders" className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700">
                     Back to all orders
                 </Link>
@@ -43,7 +43,7 @@ export default function Edit({ order }: { order: Order }) {
                 </div>
 
                 <button type="submit" disabled={processing} className="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
-                    Opslaan
+                    Save
                 </button>
             </form>
         </AppLayout>
