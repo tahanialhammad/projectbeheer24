@@ -4,7 +4,7 @@ import SiteLayout from '@/layouts/site-layout';
 export default function About() {
     return (
         <SiteLayout title="About">
-            <HeroSection title="Hi, ik ben Tahani" />
+            <HeroSection title="Hi, I'm Tahani" />
             <div className="grid grid-cols-1 gap-6 px-6 py-12 md:grid-cols-2">
                 {/* Linker kolom */}
                 <div className="">

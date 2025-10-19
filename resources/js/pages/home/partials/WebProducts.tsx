@@ -16,15 +16,15 @@ export default function WebProducts({ services }) {
                     }}
                 >
                     <div className="text-center">
-                        <h3 className="text-lg font-bold text-red-600">10% Korting</h3>
-                        <h1 className="text-3xl leading-tight font-bold capitalize">Op onze nieuwe</h1>
-                        <h3 className="text-3xl">Diensten</h3>
+                        <h3 className="text-lg font-bold text-red-600">10% Discount</h3>
+                        <h1 className="text-3xl leading-tight font-bold capitalize">On our new</h1>
+                        <h3 className="text-3xl">Services</h3>
                     </div>
                 </AnimatedWrapper>
 
                 {/* Meest gekozen diensten */}
                 <div className="-mt-10 w-3/4">
-                    <h3 className="text-lg capitalize">Meest gekozen diensten</h3>
+                    <h3 className="text-lg capitalize">Most Selected Services</h3>
 
                     <div className="flex snap-x scroll-pl-6 space-x-6 overflow-x-auto p-4">
                         {services.map((service) => (
@@ -53,7 +53,10 @@ export default function WebProducts({ services }) {
 
                                         <div className="my-2 flex w-full justify-between px-4 align-middle">
                                             <div>
-                                                <Link href={route('services.show', service)} className="text-blue-neutral-900 block text-xl font-bold">
+                                                <Link
+                                                    href={route('services.show', service)}
+                                                    className="text-blue-neutral-900 block text-xl font-bold"
+                                                >
                                                     {service.name}
                                                 </Link>
                                                 {service.discounted_price < service.price ? (
