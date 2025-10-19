@@ -5,7 +5,7 @@ import { Mail, MapPin, Smartphone } from 'lucide-react';
 export default function Contact() {
     return (
         <SiteLayout title="Contact">
-            <HeroSection title="Laten we het hebben over Jouw geweldige project" />
+            <HeroSection title="Let's talk about Your awesome project" />
 
             <section className="mx-auto my-8 max-w-6xl rounded-xl bg-fuchsia-400/20 px-6 py-12 backdrop-blur-sm">
                 <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">

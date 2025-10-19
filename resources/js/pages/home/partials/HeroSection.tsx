@@ -55,7 +55,7 @@ export default function HeroSection({ sliderImages }) {
                             <div className="absolute top-1/3 right-4 m-4">
                                 <h4 className="text-xl font-bold text-indigo-500 uppercase"> 25% korting </h4>
                                 <h1 className="text-3xl font-black capitalize">Jaarcontract</h1>
-                                <h3 className="text-2xl capitalize">Met professionele diensten</h3>
+                                <h3 className="text-2xl capitalize">Met professionele Services</h3>
                                 <PrimaryButton className="mt-4">Bekijk Aanbieding</PrimaryButton>
                             </div> */}
                             <ImageCarousel images={sliderImages} />

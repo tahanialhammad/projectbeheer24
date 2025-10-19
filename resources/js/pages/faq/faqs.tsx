@@ -19,7 +19,7 @@ export default function Faqs({ faqGroups }: Props) {
 
     return (
         <SiteLayout title="FAQ's">
-            <HeroSection title="Veelgestelde vragen" />
+            <HeroSection title="Frequently Asked Questions " />
 
             {faqGroups.map((group, i) => (
                 <div key={i} className="mb-6 border-b-2 border-fuchsia-300">

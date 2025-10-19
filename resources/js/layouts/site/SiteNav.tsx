@@ -8,10 +8,10 @@ import { useState } from 'react';
 
 const navigation = [
     { name: 'Home', href: 'home' },
-    { name: 'Diensten', href: 'services' },
+    { name: 'Services', href: 'services' },
     { name: 'Blog', href: 'posts' },
     { name: 'FAQs', href: 'faqs' },
-    { name: 'Over mij', href: 'about' },
+    { name: 'About me', href: 'about' },
     { name: 'Contact', href: 'contact' },
 ];
 

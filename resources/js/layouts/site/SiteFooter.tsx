@@ -4,17 +4,17 @@ import { Link } from '@inertiajs/react';
 import { Facebook, Github, Instagram, Linkedin, MessageCircleHeart } from 'lucide-react';
 
 const platformNav = [
-    { name: 'Diensten', href: 'services' },
+    { name: 'Services', href: 'services' },
     { name: 'Blog', href: 'posts' },
     { name: 'FAQs', href: 'faqs' },
 ];
 
 const quickLinks = [
-    { name: 'Over mij', href: 'about' },
+    { name: 'About me', href: 'about' },
     { name: 'Contact', href: 'contact' },
 ];
 
-const categories = [{ name: 'Diensten', href: 'services' }];
+const categories = [{ name: 'Services', href: 'services' }];
 const socialLinks = [
     { name: 'FaceBook', icon: <Facebook fontSize="large" />, href: 'https://www.facebook.com/profile.php?id=61567786149478' },
     {
@@ -55,7 +55,7 @@ export default function SiteFooter() {
                         <Link href="/" className="-m-1.5 p-1.5">
                             <AppLogo showName />
                         </Link>
-                        <p>Freelance webontwikkelaar uit Groningen!</p>
+                        <p>Freelance web developer from Groningen!</p>
                     </div>
 
                     {/* Column 2: About */}
