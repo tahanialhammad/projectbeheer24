@@ -69,7 +69,7 @@ export default function WebProducts({ services }) {
                                                 )}
                                             </div>
                                             <div>
-                                                <SecondaryButton>
+                                                <SecondaryButton href={route('orders.create', { service_id: service.id })}>
                                                     <Plus />
                                                 </SecondaryButton>
                                             </div>
