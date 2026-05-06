@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
+
 
 // Route::get('/', function () {
 //     return Inertia::render('home/welcome');
@@ -16,37 +18,35 @@ use App\Http\Controllers\UserController;
 
 // WEBSITE
 Route::controller(SiteController::class)->group(function () {
-    Route::get('/', 'welcome')->name('home');
-    Route::get('/our-services', 'services')->name('services');
-    Route::get('/our-services/{service}','showService')->name('services.showService');
-    Route::get('/posts', 'posts')->name('posts');
-    Route::get('/posts/{slug}', 'showPost')->name('post.show');
-    Route::get('/faqs', 'faqs')->name('faqs');
-    Route::get('/contact', 'contact')->name('contact');
-    Route::get('/about', 'about')->name('about');
+  Route::get('/', 'welcome')->name('home');
+  Route::get('/our-services', 'services')->name('services');
+  Route::get('/our-services/{service}', 'showService')->name('services.showService');
+  Route::get('/posts', 'posts')->name('posts');
+  Route::get('/posts/{slug}', 'showPost')->name('post.show');
+  Route::get('/faqs', 'faqs')->name('faqs');
+  Route::get('/contact', 'contact')->name('contact');
+  Route::get('/about', 'about')->name('about');
 
 });
 
 // Admin
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('dashboard', function () {
-        return Inertia::render('dashboard');
-    })->name('dashboard');
-    // Userr
-    Route::resource('users', UserController::class);
-    // Roles
-    Route::resource('roles', RoleController::class);
-    // Services
-    Route::resource('services', ServiceController::class);
-    // Orders
-    Route::resource('orders', OrderController::class);
-    Route::get('/my-orders', [OrderController::class, 'userOrders'])->name('orders.user');
-    // Notification
-    Route::resource('notifications', NotificationController::class);
-    // niet standaard route
-    Route::get('/notifications/unread', [NotificationController::class, 'unread']);
+  Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+  // Userr
+  Route::resource('users', UserController::class);
+  // Roles
+  Route::resource('roles', RoleController::class);
+  // Services
+  Route::resource('services', ServiceController::class);
+  // Orders
+  Route::resource('orders', OrderController::class);
+  Route::get('/my-orders', [OrderController::class, 'userOrders'])->name('orders.user');
+  // Notification
+  Route::resource('notifications', NotificationController::class);
+  // niet standaard route
+  Route::get('/notifications/unread', [NotificationController::class, 'unread']);
   //  Route::post('/notifications/mark-as-read', [NotificationController::class, 'markAsRead']);
-    Route::post('/notifications/{id}/mark-as-read', [NotificationController::class, 'markAsRead']);
+  Route::post('/notifications/{id}/mark-as-read', [NotificationController::class, 'markAsRead']);
 
 });
 
