@@ -7,7 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link, useForm } from '@inertiajs/react';
-import { ArrowLeft, Euro, Layers, Plus, Save, Tag } from 'lucide-react';
+import { ArrowLeft, Euro, Image as ImageIcon, Layers, Plus, Save, Tag } from 'lucide-react';
 import { FormEventHandler } from 'react';
 
 type FormField = {
@@ -27,6 +27,7 @@ interface ServicesData {
     discount: number;
     discount_type: 'fixed' | 'percentage';
     discount_expires_at: string;
+    image?: string | null;
 }
 
 export default function EditService({
@@ -38,7 +39,8 @@ export default function EditService({
     form_fields: FormField[];
     selected_form_fields: number[];
 }) {
-    const { data, setData, put, processing, errors } = useForm({
+    const { data, setData, post, processing, errors } = useForm({
+        _method: 'put',
         name: service.name || '',
         description: service.description || '',
         price: service.price || 0,
@@ -46,6 +48,7 @@ export default function EditService({
         discount_type: service.discount_type ?? 'fixed',
         discount_expires_at: service.discount_expires_at ?? '',
         form_fields: selected_form_fields || [],
+        image: null as File | null,
     });
 
     const breadcrumbs: BreadcrumbItem[] = [
@@ -66,7 +69,7 @@ export default function EditService({
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        put(route('services.update', service.id));
+        post(route('services.update', service.id));
     };
 
     return (
@@ -162,6 +165,55 @@ export default function EditService({
                                         </DropdownMenuContent>
                                     </DropdownMenu>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div className="space-y-6 rounded-2xl border border-border bg-card p-6 shadow-sm">
+                            <div className="flex items-center gap-2 border-b border-border pb-4">
+                                <ImageIcon className="h-5 w-5 text-primary" />
+                                <h3 className="text-lg font-semibold text-foreground">Media Assets</h3>
+                            </div>
+
+                            <div className="space-y-4">
+                                <div className="group relative flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed border-border p-12 transition-colors hover:bg-muted/20 overflow-hidden">
+                                    {data.image ? (
+                                        <div className="text-center">
+                                            <p className="text-sm font-medium text-foreground">{data.image.name}</p>
+                                            <button
+                                                type="button"
+                                                onClick={() => setData('image', null)}
+                                                className="mt-2 text-xs text-destructive hover:underline"
+                                            >
+                                                Remove selected image
+                                            </button>
+                                        </div>
+                                    ) : service.image ? (
+                                        <div className="text-center flex flex-col items-center">
+                                            <div className="h-24 w-24 rounded-lg overflow-hidden border border-border mb-4">
+                                                <img src={`/storage/${service.image}`} alt={service.name} className="h-full w-full object-cover" />
+                                            </div>
+                                            <p className="text-sm font-medium text-foreground">Current Image</p>
+                                            <p className="mt-1 text-xs text-muted-foreground">Click or drag new image to replace</p>
+                                        </div>
+                                    ) : (
+                                        <>
+                                            <ImageIcon className="mb-4 h-10 w-10 text-muted-foreground transition-colors group-hover:text-primary" />
+                                            <p className="text-sm font-medium text-foreground">
+                                                Click to upload new service image
+                                            </p>
+                                            <p className="mt-1 text-xs text-muted-foreground">
+                                                PNG, JPG or WebP (max 2MB)
+                                            </p>
+                                        </>
+                                    )}
+                                    <input
+                                        type="file"
+                                        accept="image/*"
+                                        onChange={(e) => setData('image', e.target.files?.[0] || null)}
+                                        className="absolute inset-0 cursor-pointer opacity-0 z-10"
+                                    />
+                                </div>
+                                <InputError message={errors.image} />
                             </div>
                         </div>
                     </div>

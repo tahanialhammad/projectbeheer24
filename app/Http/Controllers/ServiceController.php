@@ -136,9 +136,16 @@ class ServiceController extends Controller
 
         ]);
 
-        // Image upload , WERKT NIET
+        // Image upload handling
         if ($request->hasFile('image')) {
+            // Delete old image if it exists (optional but good practice)
+            if ($service->image) {
+                Storage::disk('public')->delete($service->image);
+            }
             $validated['image'] = $request->file('image')->store('services', 'public');
+        } else {
+            // Prevent overwriting existing image with null if no new image was uploaded
+            unset($validated['image']);
         }
 
         // Slug automatisch bijwerken
