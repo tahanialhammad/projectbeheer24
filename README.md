@@ -1,16 +1,16 @@
 ## 📌 Project Overview
 
 This project (`projectbeheer24`) is a Laravel 12 application built with an Inertia.js SPA architecture.
+It allows users to explore services, view detailed information, and place orders — all within a modern, responsive interface.
 
-## 🧱 Tech Stack
+## Tech Stack
 
 - Laravel 12 (PHP 8.2)
 - Inertia.js (SPA bridge)
-- Vue.js / React (frontend via Inertia)
+- React (frontend via Inertia)
 - Spatie Laravel Permission (roles & permissions)
-- Ziggy (Laravel routes in frontend)
 
-## 🏗️ Architecture
+## Architecture
 
 The project follows a **MVC + Service Layer** structure:
 
@@ -21,28 +21,11 @@ The project follows a **MVC + Service Layer** structure:
 - **Notifications**: Used for order status updates
 - **Frontend**: Inertia.js pages under `resources/js/Pages`
 
-## 🔄 Core Flow
+## Core Flow
 
 1. Services define dynamic form fields
 2. Users create Orders based on a Service
 3. OrderFieldValue stores dynamic form data
-4. Admin manages orders via dashboard
+4. Admin manages service, orders and invoicesvia dashboard
 5. Notifications are sent on order updates
 
-## ⚠️ Known Issues / Improvements
-
-- Some syntax errors (`=›` instead of `=>`)
-- Missing imports in controllers
-- Large controllers (needs service layer refactor)
-- Validation should use FormRequest classes
-- Some logic should be moved out of controllers
-- Pagination missing in some listings
-- Better policy coverage needed
-
-## 🚀 Recommendations
-
-- Refactor OrderController into service-based architecture
-- Add FormRequest validation classes
-- Improve authorization policies
-- Add pagination for large datasets
-- Queue notifications for better performance
