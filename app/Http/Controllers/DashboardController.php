@@ -13,7 +13,9 @@ class DashboardController extends Controller
 {
     public function index(Request $request): Response
     {
-        if ($request->user()->hasAnyRole(['admin', 'Super Admin', 'super admin'])) {
+        $user = $request->user();
+
+        if ($user->hasAnyRole(['admin', 'Super Admin', 'super admin'])) {
             $stats = [
                 'users_count' => User::count(),
                 'orders_count' => Order::count(),
@@ -50,6 +52,26 @@ class DashboardController extends Controller
             ]);
         }
 
-        return Inertia::render('user/dashboard/dashboard');
+        // Regular User Data
+        $latestOrders = Order::where('user_id', $user->id)
+            ->with('service')
+            ->latest()
+            ->take(5)
+            ->get();
+        
+        $statusCounts = Order::where('user_id', $user->id)
+            ->selectRaw('status, COUNT(*) as count')
+            ->groupBy('status')
+            ->get()
+            ->pluck('count', 'status')
+            ->toArray();
+
+        return Inertia::render('user/dashboard/dashboard', [
+            'latestOrders' => $latestOrders,
+            'statusData' => [
+                'labels' => array_keys($statusCounts),
+                'data' => array_values($statusCounts),
+            ],
+        ]);
     }
 }
