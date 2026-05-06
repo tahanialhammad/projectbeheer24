@@ -1,7 +1,8 @@
-import PrimaryButton from '@/components/PrimaryButton';
 import AppLayout from '@/layouts/app-layout';
+import { Button } from '@/components/ui/button';
 import { type BreadcrumbItem } from '@/types';
-import { Link } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
+import { ArrowLeft, CheckCircle2, Edit, Layers, Tag } from 'lucide-react';
 
 type FormField = {
     id: number;
@@ -9,7 +10,7 @@ type FormField = {
     name: string;
     type: string;
     required: boolean;
-    options?: string[] | null;
+    options?: string | null;
 };
 
 type Service = {
@@ -25,10 +26,8 @@ type Service = {
 };
 
 const breadcrumbs: BreadcrumbItem[] = [
-    {
-        title: 'Show service',
-        href: '/services/show',
-    },
+    { title: 'Services', href: '/services' },
+    { title: 'Details', href: '#' },
 ];
 
 function formatOptions(options: string | null) {
@@ -42,99 +41,154 @@ function formatOptions(options: string | null) {
 }
 
 export default function Show({ service }: { service: Service }) {
+    const hasDiscount = service.discounted_price && service.discounted_price < service.price;
+
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <div className="flex items-center justify-between">
-                <h2 className="text-xl font-bold">Service: {service.name}</h2>
-                <Link href="/services" className="rounded-md bg-blue-600 px-4 py-2 text-white shadow transition hover:bg-blue-700">
-                    Back to all service
-                </Link>
-            </div>
+            <Head title={`Service: ${service.name}`} />
 
-            <div className="max-w-xl rounded-md bg-neutral-100 dark:bg-neutral-800 p-6 shadow">
-                <img
-                    src={service.image ? `/storage/${service.image}` : '/images/Dashboard.webp'}
-                    className="h-64 w-full rounded-lg object-cover"
-                    alt={service.name}
-                />
-
-                <div className="p-6">
-                    <h1 className="mb-4 text-3xl font-bold">{service.name}</h1>
-                    <p className="mb-4 text-neutral-700 dark:text-neutral-200">{service.description}</p>
-
-                    <p className="text-xl font-semibold text-fuchsia-500">€{service.discounted_price ?? service.price}</p>
-
-                    {service.discounted_price && service.discounted_price < service.price && (
-                        <p className="text-sm text-neutral-500 line-through">€{service.price}</p>
-                    )}
-
-                    {service.form_fields.map((field) => (
-                        <div key={field.id}>
-                            {field.name}: {field.label}
-                            {field.type}
-                            {field.options}
-                            {field.required}
-                        </div>
-                    ))}
-                    <div className="overflow-hidden rounded-lg border border-neutral-200 shadow-sm">
-                        <table className="min-w-full border-collapse bg-neutral-100 dark:bg-neutral-800 text-left text-sm">
-                            <thead className="bg-neutral-100 dark:bg-neutral-700">
-                                <tr>
-                                    <th scope="col" className="px-4 py-3 font-medium">
-                                        Label
-                                    </th>
-                                    <th scope="col" className="px-4 py-3 font-medium">
-                                        Name
-                                    </th>
-                                    <th scope="col" className="px-4 py-3 font-medium">
-                                        Type
-                                    </th>
-                                    <th scope="col" className="px-4 py-3 font-medium">
-                                        Required
-                                    </th>
-                                    <th scope="col" className="px-4 py-3 font-medium">
-                                        Options
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {service.form_fields.map((field) => (
-                                    <tr key={field.id}>
-                                        <td className="p-2">{field.label}</td>
-
-                                        <td className="p-2">{field.name}</td>
-
-                                        <td className="p-2"> {field.type}</td>
-                                        <td className="p-2">
-                                            {field.required ? (
-                                                <span className="rounded bg-red-100 px-2 py-1 text-xs font-semibold text-red-700">Ja</span>
-                                            ) : (
-                                                <span className="rounded bg-neutral-100 px-2 py-1 text-xs font-medium text-neutral-600">Nee</span>
-                                            )}
-                                        </td>
-                                        {/* <td className="p-2"> {field.options}</td> */}
-
-                                        {/* <td className="p-2">
-  {(() => {
-    if (!field.options) return <span className="italic text-neutral-400">—</span>;
-    try {
-      const opts = JSON.parse(field.options);
-      return Array.isArray(opts) ? opts.join(', ') : String(field.options);
-    } catch {
-      return String(field.options);
-    }
-  })()}
-</td> */}
-
-                                        <td className="p-2 text-sm">{formatOptions(field.options)}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+            <div className="flex h-full flex-1 flex-col gap-6 p-6">
+                <div className="flex items-center justify-between">
+                    <div className="flex flex-col gap-1">
+                        <h2 className="font-display text-3xl font-semibold tracking-tight text-foreground">
+                            Service Preview
+                        </h2>
+                        <p className="text-sm text-muted-foreground">
+                            View service configuration and customer-facing details.
+                        </p>
                     </div>
 
-                    <div className="mt-6">
-                        <PrimaryButton href={route('orders.create', { service_id: service.id })}>Bestel nu</PrimaryButton>
+                    <div className="flex items-center gap-3">
+                        <Link href={route('services.edit', service.id)}>
+                            <Button variant="outline" className="gap-2">
+                                <Edit className="h-4 w-4" />
+                                Edit Service
+                            </Button>
+                        </Link>
+                        <Link
+                            href={route('services.index')}
+                            className="flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                        >
+                            <ArrowLeft className="h-4 w-4" />
+                            Back to services
+                        </Link>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+                    {/* Visual Asset & Pricing */}
+                    <div className="space-y-6 lg:col-span-1">
+                        <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+                            <img
+                                src={service.image ? `/storage/${service.image}` : '/images/Dashboard.webp'}
+                                className="h-56 w-full object-cover"
+                                alt={service.name}
+                            />
+                            <div className="p-6 space-y-4">
+                                <div className="flex flex-col gap-1">
+                                    <h3 className="text-xl font-bold text-foreground">{service.name}</h3>
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-2xl font-black text-primary">
+                                            €{service.discounted_price ?? service.price}
+                                        </span>
+                                        {hasDiscount && (
+                                            <span className="text-sm text-muted-foreground line-through">
+                                                €{service.price}
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+
+                                {hasDiscount && (
+                                    <div className="inline-flex items-center gap-2 rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-bold text-emerald-500">
+                                        <Tag className="h-3 w-3" />
+                                        PROMOTION ACTIVE
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+
+                        <div className="space-y-4 rounded-2xl border border-border bg-card p-6 shadow-sm">
+                            <h4 className="text-sm font-bold uppercase tracking-wider text-muted-foreground">
+                                Service Status
+                            </h4>
+                            <div className="flex items-center justify-between rounded-xl bg-muted/30 p-3 text-sm">
+                                <span className="text-muted-foreground">Availability</span>
+                                <span className="font-semibold text-emerald-500">Public</span>
+                            </div>
+                            <div className="flex items-center justify-between rounded-xl bg-muted/30 p-3 text-sm">
+                                <span className="text-muted-foreground">Service ID</span>
+                                <span className="font-mono text-foreground">#{service.id}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Service Details & Form Config */}
+                    <div className="space-y-6 lg:col-span-2">
+                        <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+                            <div className="mb-6 flex items-center gap-2 border-b border-border pb-4">
+                                <Layers className="h-5 w-5 text-primary" />
+                                <h3 className="text-lg font-semibold text-foreground">Service Description</h3>
+                            </div>
+                            <p className="whitespace-pre-wrap text-sm leading-relaxed text-muted-foreground">
+                                {service.description || 'No detailed description provided for this service.'}
+                            </p>
+                        </div>
+
+                        <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+                            <div className="flex items-center gap-2 border-b border-border bg-muted/10 p-6">
+                                <CheckCircle2 className="h-5 w-5 text-primary" />
+                                <h3 className="text-lg font-semibold text-foreground">Order Form Configuration</h3>
+                            </div>
+
+                            <div className="overflow-x-auto">
+                                <table className="w-full text-left text-sm">
+                                    <thead className="bg-muted/30 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                                        <tr>
+                                            <th className="px-6 py-4">Field Label</th>
+                                            <th className="px-6 py-4">Type</th>
+                                            <th className="px-6 py-4">Required</th>
+                                            <th className="px-6 py-4">Options</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-border">
+                                        {service.form_fields.length > 0 ? (
+                                            service.form_fields.map((field) => (
+                                                <tr key={field.id} className="transition-colors hover:bg-muted/20">
+                                                    <td className="px-6 py-4 font-medium text-foreground">
+                                                        {field.label}
+                                                    </td>
+                                                    <td className="px-6 py-4 capitalize text-muted-foreground">
+                                                        {field.type}
+                                                    </td>
+                                                    <td className="px-6 py-4">
+                                                        {field.required ? (
+                                                            <span className="inline-flex items-center rounded-full bg-amber-500/10 px-2 py-0.5 text-[10px] font-bold uppercase text-amber-500">
+                                                                Yes
+                                                            </span>
+                                                        ) : (
+                                                            <span className="text-muted-foreground">No</span>
+                                                        )}
+                                                    </td>
+                                                    <td className="px-6 py-4 text-[10px] italic text-muted-foreground">
+                                                        {formatOptions(field.options)}
+                                                    </td>
+                                                </tr>
+                                            ))
+                                        ) : (
+                                            <tr>
+                                                <td
+                                                    colSpan={4}
+                                                    className="px-6 py-12 text-center italic text-muted-foreground"
+                                                >
+                                                    No custom fields configured for the order form.
+                                                </td>
+                                            </tr>
+                                        )}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
