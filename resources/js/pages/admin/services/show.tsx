@@ -2,7 +2,7 @@ import AppLayout from '@/layouts/app-layout';
 import { Button } from '@/components/ui/button';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link } from '@inertiajs/react';
-import { ArrowLeft, CheckCircle2, Edit, Euro, Layers, Tag } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, Edit, Layers, Tag } from 'lucide-react';
 
 type FormField = {
     id: number;

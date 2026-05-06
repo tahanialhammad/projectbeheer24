@@ -2,7 +2,7 @@ import AppLayout from '@/layouts/app-layout';
 import { Button } from '@/components/ui/button';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link } from '@inertiajs/react';
-import { ArrowLeft, Edit, Shield, ShieldAlert, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, Edit, ShieldCheck } from 'lucide-react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
