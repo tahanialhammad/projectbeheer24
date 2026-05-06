@@ -41,14 +41,24 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
-        $order->load('fieldValues.formField', 'service');
+        $this->authorize('view', $order);
+        $order->load(['fieldValues.formField', 'service', 'user']);
 
-        return Inertia::render('admin/orders/show', [
+        // Check if user is admin/super-admin
+        $isAdmin = auth()->user()->hasAnyRole(['Admin', 'Super Admin', 'admin', 'super-admin']);
+        $view = $isAdmin ? 'admin/orders/show' : 'user/orders/show';
+
+        return Inertia::render($view, [
             'order' => [
                 'id' => $order->id,
                 'status' => $order->status,
+                'created_at' => $order->created_at,
                 'service' => [
                     'name' => $order->service->name,
+                ],
+                'user' => [
+                    'name' => $order->user->name,
+                    'email' => $order->user->email,
                 ],
                 'field_values' => $order->fieldValues->map(function ($value) {
                     return [
@@ -107,7 +117,8 @@ class OrderController extends Controller
 
     public function edit(Order $order)
     {
-        $order->load('service'); // Optioneel: als je service-informatie wilt tonen
+        $this->authorize('update', $order);
+        $order->load('service');
 
         return Inertia::render('admin/orders/edit', [
             'order' => $order,
@@ -116,6 +127,7 @@ class OrderController extends Controller
 
     public function update(Request $request, Order $order)
     {
+        $this->authorize('update', $order);
         $validated = $request->validate([
             'status' => 'required|in:pending,processing,completed,cancelled',
         ]);
@@ -131,10 +143,7 @@ class OrderController extends Controller
     }
     public function destroy(Order $order)
     {
-        // Optioneel: controleer of gebruiker deze order mag verwijderen
-        // if (auth()->id() !== $order->user_id) {
-        //     abort(403);
-        // }
+        $this->authorize('delete', $order);
 
         $order->delete();
 

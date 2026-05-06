@@ -8,20 +8,14 @@ use Illuminate\Auth\Access\Response;
 
 class OrderPolicy
 {
-    /**
-     * Determine whether the user can view any models.
-     */
     public function viewAny(User $user): bool
     {
-        return $user->hasRole('Super Admin') && $user->can('users.view');
+        return $user->hasAnyRole(['Admin', 'Super Admin', 'admin', 'super-admin']);
     }
 
-    /**
-     * Determine whether the user can view the model.
-     */
     public function view(User $user, Order $order): bool
     {
-        return $user->can('users.view') & $user->id === $model->id;
+        return $user->hasAnyRole(['Admin', 'Super Admin', 'admin', 'super-admin']) || $user->id === $order->user_id;
     }
 
     /**
@@ -29,7 +23,7 @@ class OrderPolicy
      */
     public function create(User $user): bool
     {
-        return false;
+        return true; // Allow placing orders
     }
 
     /**
@@ -37,7 +31,7 @@ class OrderPolicy
      */
     public function update(User $user, Order $order): bool
     {
-        return false;
+        return $user->hasAnyRole(['Admin', 'Super Admin', 'admin', 'super-admin']);
     }
 
     /**
@@ -45,7 +39,7 @@ class OrderPolicy
      */
     public function delete(User $user, Order $order): bool
     {
-        return false;
+        return $user->hasAnyRole(['Admin', 'Super Admin', 'admin', 'super-admin']);
     }
 
     /**
