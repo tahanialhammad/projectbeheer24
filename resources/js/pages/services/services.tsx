@@ -1,7 +1,7 @@
 import HeroSection from '@/components/HeroSection';
 import PrimaryButton from '@/components/PrimaryButton';
-import SecondaryButton from '@/components/SecondaryButton';
 import SiteLayout from '@/layouts/site-layout';
+import { Link } from '@inertiajs/react';
 
 type Service = {
     id: number;
@@ -28,7 +28,7 @@ export default function Services({ services }: ServicesProps) {
     return (
         <SiteLayout title="services">
             <HeroSection title="Our services" />
-            <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-neutral-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
                 {services.data.map(({ id, name, description, price, image, discounted_price }) => (
                     <div
                         key={id}
@@ -38,11 +38,7 @@ export default function Services({ services }: ServicesProps) {
                             <span className={`rounded-full bg-black px-3 py-1 text-white ${discounted_price < price ? '' : 'hidden'}`}>Actie</span>
                         </div>
 
-                        <img
-                            src={image ? `/storage/${image}` : '/images/Dashboard.webp'}
-                            className="h-48 w-full rounded-t-lg object-cover"
-                            alt={name}
-                        />
+                        <img src={image ? `/storage/${image}` : '/images/Dashboard.webp'} className="h-64 w-100 rounded-lg object-cover" alt={name} />
 
                         <div className="flex flex-1 flex-col p-4">
                             <div className="flex-1">
@@ -61,7 +57,9 @@ export default function Services({ services }: ServicesProps) {
 
                             <div className="mt-4 flex justify-between">
                                 <PrimaryButton href={route('orders.create', { service_id: id })}>Order now</PrimaryButton>
-                                <SecondaryButton href={route('services.showService', id)}>More info</SecondaryButton>
+                                <Link href={route('services.showService', id)} className="mt-auto text-sm text-blue-600 underline">
+                                    More info →
+                                </Link>
                             </div>
                         </div>
                     </div>

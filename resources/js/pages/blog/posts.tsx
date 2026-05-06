@@ -1,5 +1,5 @@
 import HeroSection from '@/components/HeroSection';
-import CardSimple from '@/components/ui/card-simple';
+import AppCard from '@/components/app-card';
 import SiteLayout from '@/layouts/site-layout';
 import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
 import { Document } from '@contentful/rich-text-types';
@@ -37,7 +37,7 @@ export default function BlogPosts({ posts }: Props) {
                     const shortText = plainText.slice(0, 200) + '...';
 
                     return (
-                        <CardSimple
+                        <AppCard
                             key={post.sys.id}
                             title={post.fields.title}
                             description={shortText}
