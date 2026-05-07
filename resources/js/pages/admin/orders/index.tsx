@@ -16,6 +16,7 @@ type Order = {
         email?: string;
     };
     created_at: string;
+    total_progress: number;
 };
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -66,6 +67,9 @@ export default function Index({ orders }: { orders: Order[] }) {
                                     </th>
                                     <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">
                                         Status
+                                    </th>
+                                    <th className="px-6 py-4 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                                        Progress
                                     </th>
                                     <th className="px-6 py-4 text-right text-xs font-bold uppercase tracking-wider text-muted-foreground">
                                         Actions
@@ -121,6 +125,20 @@ export default function Index({ orders }: { orders: Order[] }) {
                                             >
                                                 {order.status}
                                             </span>
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <div className="flex w-24 flex-col gap-1">
+                                                <div className="flex items-center justify-between text-[10px] font-bold tabular-nums">
+                                                    <span className="text-muted-foreground">Progress</span>
+                                                    <span className="text-primary">{order.total_progress}%</span>
+                                                </div>
+                                                <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted">
+                                                    <div
+                                                        className="h-full rounded-full bg-primary"
+                                                        style={{ width: `${order.total_progress}%` }}
+                                                    />
+                                                </div>
+                                            </div>
                                         </td>
                                         <td className="px-6 py-4 text-right">
                                             <div className="flex items-center justify-end gap-2 transition-opacity md:opacity-0 md:group-hover:opacity-100">

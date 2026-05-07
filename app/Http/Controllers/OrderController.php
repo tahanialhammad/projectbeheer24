@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\OrderProgress;
 use App\Models\Service;
 use App\Models\User;
 use App\Notifications\OrderStatusUpdated;
@@ -20,7 +21,7 @@ class OrderController extends Controller
     {
         $this->authorize('viewAny', Order::class);
 
-        $orders = Order::with(['user', 'service'])->latest()->get();
+        $orders = Order::with(['user', 'service', 'progress'])->latest()->get();
 
         return Inertia::render('admin/orders/index', [
             'orders' => $orders,
@@ -29,7 +30,7 @@ class OrderController extends Controller
 
     public function userOrders()
     {
-        $orders = Order::with(['user', 'service'])
+        $orders = Order::with(['user', 'service', 'progress'])
             ->where('user_id', Auth::id())
             ->latest()
             ->get();
@@ -42,34 +43,14 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         $this->authorize('view', $order);
-        $order->load(['fieldValues.formField', 'service', 'user']);
+        $order->load(['fieldValues.formField', 'service', 'user', 'progress']);
 
         // Check if user is admin/super-admin
         $isAdmin = auth()->user()->hasAnyRole(['Admin', 'Super Admin', 'admin', 'super-admin']);
         $view = $isAdmin ? 'admin/orders/show' : 'user/orders/show';
 
         return Inertia::render($view, [
-            'order' => [
-                'id' => $order->id,
-                'status' => $order->status,
-                'created_at' => $order->created_at,
-                'service' => [
-                    'name' => $order->service->name,
-                ],
-                'user' => [
-                    'name' => $order->user->name,
-                    'email' => $order->user->email,
-                ],
-                'field_values' => $order->fieldValues->map(function ($value) {
-                    return [
-                        'id' => $value->id,
-                        'value' => $value->value,
-                        'form_field' => [
-                            'label' => $value->formField->label,
-                        ],
-                    ];
-                }),
-            ],
+            'order' => $order,
         ]);
     }
 
@@ -118,7 +99,7 @@ class OrderController extends Controller
     public function edit(Order $order)
     {
         $this->authorize('update', $order);
-        $order->load('service');
+        $order->load(['service', 'progress']);
 
         return Inertia::render('admin/orders/edit', [
             'order' => $order,
@@ -128,15 +109,44 @@ class OrderController extends Controller
     public function update(Request $request, Order $order)
     {
         $this->authorize('update', $order);
+
         $validated = $request->validate([
-            'status' => 'required|in:pending,processing,completed,cancelled',
+            'status'                => 'required|in:pending,processing,completed,cancelled',
+            'progress'              => 'nullable|array',
+            'progress.*.id'         => 'nullable|integer|exists:order_progress,id',
+            'progress.*.label'      => 'required_with:progress|string|max:255',
+            'progress.*.percentage' => 'required_with:progress|integer|min:0|max:100',
+            'progress.*.note'       => 'nullable|string|max:1000',
         ]);
 
-        $order->update([
-            'status' => $validated['status'],
-        ]);
+        $order->update(['status' => $validated['status']]);
 
-        // أرسل الإشعار للمستخدم المرتبط بالطلب
+        // Sync progress steps
+        $incoming = collect($validated['progress'] ?? []);
+
+        // Delete steps that are no longer present
+        $incomingIds = $incoming->pluck('id')->filter()->values();
+        $order->progress()->whereNotIn('id', $incomingIds)->delete();
+
+        // Update or create each step
+        foreach ($incoming as $step) {
+            $attrs = [
+                'admin_id'   => Auth::id(),
+                'label'      => $step['label'],
+                'percentage' => $step['percentage'],
+                'note'       => $step['note'] ?? null,
+            ];
+
+            if (!empty($step['id'])) {
+                // Update existing row (scoped to this order for safety)
+                $order->progress()->where('id', $step['id'])->update($attrs);
+            } else {
+                // Create a new step
+                $order->progress()->create($attrs);
+            }
+        }
+
+        // Notify the user about the status update
         $order->user->notify(new OrderStatusUpdated($order));
 
         return to_route('orders.index')->with('success', 'Order succesvol bijgewerkt!');

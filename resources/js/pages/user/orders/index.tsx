@@ -12,6 +12,7 @@ type Order = {
         name: string;
     };
     created_at: string;
+    total_progress: number;
 };
 
 const breadcrumbs: BreadcrumbItem[] = [
@@ -66,6 +67,20 @@ export default function Index({ orders }: { orders: Order[] }) {
                                     {order.service?.name || 'N/A Service'}
                                 </div>
                                 <h3 className="text-xl font-bold tracking-tight text-foreground">Order ORD-{order.id}</h3>
+                            </div>
+
+                            {/* Progress Bar Summary */}
+                            <div className="mt-4 space-y-1.5">
+                                <div className="flex items-center justify-between text-[10px] font-black uppercase tracking-widest text-muted-foreground">
+                                    <span>Progress</span>
+                                    <span className="text-primary">{order.total_progress}%</span>
+                                </div>
+                                <div className="h-1.5 w-full overflow-hidden rounded-full bg-muted/50">
+                                    <div
+                                        className="h-full rounded-full bg-primary transition-all duration-500"
+                                        style={{ width: `${order.total_progress}%` }}
+                                    />
+                                </div>
                             </div>
 
                             <div className="mt-8 flex items-center justify-between border-t border-border pt-4">
