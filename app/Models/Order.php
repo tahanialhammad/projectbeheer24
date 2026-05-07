@@ -13,6 +13,8 @@ class Order extends Model
         'status',
     ];
 
+    protected $appends = ['total_progress'];
+
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -30,5 +32,15 @@ class Order extends Model
     public function valuesWithLabels()
     {
         return $this->fieldValues()->with('formField');
+    }
+
+    public function progress()
+    {
+        return $this->hasMany(OrderProgress::class)->orderBy('id', 'asc');
+    }
+
+    public function getTotalProgressAttribute()
+    {
+        return min($this->progress->sum('percentage'), 100);
     }
 }

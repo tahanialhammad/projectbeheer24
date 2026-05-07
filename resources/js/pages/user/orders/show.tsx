@@ -13,6 +13,13 @@ type OrderFieldValue = {
     };
 };
 
+type ProgressStep = {
+    id: number;
+    label: string;
+    percentage: number;
+    note?: string;
+};
+
 type Order = {
     id: number;
     status: string;
@@ -21,6 +28,8 @@ type Order = {
     };
     created_at: string;
     field_values: OrderFieldValue[];
+    progress: ProgressStep[];
+    total_progress: number;
 };
 
 type Props = {
@@ -106,8 +115,76 @@ export default function ShowOrder({ order }: Props) {
                         </div>
                     </div>
 
-                    {/* Submission Details */}
+                    {/* Right column */}
                     <div className="lg:col-span-2 space-y-6">
+
+                        {/* ── Project Progress card ── */}
+                        <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-sm">
+                            <div className="flex items-center justify-between border-b border-border bg-muted/10 p-6">
+                                <div className="flex items-center gap-2">
+                                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                                    <h3 className="text-lg font-bold text-foreground">Project Progress</h3>
+                                </div>
+                                <span
+                                    className="text-2xl font-black tabular-nums"
+                                    style={{ color: order.total_progress === 100 ? '#10b981' : '#3b82f6' }}
+                                >
+                                    {order.total_progress}%
+                                </span>
+                            </div>
+
+                            <div className="p-6 space-y-5">
+                                {/* Total progress bar */}
+                                <div className="space-y-2">
+                                    <div className="h-4 w-full overflow-hidden rounded-full bg-muted/40">
+                                        <div
+                                            className="h-full rounded-full transition-all duration-700"
+                                            style={{
+                                                width: `${order.total_progress}%`,
+                                                background:
+                                                    order.total_progress === 100
+                                                        ? 'linear-gradient(90deg, #10b981, #059669)'
+                                                        : 'linear-gradient(90deg, #3b82f6, #6366f1)',
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+
+                                {/* Steps */}
+                                {order.progress && order.progress.length > 0 ? (
+                                    <div className="space-y-3">
+                                        {order.progress.map((step) => (
+                                            <div
+                                                key={step.id}
+                                                className="rounded-2xl border border-border/50 bg-muted/20 p-4"
+                                            >
+                                                <div className="flex items-center justify-between mb-2">
+                                                    <span className="text-sm font-bold text-foreground">{step.label}</span>
+                                                    <span className="text-sm font-black tabular-nums text-primary">{step.percentage}%</span>
+                                                </div>
+                                                <div className="h-2 w-full overflow-hidden rounded-full bg-muted/40">
+                                                    <div
+                                                        className="h-full rounded-full bg-primary/70 transition-all duration-500"
+                                                        style={{ width: `${step.percentage}%` }}
+                                                    />
+                                                </div>
+                                                {step.note && (
+                                                    <p className="mt-2 text-xs text-muted-foreground">{step.note}</p>
+                                                )}
+                                            </div>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div className="py-8 text-center">
+                                        <p className="text-sm italic text-muted-foreground">
+                                            No progress updates yet. Check back soon!
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Submission Details */}
                         <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-sm">
                             <div className="flex items-center gap-2 border-b border-border bg-muted/10 p-6">
                                 <FileText className="h-5 w-5 text-primary" />
