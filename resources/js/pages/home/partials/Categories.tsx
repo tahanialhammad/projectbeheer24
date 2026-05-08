@@ -5,24 +5,24 @@ import AnimatedWrapper from '@/components/AnimatedWrapper';
 export default function Categories({ initialTime }) {
     const categories = [
         {
-            name: 'Website bouwen',
+            name: 'WordPress Website Development',
             image: './images/wired-outline-27-globe-hover-rotate.gif',
-            description: 'WordPress website of webshop op maat',
+            description: 'Professional WordPress websites designed to showcase your brand and attract more customers.',
         },
         {
-            name: 'Software Ontwikkeling',
+            name: 'Laravel Web Application Development',
             image: './images/wired-outline-742-code-hover-pinch.gif',
-            description: 'Laravel-apps met moderne technologieën',
+            description: 'Custom Laravel applications built to automate processes and scale your business online.',
         },
         {
-            name: 'Vindbaar op Google (SEO)',
+            name: 'IT Support',
             image: './images/wired-gradient-19-magnifier-zoom-search-hover-spin.gif',
-            description: 'Zichtbaar in Google & Bing',
+            description: 'Reliable technical support to maintain, secure, and optimize your digital systems.',
         },
         {
-            name: 'Merkidentiteit',
+            name: 'Web Hosting',
             image: './images/wired-outline-54-photo-hover-pinch.gif',
-            description: 'Logo’s, pictogrammen & meer',
+            description: 'Managed hosting with secure servers, email services, backups, and high uptime.',
         },
     ];
 
