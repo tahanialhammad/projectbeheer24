@@ -29,9 +29,10 @@ export default function HeroSection({ sliderImages }) {
                 <div className="mb-8 flex w-full items-center justify-center">
                     <div className="max-w-[50vw] text-center">
                         <h1 className="text-8xl">Modernize your business</h1>
+                        <p className="text-l">We help entrepreneurs, freelancers, and companies grow online with modern websites, custom Laravel applications, reliable hosting, and professional IT support.</p>
                         <div className="my-4 flex justify-center gap-2">
                             <PrimaryButton href={route('contact')}>Contact Us</PrimaryButton>
-                            <SecondaryButton>Discover prices</SecondaryButton>{' '}
+                            <SecondaryButton href={route('services')}>View Our Services</SecondaryButton>{' '}
                         </div>
                     </div>
                 </div>
@@ -45,7 +46,7 @@ export default function HeroSection({ sliderImages }) {
                             <h1 className="text-3xl font-black capitalize">web developer </h1>
                             <h3 className="text-2xl capitalize">From Groningen</h3>
                             <PrimaryButton href={route('contact')} className="mt-4">
-                                Make an appointment{' '}
+                                Make an appointment
                             </PrimaryButton>
                         </div>
                     </AnimatedWrapper>
@@ -65,9 +66,9 @@ export default function HeroSection({ sliderImages }) {
                             <img className="rounded-3xl" src=".\images\7073.jpg" alt="" />
                             <div className="absolute top-1/3 left-4 m-4">
                                 <h4 className="text-xl font-bold text-indigo-500 uppercase">Trendtech</h4>
-                                <h1 className="text-3xl font-black capitalize">Customization & Innovation</h1>{' '}
-                                <h3 className="text-2xl capitalize">fashion on fleek</h3>
-                                <SecondaryButton className="mt-4">View Services</SecondaryButton>{' '}
+                                <h1 className="text-3xl font-black capitalize">Trusted Digital Solutions for</h1>
+                                <h3 className="text-2xl capitalize"> Modern Businesses</h3>
+                                <SecondaryButton href={route('services')} className="mt-4">View Services</SecondaryButton>{' '}
                             </div>
                         </AnimatedWrapper>
                     </div>

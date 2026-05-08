@@ -55,7 +55,7 @@ export default function SiteFooter() {
                         <Link href="/" className="-m-1.5 p-1.5">
                             <AppLogo showName />
                         </Link>
-                        <p>Freelance web developer from Groningen!</p>
+                        <h3 className='text-2xl'>Digital Solutions for Modern Businesses</h3>
                     </div>
 
                     {/* Column 2: About */}
@@ -96,7 +96,7 @@ export default function SiteFooter() {
 
                     {/* Column 4: Categories */}
                     <div>
-                        <h4 className="mb-3 text-lg font-bold">Categories</h4>
+                        <h4 className="mb-3 text-lg font-bold">We specialize in:</h4>
                         <ul className="space-y-2">
                             {categories.map((item) => (
                                 <li>

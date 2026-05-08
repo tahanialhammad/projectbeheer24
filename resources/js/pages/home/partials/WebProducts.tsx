@@ -5,8 +5,14 @@ import { Plus } from 'lucide-react';
 
 export default function WebProducts({ services }) {
     return (
-        <div>
-            <div className="mt-20 mb-10 flex w-full gap-8">
+        <div className='my-8'>
+            <div className='text-center'>
+                <h3 className="text-lg capitalize font-bold">Our Services</h3>
+                <p className='text-l'>We provide complete digital solutions for businesses that want to grow online.</p>
+
+            </div>
+
+            <div className="my-10 flex w-full gap-8">
                 {/* Promo blok */}
                 <AnimatedWrapper
                     className="flex w-1/4 flex-col items-center justify-center rounded-3xl bg-fuchsia-100 bg-auto bg-bottom bg-no-repeat p-4 text-black"
@@ -24,8 +30,6 @@ export default function WebProducts({ services }) {
 
                 {/* Meest gekozen diensten */}
                 <div className="-mt-10 w-3/4">
-                    <h3 className="text-lg capitalize">Most Selected Services</h3>
-
                     <div className="flex snap-x scroll-pl-6 space-x-6 overflow-x-auto p-4">
                         {services.map((service) => (
                             <AnimatedWrapper
@@ -36,9 +40,8 @@ export default function WebProducts({ services }) {
                             >
                                 <div className="absolute top-4 left-4">
                                     <span
-                                        className={`rounded-full bg-black px-3 py-1 text-white ${
-                                            service.discounted_price < service.price ? '' : 'hidden'
-                                        }`}
+                                        className={`rounded-full bg-black px-3 py-1 text-white ${service.discounted_price < service.price ? '' : 'hidden'
+                                            }`}
                                     >
                                         Sale
                                     </span>
